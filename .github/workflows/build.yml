@@ -13,8 +13,8 @@ permissions:
   contents: read
 
 jobs:
-  core-format:
-    name: ":core-format tests"
+  jvm-tests:
+    name: "JVM module tests"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,13 +27,36 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Run :core-format tests
-        run: ./gradlew :core-format:test --no-daemon
+      - name: Run :core-format and :core-scan tests
+        run: ./gradlew :core-format:test :core-scan:test --no-daemon
 
-      - name: Upload test report
+      - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: core-format-test-report
-          path: core-format/build/reports/tests/
+          name: jvm-test-reports
+          path: |
+            core-format/build/reports/tests/
+            core-scan/build/reports/tests/
           retention-days: 7
+
+  android-build:
+    name: ":data-storage Android assemble"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install Android SDK 36
+        run: |
+          sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1 | tail -5
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Assemble :data-storage
+        run: ./gradlew :data-storage:assemble --no-daemon
