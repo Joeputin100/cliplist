@@ -108,4 +108,18 @@ class PlaylistPlannerTest {
         val w = plan.warnings.filterIsInstance<PlanWarning.TooManyPlaylists>().single()
         assertEquals(51, w.count)
     }
+
+    @Test fun `exactly 1000 tracks - no warning`() {
+        val files = (1..1000).map { fakeFile("track$it.mp3") }.toTypedArray()
+        val volume = FakeVolume(fakeDir("AtLimit", *files))
+        val plan = planner.plan(volume, opts)
+        assertTrue(plan.warnings.filterIsInstance<PlanWarning.TooManyTracksInFolder>().isEmpty())
+    }
+
+    @Test fun `exactly 50 playlists - no warning`() {
+        val subfolders = (1..50).map { fakeDir("F$it", fakeFile("t.mp3")) }.toTypedArray()
+        val volume = FakeVolume(fakeDir("Root", *subfolders))
+        val plan = planner.plan(volume, ScanOptions(recursive = true, alphabetize = false))
+        assertTrue(plan.warnings.filterIsInstance<PlanWarning.TooManyPlaylists>().isEmpty())
+    }
 }
