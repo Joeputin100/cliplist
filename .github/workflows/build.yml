@@ -41,7 +41,7 @@ jobs:
           retention-days: 7
 
   android-build:
-    name: ":data-storage Android assemble"
+    name: "Android modules build"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -57,5 +57,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Assemble :data-storage
-        run: ./gradlew :data-storage:assemble --no-daemon
+      - name: Assemble Android modules
+        run: ./gradlew :data-storage:assemble :app:assembleDebug --no-daemon
+
+      - name: Upload app-debug APK
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          retention-days: 7
+          if-no-files-found: warn
