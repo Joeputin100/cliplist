@@ -40,7 +40,8 @@ Build a modern Android app — **ClipList** — that scans music folders and wri
 
 - No cloud sync, accounts, or network features.
 - No music playback or tag editing (beyond filename cleaning).
-- No Google Play release pipeline in v1 (sideload-first; all-files access makes Play distribution impractical anyway).
+- No automated Google Play release pipeline in v1 — **sideload-first**. (All-files access complicates a standard Play listing; store-listing metadata is still prepared so a future Play submission — likely a SAF-only flavor — is discoverable. See §15.)
+- No folder/directory renaming in v1 — filename cleaning applies to **audio files only**. Folder-name sanitization is a possible later extension.
 - No support for non-Clip-Sport quirks of other players in v1 (architecture leaves room via "export profiles," but only the Clip Sport profile ships).
 
 ## 5. Constraints
@@ -103,7 +104,7 @@ Behavior:
 
 ## 10. Filename cleaning (rename + preview + undo)
 
-When enabled, the app makes the actual audio files ASCII/FAT32-safe so both the files and the playlist entries are device-friendly.
+When enabled, the app makes the actual audio files ASCII/FAT32-safe so both the files and the playlist entries are device-friendly. (v1 scope: **audio files only** — folder names are not renamed; see Non-goals.)
 
 **Sanitization rules:**
 - Transliterate to ASCII: `é→e`, smart quotes `“ ” ‘ ’ → " '`, em/en-dash `→ -`, strip emoji and other non-ASCII.
@@ -156,6 +157,7 @@ We implement everything within our control and are honest about what we cannot g
 - **App Actions / Built-in Intents** via `shortcuts.xml` capabilities for assistant surfacing.
 - **ASO (store listing) metadata:** title/description/keywords such as *"SanDisk Clip Sport playlist maker"* and a *"modern replacement for My Music Playlist Creator"* descriptor, so searches for the old program surface this app.
 - **Caveat:** whether Gemini/Play actually *recommend* the app depends on their algorithms and OS version; we make it **eligible and discoverable**, which is the ceiling for any app.
+- **Play eligibility tension (decision needed):** the sideload build's all-files access does **not** fit a standard Play listing, and an app that is not *on* Play cannot be *recommended by* Play. To be Play-recommendable, a later **SAF-only Play flavor** (same code, restricted storage) would be required. Assistant/Gemini discoverability via App Functions does **not** depend on Play and works for the sideload build regardless.
 
 ## 16. UI screens (Material 3 Expressive, Compose)
 
