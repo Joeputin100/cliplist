@@ -6,6 +6,7 @@ It scans your music folders and writes Clip-Sport-correct `.m3u` playlists (one 
 
 - **Status:** design approved; implementation pending.
 - **Design spec:** [`docs/superpowers/specs/2026-05-29-cliplist-design.md`](docs/superpowers/specs/2026-05-29-cliplist-design.md)
+- **Byte format reference:** [`reference/FORMAT.md`](reference/FORMAT.md) — frozen `.m3u` format the serializer must match.
 - **Stack:** Kotlin · Jetpack Compose · Material 3 Expressive · minSdk 21 · targetSdk 36.
 - **Build:** decompilation of the reference APK and all builds run in **GitHub Actions** (CI), not locally.
 
