@@ -1,7 +1,7 @@
 # ClipList — Design Spec
 
 - **Date:** 2026-05-29
-- **Status:** Approved (design); awaiting written-spec review
+- **Status:** Approved (design), rev. 2 (SAF-only storage + folder cleaning); awaiting written-spec review
 - **Author:** Joeputin100 (with Claude)
 - **Topic:** Modern, clean-room replacement for the 10-year-old *My Music Playlist Creator* (`com.matt.mym3ucreator`, v2.1.1, 2016), purpose-built for SanDisk Clip Sport + FAT32 SD-card workflows.
 
@@ -27,8 +27,8 @@ Build a modern Android app — **ClipList** — that scans music folders and wri
 | Decision | Choice |
 |---|---|
 | Build strategy | **Clean-room rewrite**; decompile only as a private reference to extract the exact format |
-| Storage access | **Both**: all-files access (`MANAGE_EXTERNAL_STORAGE`) for internal storage **and** SAF tree picker for removable SD cards |
-| Filename cleaning | **Rename the real files** to ASCII/FAT32-safe names, with **mandatory preview** + **undo log** |
+| Storage access | **SAF only** (Storage Access Framework folder picker) — one uniform path for internal storage **and** removable SD cards; no all-files permission; Play-eligible |
+| Filename cleaning | **Rename the real files *and* folders** to ASCII/FAT32-safe names, with **mandatory preview** + **undo log** |
 | Audio formats scanned | **All Clip Sport formats**: mp3, wma, m4a/aac, ogg/oga, flac, wav, plus Audible (aa/aax) — editable in Settings |
 | Repo & privacy | **One private GitHub repo** holds the APK + decompile workflow + app. Decompiled source is **never committed** (CI artifact only) |
 | Languages | **10**: en, es, fr, de, pt-BR, it, ru, ja, ko, zh-CN |
@@ -40,15 +40,14 @@ Build a modern Android app — **ClipList** — that scans music folders and wri
 
 - No cloud sync, accounts, or network features.
 - No music playback or tag editing (beyond filename cleaning).
-- No automated Google Play release pipeline in v1 — **sideload-first**. (All-files access complicates a standard Play listing; store-listing metadata is still prepared so a future Play submission — likely a SAF-only flavor — is discoverable. See §15.)
-- No folder/directory renaming in v1 — filename cleaning applies to **audio files only**. Folder-name sanitization is a possible later extension.
+- No automated Google Play release pipeline in v1 — **sideload-first** — but the app is **Play-eligible** (SAF-only, no sensitive permissions), so listing is a later metadata/submission step, not a code change. See §15.
 - No support for non-Clip-Sport quirks of other players in v1 (architecture leaves room via "export profiles," but only the Clip Sport profile ships).
 
 ## 5. Constraints
 
 - **Byte-exact output** is the hard acceptance bar (see §8).
 - **CRLF always**, regardless of host OS conventions.
-- **FAT32 reality:** illegal filename characters `\ / : * ? " < > |`; reserved names (`CON`, `PRN`, `AUX`, `NUL`, `COM1–9`, `LPT1–9`); case-insensitive collisions; long-name/path limits.
+- **FAT32 reality (applies to both file *and* folder names):** illegal characters `\ / : * ? " < > |`; reserved names (`CON`, `PRN`, `AUX`, `NUL`, `COM1–9`, `LPT1–9`); case-insensitive collisions; long-name/path limits.
 - **minSdk 21** means some 2025-era features (App Functions, dynamic color, predictive-back animation) only activate on newer OS versions and must degrade cleanly.
 - **Privacy/IP:** the proprietary APK and any decompiled output stay in the private repo / CI artifacts; only original work + a written format description + synthetic fixtures could ever go public.
 
@@ -58,11 +57,11 @@ Build a modern Android app — **ClipList** — that scans music folders and wri
 :core-format   pure Kotlin/JVM — m3u serializer (byte-exact), filename sanitizer, sort logic.
                No Android deps → golden-master byte tests run as plain JUnit, no emulator.
 :core-scan     folder walking + playlist planning over a StorageVolume abstraction.
-:data-storage  two StorageVolume backends: FileSystemVolume (all-files) and SafTreeVolume (SAF).
+:data-storage  one StorageVolume backend — SafTreeVolume (SAF) — plus a fake volume for tests.
 :app           Compose UI, ViewModels, DI, localization, theming, App Functions entry points.
 ```
 
-**Why this split:** keeping serialization pure and Android-free makes the most critical, hardest-to-get-right code (the bytes) testable in milliseconds without a device, and lets the scan engine ignore whether it is talking to the File API or SAF.
+**Why this split:** keeping serialization pure and Android-free makes the most critical, hardest-to-get-right code (the bytes) testable in milliseconds without a device, and the `StorageVolume` abstraction lets the scan engine ignore SAF's details and be tested against a fake.
 
 ## 7. Phase 0 — Decompile in CI → the reference (runs first)
 
@@ -99,35 +98,39 @@ Behavior:
 2. For each folder containing ≥1 supported audio file, build a playlist of **that folder's** audio files (per-folder content).
 3. Optionally alphabetize (order matching the original).
 4. If cleaning is on, apply the rename plan first (§10), then write entries matching the renamed files.
-5. Write `<FolderName>.m3u` **inside the folder**, replacing any existing file, using the §8 byte profile.
+5. Write `<FolderName>.m3u` **inside the folder** (using the folder's final, possibly-cleaned name), replacing any existing file, using the §8 byte profile.
 6. Surface device-limit warnings: **> 1000 tracks in a folder** or **> 50 playlists total**.
 
-## 10. Filename cleaning (rename + preview + undo)
+## 10. Filename cleaning (rename files **and folders** + preview + undo)
 
-When enabled, the app makes the actual audio files ASCII/FAT32-safe so both the files and the playlist entries are device-friendly. (v1 scope: **audio files only** — folder names are not renamed; see Non-goals.)
+When enabled, the app makes the actual **audio files and the folders that contain them** ASCII/FAT32-safe, so the files, the folders, and the playlist entries are all device-friendly.
 
-**Sanitization rules:**
+**Sanitization rules (applied to file and folder names):**
 - Transliterate to ASCII: `é→e`, smart quotes `“ ” ‘ ’ → " '`, em/en-dash `→ -`, strip emoji and other non-ASCII.
 - Remove/replace FAT32-illegal `\ / : * ? " < > |` and control chars.
 - Avoid reserved device names (`CON`, `PRN`, `AUX`, `NUL`, `COM1–9`, `LPT1–9`).
-- Collapse repeated whitespace, trim, enforce length limits, preserve the file extension.
-- Resolve case-insensitive collisions deterministically (`name`, `name_1`, `name_2`, …) with no data loss.
+- Collapse repeated whitespace, trim, enforce length limits; preserve the file extension (folders have none).
+- Resolve case-insensitive collisions among siblings deterministically (`name`, `name_1`, `name_2`, …) with no data loss.
 
-**Process (safety-first):**
-1. Compute a full rename plan (old → new) across affected files.
+**Process (safety-first, order matters):**
+1. Compute one full rename plan (old → new) for every affected file **and** folder.
 2. Show a **mandatory preview** of every change; nothing touches disk until the user confirms.
-3. Execute renames (`File.renameTo` for File backend; `DocumentsContract.renameDocument` for SAF).
-4. Write an **undo log** (JSON) so "Undo last run" fully reverts.
-5. Generate playlists **after** renames so entries always match.
+3. Execute **bottom-up** — rename audio files first, then their folders from the deepest level upward — so paths never invalidate mid-operation (`DocumentsContract.renameDocument`, which returns the new URI to chain from).
+4. Write an **undo log** (JSON) recording every file and folder rename; **Undo last run** reverts in reverse order (folders top-down, then files).
+5. Generate playlists **after** all renames, so each `<CleanedFolderName>.m3u` and its bare-filename entries match what is now on disk.
 
-## 11. Storage model (the "both / it varies" answer)
+Note: because playlist entries are **bare filenames** (co-located), a folder rename changes only the playlist's *filename* and the device's folder display — never the entry text — which keeps the operation simple and safe.
 
-A `StorageVolume` interface with two backends, chosen by the user's entry point:
+## 11. Storage model (SAF-only)
 
-- **"Scan a folder on this phone"** → `FileSystemVolume` over `MANAGE_EXTERNAL_STORAGE`: fast recursion and writes via `java.io.File`. Best for internal staging.
-- **"Scan the SD card / external drive"** → `SafTreeVolume`: user picks the volume via the system folder picker once; the tree URI is persisted (`takePersistableUriPermission`); traversal/writes via `DocumentFile`/`ContentResolver`. This is the reliable path for **removable** cards, which Android blocks from raw File writes even with all-files access.
+All storage goes through one path — the **Storage Access Framework (SAF)** — behind a `StorageVolume` abstraction with a single real backend (`SafTreeVolume`) plus a fake for tests.
 
-The scan/generate engine consumes the abstraction and is agnostic to which backend is active.
+- The user taps **"Choose folder / SD card,"** the system folder picker opens, they select the music root (a folder on the phone *or* the removable Clip Sport card) and tap **Use this folder**. The grant is persisted (`takePersistableUriPermission`) and survives reboots, so it is a one-time pick per location.
+- Within the granted subtree the app lists, reads, creates, writes, renames, and deletes via `DocumentsContract`/`ContentResolver`. We write `.m3u` bytes through `openOutputStream(uri, "wt")`, giving **full byte control** (exact charset, CRLF, trailing newline) — SAF never alters file contents, so byte-exactness is unaffected.
+- **One uniform path for internal storage *and* removable SD cards.** This is the whole reason to prefer SAF: Android blocks raw File writes to removable cards even with all-files access, so SAF was unavoidable for the card anyway. Using it everywhere removes the second code path.
+- **No `MANAGE_EXTERNAL_STORAGE`** → not a "sensitive" permission → the app is **Play-Store-eligible** (resolving the discoverability goal) and shows users a friendlier, scoped grant.
+- **Performance:** SAF's convenience wrapper (`DocumentFile.listFiles()`) is slow on large trees, so we bulk-query children via `DocumentsContract.buildChildDocumentsUriUsingTree(...)` with a projection (id, name, mime), keeping scans fast.
+- **Minor limitation:** SAF cannot grant a few special locations (root of primary storage, `Download`, `Android/data`) on newer Android. Music folders and SD-card roots are fully pickable, so the workflow is unaffected.
 
 ## 12. Localization
 
@@ -157,12 +160,12 @@ We implement everything within our control and are honest about what we cannot g
 - **App Actions / Built-in Intents** via `shortcuts.xml` capabilities for assistant surfacing.
 - **ASO (store listing) metadata:** title/description/keywords such as *"SanDisk Clip Sport playlist maker"* and a *"modern replacement for My Music Playlist Creator"* descriptor, so searches for the old program surface this app.
 - **Caveat:** whether Gemini/Play actually *recommend* the app depends on their algorithms and OS version; we make it **eligible and discoverable**, which is the ceiling for any app.
-- **Play eligibility tension (decision needed):** the sideload build's all-files access does **not** fit a standard Play listing, and an app that is not *on* Play cannot be *recommended by* Play. To be Play-recommendable, a later **SAF-only Play flavor** (same code, restricted storage) would be required. Assistant/Gemini discoverability via App Functions does **not** depend on Play and works for the sideload build regardless.
+- **Play eligibility:** because we use **SAF only** (no `MANAGE_EXTERNAL_STORAGE`), the app meets Play's storage policy, so it *can* be listed on Play and is therefore Play-recommendable — **no separate build flavor needed**. Assistant/Gemini discoverability via App Functions works regardless of Play.
 
 ## 16. UI screens (Material 3 Expressive, Compose)
 
-1. **Home** — choose location (two entry points), recursive toggle, options (alphabetize, clean filenames), Generate CTA, last-run summary.
-2. **Preview** — folders found with music + counts, device-limit warnings, and (if cleaning) the rename diff.
+1. **Home** — choose location (SAF folder/SD-card picker), recursive toggle, options (alphabetize, clean filenames), Generate CTA, last-run summary.
+2. **Preview** — folders found with music + counts, device-limit warnings, and (if cleaning) the file/folder rename diff.
 3. **Progress** — expressive loading indicator, per-folder progress.
 4. **Results** — written / renamed / errors summary, Undo, export log/share.
 5. **Settings** — extension list, export profile, language, theme, about.
@@ -174,23 +177,23 @@ Mockups will be shown to the user as **in-chat screenshots** (headless VPS) befo
 - **Repo:** one **private** GitHub repo (`gh` account: Joeputin100). Holds the reference APK (under `reference/`), the workflows, and the app. Private = not redistribution.
 - **`decompile.yml`** — Phase 0 reference extraction (manual `workflow_dispatch`); uploads decompiled source as an artifact; does not commit it.
 - **`build.yml`** — Gradle assemble + `:core-format` golden-master unit tests + lint; **release-signs** the APK with a keystore from repo secrets (so updates install over each other); uploads the APK artifact and attaches it to a GitHub Release on tag. Gradle caching enabled.
-- A future public source repo (app only, no APK/decompiled source) is possible if open-sourcing is desired later.
+- A **single SAF-only build** serves both sideloading and a future Play listing — no product flavors needed. A separate public source repo (app only, no APK/decompiled source) is possible if open-sourcing is desired later.
 
 ## 18. Testing strategy (TDD)
 
 - **Golden-master byte tests** for the serializer (from §8 fixtures) — the core correctness gate.
-- **Sanitizer tests** — Unicode→ASCII transliteration, illegal/reserved names, collisions, length limits.
+- **Sanitizer tests** — Unicode→ASCII transliteration, illegal/reserved names, collisions, length limits, for both file and folder names.
 - **Scan-engine tests** against a fake `StorageVolume` (no device needed).
 - **Localization completeness check** — every string ID present for all 10 locales (build-time validation in the codegen task).
-- Optional minimal instrumented tests for SAF and the rename/undo flow.
+- Optional minimal instrumented tests for the SAF backend and the rename/undo flow.
 - Process: write tests from `FORMAT.md` **before** implementing the serializer.
 
 ## 19. Acceptance criteria
 
 1. For all golden fixtures, generated `.m3u` bytes are identical to the captured originals (encoding, header, paths, CRLF, trailing newline).
 2. Playlists generated on a real Clip Sport from a sample library are non-empty and play in order.
-3. App scans and writes via **both** File and SAF backends.
-4. Filename cleaning previews before touching disk and is fully reversible via undo.
+3. App scans and writes via the **SAF backend** across both internal storage and removable SD cards.
+4. Filename cleaning previews before touching disk and is fully reversible via undo — for **both files and folders**.
 5. UI runs edge-to-edge with working predictive back; theme + language follow system and are overridable.
 6. App installs and runs on Android 5.0 (API 21) through Android 16, with newer features degrading gracefully.
 7. CI builds, tests, signs, and publishes the APK; decompiled source is never committed.
@@ -198,18 +201,19 @@ Mockups will be shown to the user as **in-chat screenshots** (headless VPS) befo
 ## 20. Risks & mitigations
 
 - **Wrong byte format → empty playlists.** Mitigation: golden masters from the actual original; CRLF asserted explicitly.
-- **Removable-SD write restrictions.** Mitigation: SAF backend for cards.
-- **Destructive renames.** Mitigation: mandatory preview + undo log; generate after rename.
+- **Removable-SD write restrictions.** Mitigation: SAF is the single storage path and handles removable cards natively.
+- **SAF scan speed on large libraries.** Mitigation: bulk `DocumentsContract` child queries instead of `DocumentFile.listFiles()`.
+- **Destructive renames (files + folders).** Mitigation: mandatory preview + undo log; bottom-up ordering; generate after rename.
 - **App Functions is alpha / API churn.** Mitigation: isolate behind a thin module, guard by OS version, treat as best-effort.
 - **minSdk 21 vs modern libraries.** Mitigation: graceful degradation; keep newest features optional.
 
 ## 21. Implementation phases (detailed plan to follow via writing-plans)
 
 0. Create private repo; add reference APK; `decompile.yml`; extract `FORMAT.md` + golden fixtures.
-1. `:core-format` — byte-exact serializer + sanitizer + sort (TDD against fixtures).
-2. `:core-scan` + `:data-storage` — engine + File and SAF backends.
+1. `:core-format` — byte-exact serializer + sanitizer (files + folders) + sort (TDD against fixtures).
+2. `:core-scan` + `:data-storage` — engine + SAF backend (with a fake volume for tests).
 3. `:app` — Compose MD3E UI, ViewModels, DI; localization codegen; theming; edge-to-edge; predictive back.
-4. Filename-cleaning preview/undo flow.
+4. Filename-cleaning preview/undo flow (files + folders).
 5. Discoverability (App Functions / BII / ASO); `build.yml` sign + release; on-device verification checklist.
 
 ## 22. Glossary (plain language)
@@ -219,7 +223,7 @@ Mockups will be shown to the user as **in-chat screenshots** (headless VPS) befo
 - **`.m3u`** — a plain-text playlist file listing which songs to play, in order.
 - **CRLF** — the Windows-style invisible "end of line" marker the Clip Sport requires.
 - **FAT32** — the older SD-card format the Clip Sport uses; picky about filename characters.
-- **SAF (Storage Access Framework)** — Android's system folder-picker; the sanctioned way to write to removable SD cards.
+- **SAF (Storage Access Framework)** — Android's system folder-picker; the sanctioned, Play-friendly way to read/write user-chosen folders, including removable SD cards.
 - **Golden master** — a saved "known-correct" output we compare against to prove nothing changed.
 - **Material 3 Expressive** — Google's newest visual design system (shapes, motion, color).
 - **App Functions** — a new Android feature letting assistants like Gemini find and run actions inside apps.
