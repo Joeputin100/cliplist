@@ -22,4 +22,5 @@ lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel
 kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }
 android-library     = { id = "com.android.library",       version.ref = "agp" }
 android-application = { id = "com.android.application",  version.ref = "agp" }
+compose-compiler    = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 # kotlin-android intentionally absent — AGP 9.0+ has built-in Kotlin support.
