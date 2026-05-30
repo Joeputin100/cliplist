@@ -13,7 +13,6 @@ sealed class VolumeWriteResult {
 interface StorageVolume {
     val rootNode: VolumeNode
     fun children(node: VolumeNode): List<VolumeNode>
-    fun findFile(directory: VolumeNode, fileName: String): VolumeNode?
     fun writeFile(directory: VolumeNode, name: String, content: ByteArray): VolumeWriteResult
     fun deleteFile(directory: VolumeNode, fileName: String): Boolean
 }

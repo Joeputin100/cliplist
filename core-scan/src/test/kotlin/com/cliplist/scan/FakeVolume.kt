@@ -8,7 +8,7 @@ class FakeVolume(root: FakeNode) : StorageVolume {
     override fun children(node: VolumeNode): List<VolumeNode> =
         (node as FakeNode).children.toList()
 
-    override fun findFile(directory: VolumeNode, fileName: String): VolumeNode? =
+    fun findFile(directory: VolumeNode, fileName: String): VolumeNode? =
         (directory as FakeNode).children.find { it.name.equals(fileName, ignoreCase = true) }
 
     override fun writeFile(directory: VolumeNode, name: String, content: ByteArray): VolumeWriteResult {

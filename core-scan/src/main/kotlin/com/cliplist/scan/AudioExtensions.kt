@@ -8,7 +8,7 @@ object AudioExtensions {
 
     fun isAudio(filename: String, extensions: Set<String> = DEFAULT): Boolean {
         val dot = filename.lastIndexOf('.')
-        if (dot < 0) return false
+        if (dot <= 0) return false  // dot at 0 means hidden file like ".mp3", not an audio track
         return filename.substring(dot + 1).lowercase() in extensions
     }
 }
