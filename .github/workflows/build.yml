@@ -51,8 +51,8 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Install Android SDK 36
-        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
+      # Android SDK 36 is pre-installed on ubuntu-latest runners.
+      # No sdkmanager install step needed.
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
