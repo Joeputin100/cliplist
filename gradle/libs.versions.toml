@@ -7,6 +7,7 @@ junit5 = "5.14.4"
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
 
 [plugins]
-kotlin-jvm     = { id = "org.jetbrains.kotlin.jvm",     version.ref = "kotlin" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-android-library = { id = "com.android.library",         version.ref = "agp" }
+kotlin-jvm      = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+android-library = { id = "com.android.library",      version.ref = "agp" }
+# Note: kotlin-android is intentionally absent. AGP 9.0+ has built-in Kotlin support;
+# applying org.jetbrains.kotlin.android alongside com.android.library/application is a hard error.
