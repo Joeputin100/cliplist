@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Minimal base theme for a Compose app.
+        All visual theming is handled by ClipListTheme in Compose.
+        NoActionBar prevents a duplicate title bar; transparent bars let
+        enableEdgeToEdge() control the window chrome.
+    -->
+    <style name="Theme.ClipList" parent="android:Theme.Material.Light.NoTitleBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
