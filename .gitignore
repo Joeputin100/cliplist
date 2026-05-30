@@ -1,0 +1,34 @@
+# --- Secrets & signing (NEVER commit) ---
+*.jks
+*.keystore
+keystore.properties
+key.properties
+local.properties
+*.p12
+google-services.json
+
+# --- Gradle / Android build output ---
+.gradle/
+build/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.aab
+
+# --- IDE ---
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
+# --- CI scratch (decompiled output is an artifact, never committed) ---
+/decompiled/
+/.decompile-work/
+
+# NOTE: reference/*.apk IS intentionally tracked (private repo, CI input).
