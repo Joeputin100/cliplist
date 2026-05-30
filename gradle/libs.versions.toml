@@ -1,9 +1,12 @@
 [versions]
 kotlin = "2.3.20"
+agp = "9.2.0"
 junit5 = "5.14.4"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-jvm     = { id = "org.jetbrains.kotlin.jvm",     version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-library = { id = "com.android.library",         version.ref = "agp" }
