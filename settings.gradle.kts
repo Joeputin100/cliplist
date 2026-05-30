@@ -18,3 +18,4 @@ rootProject.name = "cliplist"
 include(":core-format")
 include(":core-scan")
 include(":data-storage")
+include(":app")

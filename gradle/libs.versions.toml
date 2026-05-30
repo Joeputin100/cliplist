@@ -1,13 +1,25 @@
 [versions]
-kotlin = "2.3.20"
-agp = "9.2.0"
-junit5 = "5.14.4"
+kotlin       = "2.3.20"
+agp          = "9.2.0"
+junit5       = "5.14.4"
+compose-bom  = "2026.05.01"
+activity     = "1.13.0"
+navigation   = "2.9.8"
+lifecycle    = "2.10.0"
 
 [libraries]
-junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5" }
+junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
+compose-bom                 = { module = "androidx.compose:compose-bom",                              version.ref = "compose-bom" }
+compose-ui                  = { module = "androidx.compose.ui:ui" }
+compose-ui-tooling          = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-tooling-preview  = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-material3           = { module = "androidx.compose.material3:material3" }
+activity-compose            = { module = "androidx.activity:activity-compose",                        version.ref = "activity" }
+navigation-compose          = { module = "androidx.navigation:navigation-compose",                    version.ref = "navigation" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose",            version.ref = "lifecycle" }
 
 [plugins]
-kotlin-jvm      = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-android-library = { id = "com.android.library",      version.ref = "agp" }
-# Note: kotlin-android is intentionally absent. AGP 9.0+ has built-in Kotlin support;
-# applying org.jetbrains.kotlin.android alongside com.android.library/application is a hard error.
+kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }
+android-library     = { id = "com.android.library",       version.ref = "agp" }
+android-application = { id = "com.android.application",  version.ref = "agp" }
+# kotlin-android intentionally absent — AGP 9.0+ has built-in Kotlin support.
