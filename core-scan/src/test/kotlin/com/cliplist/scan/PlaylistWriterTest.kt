@@ -81,4 +81,19 @@ class PlaylistWriterTest {
         assertTrue(content.startsWith("Alice.mp3\r\n"), "Expected Alice first, got: $content")
         assertTrue(content.endsWith("Zappa.mp3\r\n"), "Expected Zappa last, got: $content")
     }
+
+    @Test fun `write failure increments failed count and records error`() {
+        val root = fakeDir("Rock", fakeFile("song.mp3"))
+        val volume = FakeVolume(root).also { it.failFiles.add("Rock/Rock.m3u") }
+        val plan = ScanPlan(
+            folders = listOf(FolderPlan(root, listOf("song.mp3"), null, "Rock.m3u")),
+            warnings = emptyList()
+        )
+
+        val report = PlaylistWriter(volume).execute(plan)
+
+        assertEquals(0, report.written)
+        assertEquals(1, report.failed)
+        assertTrue(report.errors.any { "Rock/Rock.m3u" in it })
+    }
 }
