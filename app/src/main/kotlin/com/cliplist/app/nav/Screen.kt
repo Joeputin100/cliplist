@@ -5,5 +5,5 @@ sealed class Screen(val route: String) {
     object Preview  : Screen("preview")
     object Progress : Screen("progress")
     object Results  : Screen("results")
-    object Settings : Screen("settings")
+    object Privacy  : Screen("privacy")
 }
