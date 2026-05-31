@@ -1,20 +1,146 @@
 package com.cliplist.app.ui.preview
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.cliplist.app.nav.Screen
+import com.cliplist.app.workflow.ScanUiState
+import com.cliplist.app.workflow.ScanViewModel
+import com.cliplist.scan.PlaylistAction
+import com.cliplist.scan.PlaylistRow
+import com.cliplist.scan.PreviewModel
+import com.cliplist.scan.RenameRow
 
 @Composable
-fun PreviewScreen(navController: NavController) {
-    Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("Preview — Phase 3b", style = MaterialTheme.typography.headlineMedium)
+fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
+    val scanState by vm.scanState.collectAsStateWithLifecycle()
+    val model = (scanState as? ScanUiState.Ready)?.model
+
+    Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
+        if (model == null) {
+            Column(Modifier.fillMaxSize().padding(padding).padding(20.dp)) {
+                Text("Nothing to preview yet.", style = MaterialTheme.typography.bodyLarge)
+            }
+            return@Scaffold
         }
+        LazyColumn(
+            modifier = Modifier.fillMaxSize().padding(padding).padding(horizontal = 16.dp),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 16.dp)
+        ) {
+            item {
+                Text("Preview", style = MaterialTheme.typography.headlineSmall)
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    "${model.playlists.size} playlists · ${model.totalTracks} tracks" +
+                        if (model.withinLimits) " · within Clip Sport limits" else "",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.height(16.dp))
+            }
+            if (model.warnings.isNotEmpty()) {
+                item { SectionHeader("Warnings") }
+                items(model.warnings) { w ->
+                    WarningCard(w)
+                    Spacer(Modifier.height(8.dp))
+                }
+            }
+            item { SectionHeader("Playlists") }
+            items(model.playlists) { p ->
+                PlaylistCard(p)
+                Spacer(Modifier.height(8.dp))
+            }
+            if (model.renames.isNotEmpty()) {
+                item { SectionHeader("Renames (${model.renames.size})") }
+                items(model.renames) { r ->
+                    RenameCardRow(r)
+                    Spacer(Modifier.height(8.dp))
+                }
+            }
+            item {
+                Spacer(Modifier.height(16.dp))
+                Button(
+                    onClick = { navController.navigate(Screen.Progress.route) },
+                    modifier = Modifier.fillMaxWidth()
+                ) { Text("Generate playlists") }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SectionHeader(text: String) {
+    Text(
+        text.uppercase(),
+        style = MaterialTheme.typography.labelMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+    )
+}
+
+@Composable
+private fun PlaylistCard(p: PlaylistRow) {
+    Card(Modifier.fillMaxWidth()) {
+        Row(
+            Modifier.fillMaxWidth().padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                Text(p.folderName, style = MaterialTheme.typography.titleMedium)
+                Text("${p.trackCount} tracks · ${p.playlistName}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Text(
+                if (p.action == PlaylistAction.NEW) "NEW" else "REPLACE",
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Bold,
+                color = if (p.action == PlaylistAction.NEW)
+                    MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+            )
+        }
+    }
+}
+
+@Composable
+private fun RenameCardRow(r: RenameRow) {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.fillMaxWidth().padding(12.dp)) {
+            Text("${r.oldName}  →  ${r.newName}", style = MaterialTheme.typography.bodyMedium)
+            Text(
+                (if (r.isDirectory) "folder" else "file") +
+                    (if (r.parentPath.isNotEmpty()) " in ${r.parentPath}" else ""),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+private fun WarningCard(text: String) {
+    Card(Modifier.fillMaxWidth()) {
+        Text(text, modifier = Modifier.padding(12.dp),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.error)
     }
 }
