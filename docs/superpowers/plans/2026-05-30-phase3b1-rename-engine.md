@@ -711,7 +711,7 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 - [ ] **Step 1: Run the full JVM suite locally**
 
 Run: `cd /home/projects/mpc && ./gradlew :core-format:test :core-scan:test --no-daemon 2>&1 | tail -6`
-Expected: `BUILD SUCCESSFUL`. Test count rises by 20 (2 + 7 + 6 + 2 + 3) to **87 tests**, 0 failures.
+Expected: `BUILD SUCCESSFUL`. Test count rises by 18 (2 + 7 + 6 + 3 — Task 5 appends to Task 4's file) to **85 tests**, 0 failures.
 
 - [ ] **Step 2: Push and watch CI**
 
@@ -730,7 +730,7 @@ Expected: both `jvm-tests` and `Android modules build` green. The Android job pr
 
 ## Definition of Done (Phase 3b-1)
 
-- [ ] `./gradlew :core-format:test :core-scan:test` passes: **87 tests**, 0 failures.
+- [ ] `./gradlew :core-format:test :core-scan:test` passes: **85 tests**, 0 failures.
 - [ ] Both CI jobs green (the Android job validates `SafTreeVolume.renameNode`).
 - [ ] `StorageVolume` exposes `renameNode(node, newName): RenameOutcome`, implemented by `FakeVolume` and `SafTreeVolume`.
 - [ ] `RenamePlanner` produces deepest-first ops, recurses the whole tree, and excludes+reports collisions (never overwrites).

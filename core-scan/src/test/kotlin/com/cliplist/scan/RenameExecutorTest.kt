@@ -44,7 +44,7 @@ class RenameExecutorTest {
         assertEquals(3, undo.reverted)
         assertTrue(undo.failed.isEmpty())
         assertEquals(setOf("Café.mp3", "Jazz:Sub"), root.children.map { it.name }.toSet())
-        val sub = root.children.first { it.isDirectory } as FakeNode
+        val sub = root.children.first { it.isDirectory }
         assertEquals("Tëst.mp3", sub.children.single().name)
     }
 }
