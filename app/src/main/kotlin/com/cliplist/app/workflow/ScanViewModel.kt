@@ -32,12 +32,9 @@ import kotlinx.coroutines.withContext
 data class WorkflowOptions(
     val searchSubfolders: Boolean = true,
     val alphabetize: Boolean = true,
-    val cleanNames: Boolean = false,
-    val renameHidden: Boolean = false,
-    val writeCoverArt: Boolean = false,
 )
 
-data class SelectedFolder(val uri: Uri, val displayName: String)
+data class SelectedFolder(val uri: Uri, val displayName: String, val isRemovable: Boolean = false)
 
 sealed interface ScanUiState {
     data object Idle : ScanUiState
@@ -77,9 +74,6 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
     fun setFolder(folder: SelectedFolder) { _folder.value = folder }
     fun setSearchSubfolders(v: Boolean) = _options.update { it.copy(searchSubfolders = v) }
     fun setAlphabetize(v: Boolean) = _options.update { it.copy(alphabetize = v) }
-    fun setCleanNames(v: Boolean) = _options.update { it.copy(cleanNames = v) }
-    fun setRenameHidden(v: Boolean) = _options.update { it.copy(renameHidden = v) }
-    fun setWriteCoverArt(v: Boolean) = _options.update { it.copy(writeCoverArt = v) }
 
     fun clearResult() { _scanState.value = ScanUiState.Idle }
 
@@ -91,15 +85,19 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
             try {
                 val model = withContext(Dispatchers.IO) {
                     val volume = SafTreeVolume(getApplication(), f.uri)
+                    val settings = SettingsRepository(getApplication())
                     val scanOptions = ScanOptions(
                         recursive = opts.searchSubfolders,
                         alphabetize = opts.alphabetize,
-                        audioExtensions = SettingsRepository(getApplication()).audioExtensions.first()
+                        audioExtensions = settings.audioExtensions.first()
                     )
                     val scanPlan = PlaylistPlanner().plan(volume, scanOptions)
                     val renamePlan = RenamePlanner().plan(
                         volume,
-                        RenameOptions(cleanNames = opts.cleanNames, renameHidden = opts.renameHidden)
+                        RenameOptions(
+                            cleanNames = settings.cleanNames.first(),
+                            renameHidden = settings.renameHidden.first()
+                        )
                     )
                     lastScanPlan = scanPlan
                     lastRenamePlan = renamePlan
@@ -122,12 +120,12 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
         val scanPlan = lastScanPlan ?: return
         val renamePlan = lastRenamePlan ?: return
         val scanOptions = lastScanOptions ?: return
-        val writeCoverArt = _options.value.writeCoverArt
         _generateState.value = GenerateUiState.Working(GenPhase.Starting, 0, scanPlan.folders.size)
         viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) {
                     val volume = SafTreeVolume(getApplication(), f.uri)
+                    val writeCoverArt = SettingsRepository(getApplication()).writeCoverArt.first()
                     var renameExec: RenameExecution? = null
                     if (renamePlan.ops.isNotEmpty()) {
                         _generateState.value =
@@ -152,7 +150,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                             if (!hasArt) volume.writeFile(fp.folder, "folder.jpg", artBytes, "image/jpeg")
                         }
                     }
-                    ResultModelBuilder.build(report, renameExec)
+                    ResultModelBuilder.build(report, renameExec, planToWrite, f.displayName)
                 }
                 _generateState.value = GenerateUiState.Done(result)
             } catch (e: Exception) {
