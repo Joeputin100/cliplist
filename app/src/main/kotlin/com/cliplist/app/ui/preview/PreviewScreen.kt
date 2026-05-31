@@ -79,7 +79,10 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
             item {
                 Spacer(Modifier.height(16.dp))
                 Button(
-                    onClick = { navController.navigate(Screen.Progress.route) },
+                    onClick = {
+                        vm.generate()
+                        navController.navigate(Screen.Progress.route)
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) { Text("Generate playlists") }
             }
