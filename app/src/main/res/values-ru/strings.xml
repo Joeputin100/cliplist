@@ -2,17 +2,21 @@
 <resources>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">для SanDisk Clip Sport</string>
+    <string name="audio_formats">Аудиоформаты</string>
+    <string name="audio_formats_count_fmt">%1$d из %2$d выбрано</string>
     <string name="badge_new">НОВОЕ</string>
     <string name="badge_replace">ЗАМЕНИТЬ</string>
     <string name="choose_folder">Нажмите, чтобы выбрать папку</string>
     <string name="done">Готово</string>
     <string name="eject">Извлечь SD-карту</string>
     <string name="eject_note">Открывает экран хранилища Android — приложения не могут извлекать напрямую.</string>
+    <string name="format_dialog_done">Готово</string>
     <string name="generate">Создать плейлисты</string>
     <string name="language_system">Системный по умолчанию</string>
     <string name="make_another">Создать еще один плейлист</string>
     <string name="music_folder">МУЗЫКАЛЬНАЯ ПАПКА</string>
     <string name="no_preview">Пока нет предпросмотра.</string>
+    <string name="open_settings">Открыть настройки</string>
     <string name="opt_alphabetize">Сортировать треки по алфавиту</string>
     <string name="opt_clean_names">Очистить имена файлов</string>
     <string name="opt_clean_names_sub">Простой ASCII для SanDisk Clip Sport</string>
@@ -26,9 +30,16 @@
     <string name="preparing">Подготовка…</string>
     <string name="preview">Предварительный просмотр</string>
     <string name="preview_summary_fmt">%1$d плейлистов · %2$d треков</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="progress_count_fmt">%1$d из %2$d</string>
+    <string name="results_folder_tracks_fmt">%1$d треков</string>
+    <string name="results_folders_written">Папки записаны</string>
+    <string name="results_in_destination_fmt">в %1$s</string>
     <string name="results_issues">Завершено с некоторыми проблемами</string>
     <string name="results_renamed_fmt">%1$d переименовано</string>
+    <string name="results_stat_playlists">плейлисты</string>
+    <string name="results_stat_renamed">переименовано</string>
+    <string name="results_stat_tracks">треки</string>
     <string name="results_stats_fmt">%1$d записано · %2$d не удалось</string>
     <string name="results_success">Все плейлисты созданы</string>
     <string name="scan_folder">Сканировать папку</string>
@@ -37,8 +48,11 @@
     <string name="section_renames">Переименования</string>
     <string name="section_warnings">Предупреждения</string>
     <string name="settings">Настройки</string>
+    <string name="settings_about">О программе</string>
+    <string name="settings_appearance">Внешний вид</string>
     <string name="settings_language">Язык</string>
     <string name="settings_language_label">Язык</string>
+    <string name="settings_playlist_options">Параметры плейлиста</string>
     <string name="settings_theme">Тема</string>
     <string name="something_wrong">Что-то пошло не так</string>
     <string name="theme_dark">Темная</string>
@@ -46,5 +60,12 @@
     <string name="theme_system">Как в системе</string>
     <string name="tracks_with_playlist_fmt">%1$d треков · %2$s</string>
     <string name="within_limits">в пределах лимитов Clip Sport</string>
+    <string name="wizard_get_started">Начать</string>
+    <string name="wizard_show_next_time">Показывать это в следующий раз</string>
+    <string name="wizard_step1">Выберите папку с музыкой или SD card</string>
+    <string name="wizard_step2">Выберите параметры, затем Сканировать для предпросмотра</string>
+    <string name="wizard_step3">Сгенерируйте — один .m3u для каждой папки</string>
+    <string name="wizard_subtitle">Создавайте плейлисты Clip Sport за 3 шага</string>
+    <string name="wizard_welcome">Добро пожаловать</string>
     <string name="writing_crlf">Запись файлов .m3u в формате CRLF</string>
 </resources>

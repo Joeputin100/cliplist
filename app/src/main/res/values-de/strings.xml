@@ -2,17 +2,21 @@
 <resources>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">für SanDisk Clip Sport</string>
+    <string name="audio_formats">Audioformate</string>
+    <string name="audio_formats_count_fmt">%1$d von %2$d ausgewählt</string>
     <string name="badge_new">NEU</string>
     <string name="badge_replace">ERSETZEN</string>
     <string name="choose_folder">Ordner auswählen</string>
     <string name="done">Fertig</string>
     <string name="eject">SD-Karte auswerfen</string>
     <string name="eject_note">Öffnet den Speicherbildschirm von Android — Apps können nicht direkt auswerfen.</string>
+    <string name="format_dialog_done">Fertig</string>
     <string name="generate">Wiedergabelisten erstellen</string>
     <string name="language_system">Systemstandard</string>
     <string name="make_another">Weitere Wiedergabeliste erstellen</string>
     <string name="music_folder">MUSIKORDNER</string>
     <string name="no_preview">Noch keine Vorschau verfügbar.</string>
+    <string name="open_settings">Einstellungen öffnen</string>
     <string name="opt_alphabetize">Titel alphabetisch sortieren</string>
     <string name="opt_clean_names">Dateinamen bereinigen</string>
     <string name="opt_clean_names_sub">Reines ASCII für SanDisk Clip Sport</string>
@@ -26,9 +30,16 @@
     <string name="preparing">Vorbereiten…</string>
     <string name="preview">Vorschau</string>
     <string name="preview_summary_fmt">%1$d Wiedergabelisten · %2$d Titel</string>
+    <string name="privacy_policy">Datenschutzerklärung</string>
     <string name="progress_count_fmt">%1$d von %2$d</string>
+    <string name="results_folder_tracks_fmt">%1$d Titel</string>
+    <string name="results_folders_written">ORDNER GESCHRIEBEN</string>
+    <string name="results_in_destination_fmt">in %1$s</string>
     <string name="results_issues">Mit Problemen abgeschlossen</string>
     <string name="results_renamed_fmt">%1$d umbenannt</string>
+    <string name="results_stat_playlists">Wiedergabelisten</string>
+    <string name="results_stat_renamed">umbenannt</string>
+    <string name="results_stat_tracks">Titel</string>
     <string name="results_stats_fmt">%1$d geschrieben · %2$d fehlgeschlagen</string>
     <string name="results_success">Alle Wiedergabelisten erstellt</string>
     <string name="scan_folder">Ordner scannen</string>
@@ -37,8 +48,11 @@
     <string name="section_renames">Umbenennungen</string>
     <string name="section_warnings">Warnungen</string>
     <string name="settings">Einstellungen</string>
+    <string name="settings_about">Über</string>
+    <string name="settings_appearance">Erscheinungsbild</string>
     <string name="settings_language">Sprache</string>
     <string name="settings_language_label">Sprache</string>
+    <string name="settings_playlist_options">Wiedergabelisten-Optionen</string>
     <string name="settings_theme">Design</string>
     <string name="something_wrong">Etwas ist schiefgelaufen</string>
     <string name="theme_dark">Dunkel</string>
@@ -46,5 +60,12 @@
     <string name="theme_system">Systemstandard</string>
     <string name="tracks_with_playlist_fmt">%1$d Titel · %2$s</string>
     <string name="within_limits">innerhalb der Clip Sport Grenzen</string>
+    <string name="wizard_get_started">Erste Schritte</string>
+    <string name="wizard_show_next_time">Nächstes Mal anzeigen</string>
+    <string name="wizard_step1">Wählen Sie Ihren Musikordner oder SD card</string>
+    <string name="wizard_step2">Optionen auswählen, dann scannen zur Vorschau</string>
+    <string name="wizard_step3">Generieren — eine .m3u pro Ordner</string>
+    <string name="wizard_subtitle">Erstellen Sie Clip Sport Wiedergabelisten in 3 Schritten</string>
+    <string name="wizard_welcome">Willkommen</string>
     <string name="writing_crlf">.m3u-Dateien im CRLF-Format schreiben</string>
 </resources>
