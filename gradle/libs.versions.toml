@@ -10,6 +10,7 @@ datastore    = "1.2.1"
 google-services = "4.4.4"
 firebase-bom = "34.14.0"
 appcompat = "1.7.1"
+firebase-crashlytics-plugin = "3.0.7"
 
 [libraries]
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
@@ -33,4 +34,5 @@ android-library     = { id = "com.android.library",       version.ref = "agp" }
 android-application = { id = "com.android.application",  version.ref = "agp" }
 compose-compiler    = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-services     = { id = "com.google.gms.google-services", version.ref = "google-services" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 # kotlin-android intentionally absent — AGP 9.0+ has built-in Kotlin support.

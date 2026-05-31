@@ -58,7 +58,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Assemble Android modules
-        run: ./gradlew :data-storage:assemble :app:assembleDebug --no-daemon
+        run: ./gradlew :data-storage:assemble :app:assembleDebug :app:assembleRelease --no-daemon
 
       - name: Upload app-debug APK
         if: always()

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher long-press shortcut. Reuses already-localized labels. App Actions/App
+     Functions (Gemini) bindings are a deliberate follow-up (alpha APIs); this static
+     shortcut is the stable discoverability gesture. -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="create_playlists"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/scan_folder"
+        android:shortcutLongLabel="@string/generate">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.cliplist.app"
+            android:targetClass="com.cliplist.app.MainActivity" />
+    </shortcut>
+</shortcuts>
