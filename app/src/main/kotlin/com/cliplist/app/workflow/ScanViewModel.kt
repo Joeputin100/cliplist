@@ -6,11 +6,18 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.cliplist.scan.AudioExtensions
 import com.cliplist.scan.PlaylistPlanner
+import com.cliplist.scan.PlaylistWriter
 import com.cliplist.scan.PreviewModel
 import com.cliplist.scan.PreviewModelBuilder
+import com.cliplist.scan.RenameExecution
+import com.cliplist.scan.RenameExecutor
 import com.cliplist.scan.RenameOptions
+import com.cliplist.scan.RenamePlan
 import com.cliplist.scan.RenamePlanner
+import com.cliplist.scan.ResultModel
+import com.cliplist.scan.ResultModelBuilder
 import com.cliplist.scan.ScanOptions
+import com.cliplist.scan.ScanPlan
 import com.cliplist.storage.SafTreeVolume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +27,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/** The four Home toggles. Defaults match spec §3a. */
 data class WorkflowOptions(
     val searchSubfolders: Boolean = true,
     val alphabetize: Boolean = true,
@@ -28,7 +34,6 @@ data class WorkflowOptions(
     val renameHidden: Boolean = false,
 )
 
-/** A folder the user granted via SAF. */
 data class SelectedFolder(val uri: Uri, val displayName: String)
 
 sealed interface ScanUiState {
@@ -38,10 +43,13 @@ sealed interface ScanUiState {
     data class Error(val message: String) : ScanUiState
 }
 
-/**
- * Activity-scoped: shared by Home (sets folder/options, triggers scan) and Preview (reads result).
- * Scans run on Dispatchers.IO because the SAF volume does ContentResolver I/O.
- */
+sealed interface GenerateUiState {
+    data object Idle : GenerateUiState
+    data class Working(val phase: String, val done: Int, val total: Int) : GenerateUiState
+    data class Done(val result: ResultModel) : GenerateUiState
+    data class Error(val message: String) : GenerateUiState
+}
+
 class ScanViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _options = MutableStateFlow(WorkflowOptions())
@@ -53,13 +61,20 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
     private val _scanState = MutableStateFlow<ScanUiState>(ScanUiState.Idle)
     val scanState: StateFlow<ScanUiState> = _scanState.asStateFlow()
 
+    private val _generateState = MutableStateFlow<GenerateUiState>(GenerateUiState.Idle)
+    val generateState: StateFlow<GenerateUiState> = _generateState.asStateFlow()
+
+    // Raw plans retained from the last scan, needed to actually execute.
+    private var lastScanPlan: ScanPlan? = null
+    private var lastRenamePlan: RenamePlan? = null
+    private var lastScanOptions: ScanOptions? = null
+
     fun setFolder(folder: SelectedFolder) { _folder.value = folder }
     fun setSearchSubfolders(v: Boolean) = _options.update { it.copy(searchSubfolders = v) }
     fun setAlphabetize(v: Boolean) = _options.update { it.copy(alphabetize = v) }
     fun setCleanNames(v: Boolean) = _options.update { it.copy(cleanNames = v) }
     fun setRenameHidden(v: Boolean) = _options.update { it.copy(renameHidden = v) }
 
-    /** Resets the scan result (e.g. when returning to Home to re-run). */
     fun clearResult() { _scanState.value = ScanUiState.Idle }
 
     fun scan() {
@@ -70,18 +85,19 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
             try {
                 val model = withContext(Dispatchers.IO) {
                     val volume = SafTreeVolume(getApplication(), f.uri)
-                    val scanPlan = PlaylistPlanner().plan(
-                        volume,
-                        ScanOptions(
-                            recursive = opts.searchSubfolders,
-                            alphabetize = opts.alphabetize,
-                            audioExtensions = AudioExtensions.DEFAULT
-                        )
+                    val scanOptions = ScanOptions(
+                        recursive = opts.searchSubfolders,
+                        alphabetize = opts.alphabetize,
+                        audioExtensions = AudioExtensions.DEFAULT
                     )
+                    val scanPlan = PlaylistPlanner().plan(volume, scanOptions)
                     val renamePlan = RenamePlanner().plan(
                         volume,
                         RenameOptions(cleanNames = opts.cleanNames, renameHidden = opts.renameHidden)
                     )
+                    lastScanPlan = scanPlan
+                    lastRenamePlan = renamePlan
+                    lastScanOptions = scanOptions
                     PreviewModelBuilder.build(scanPlan, renamePlan)
                 }
                 _scanState.value = ScanUiState.Ready(model)
@@ -89,5 +105,47 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                 _scanState.value = ScanUiState.Error(e.message ?: "Scan failed")
             }
         }
+    }
+
+    /**
+     * Applies renames (if any), re-scans so playlists reference the cleaned names, writes the
+     * playlists with progress, and publishes a ResultModel. No-op if no scan has been run.
+     */
+    fun generate() {
+        val f = _folder.value ?: return
+        val scanPlan = lastScanPlan ?: return
+        val renamePlan = lastRenamePlan ?: return
+        val scanOptions = lastScanOptions ?: return
+        _generateState.value = GenerateUiState.Working("Starting…", 0, scanPlan.folders.size)
+        viewModelScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    val volume = SafTreeVolume(getApplication(), f.uri)
+                    var renameExec: RenameExecution? = null
+                    if (renamePlan.ops.isNotEmpty()) {
+                        _generateState.value =
+                            GenerateUiState.Working("Cleaning names…", 0, renamePlan.ops.size)
+                        renameExec = RenameExecutor(volume).execute(renamePlan)
+                    }
+                    // After renames, filenames changed — re-scan so the .m3u lists the new names.
+                    val planToWrite = if (renamePlan.ops.isNotEmpty())
+                        PlaylistPlanner().plan(volume, scanOptions) else scanPlan
+                    val report = PlaylistWriter(volume).execute(planToWrite) { done, total ->
+                        _generateState.value =
+                            GenerateUiState.Working("Writing playlists…", done, total)
+                    }
+                    ResultModelBuilder.build(report, renameExec)
+                }
+                _generateState.value = GenerateUiState.Done(result)
+            } catch (e: Exception) {
+                _generateState.value = GenerateUiState.Error(e.message ?: "Generation failed")
+            }
+        }
+    }
+
+    /** Resets everything for "make another playlist". */
+    fun resetWorkflow() {
+        _scanState.value = ScanUiState.Idle
+        _generateState.value = GenerateUiState.Idle
     }
 }
