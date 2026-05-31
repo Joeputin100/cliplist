@@ -24,7 +24,6 @@ lifecycle-runtime-compose   = { module = "androidx.lifecycle:lifecycle-runtime-c
 datastore-preferences       = { module = "androidx.datastore:datastore-preferences",                  version.ref = "datastore" }
 firebase-bom                = { module = "com.google.firebase:firebase-bom",                          version.ref = "firebase-bom" }
 firebase-crashlytics        = { module = "com.google.firebase:firebase-crashlytics" }
-firebase-analytics          = { module = "com.google.firebase:firebase-analytics" }
 
 [plugins]
 kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }
