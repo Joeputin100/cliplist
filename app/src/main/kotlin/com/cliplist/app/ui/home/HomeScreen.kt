@@ -25,9 +25,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.cliplist.app.R
 import com.cliplist.app.nav.Screen
 import com.cliplist.app.workflow.ScanUiState
 import com.cliplist.app.workflow.ScanViewModel
@@ -67,9 +69,9 @@ fun HomeScreen(navController: NavController, vm: ScanViewModel) {
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp, vertical = 16.dp)
         ) {
-            Text("My Playlist Creator", style = MaterialTheme.typography.headlineMedium)
+            Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
             Text(
-                "for SanDisk Clip Sport",
+                stringResource(R.string.app_tagline),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -77,22 +79,22 @@ fun HomeScreen(navController: NavController, vm: ScanViewModel) {
 
             Card(onClick = { picker.launch(null) }, modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("MUSIC FOLDER", style = MaterialTheme.typography.labelMedium,
+                    Text(stringResource(R.string.music_folder), style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary)
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        folder?.displayName ?: "Tap to choose a folder",
+                        folder?.displayName ?: stringResource(R.string.choose_folder),
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
             }
             Spacer(Modifier.height(16.dp))
 
-            ToggleRow("Search subfolders", null, options.searchSubfolders, vm::setSearchSubfolders)
-            ToggleRow("Alphabetize tracks", null, options.alphabetize, vm::setAlphabetize)
-            ToggleRow("Clean file names", "Plain ASCII for SanDisk Clip Sport",
+            ToggleRow(stringResource(R.string.opt_subfolders), null, options.searchSubfolders, vm::setSearchSubfolders)
+            ToggleRow(stringResource(R.string.opt_alphabetize), null, options.alphabetize, vm::setAlphabetize)
+            ToggleRow(stringResource(R.string.opt_clean_names), stringResource(R.string.opt_clean_names_sub),
                 options.cleanNames, vm::setCleanNames)
-            ToggleRow("Rename hidden files", "For SanDisk Clip Sport compatibility",
+            ToggleRow(stringResource(R.string.opt_rename_hidden), stringResource(R.string.opt_rename_hidden_sub),
                 options.renameHidden, vm::setRenameHidden)
             Spacer(Modifier.height(24.dp))
 
@@ -102,7 +104,7 @@ fun HomeScreen(navController: NavController, vm: ScanViewModel) {
                 enabled = folder != null && !scanning,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(if (scanning) "Scanning…" else "Scan folder")
+                Text(if (scanning) stringResource(R.string.scanning) else stringResource(R.string.scan_folder))
             }
             (scanState as? ScanUiState.Error)?.let {
                 Spacer(Modifier.height(12.dp))
