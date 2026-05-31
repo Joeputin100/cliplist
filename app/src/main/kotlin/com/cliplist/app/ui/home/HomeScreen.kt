@@ -107,6 +107,8 @@ fun HomeScreen(navController: NavController, vm: ScanViewModel) {
                 options.cleanNames, vm::setCleanNames)
             ToggleRow(stringResource(R.string.opt_rename_hidden), stringResource(R.string.opt_rename_hidden_sub),
                 options.renameHidden, vm::setRenameHidden)
+            ToggleRow(stringResource(R.string.opt_cover_art), stringResource(R.string.opt_cover_art_sub),
+                options.writeCoverArt, vm::setWriteCoverArt)
             Spacer(Modifier.height(24.dp))
 
             val scanning = scanState is ScanUiState.Scanning

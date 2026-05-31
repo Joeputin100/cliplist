@@ -20,7 +20,7 @@ class PlaylistWriter(private val volume: StorageVolume) {
             fp.existingPlaylistName?.let { volume.deleteFile(fp.folder, it) }
             // Files already sorted by planner; pass alphabetize=false to preserve order.
             val bytes = M3uSerializer.serialize(fp.audioFiles, SerializerOptions(alphabetize = false))
-            when (val result = volume.writeFile(fp.folder, fp.playlistName, bytes)) {
+            when (val result = volume.writeFile(fp.folder, fp.playlistName, bytes, "audio/x-mpegurl")) {
                 is VolumeWriteResult.Success -> written++
                 is VolumeWriteResult.Failure -> {
                     failed++

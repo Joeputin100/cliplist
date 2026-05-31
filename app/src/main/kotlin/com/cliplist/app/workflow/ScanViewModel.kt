@@ -34,6 +34,7 @@ data class WorkflowOptions(
     val alphabetize: Boolean = true,
     val cleanNames: Boolean = false,
     val renameHidden: Boolean = false,
+    val writeCoverArt: Boolean = false,
 )
 
 data class SelectedFolder(val uri: Uri, val displayName: String)
@@ -78,6 +79,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
     fun setAlphabetize(v: Boolean) = _options.update { it.copy(alphabetize = v) }
     fun setCleanNames(v: Boolean) = _options.update { it.copy(cleanNames = v) }
     fun setRenameHidden(v: Boolean) = _options.update { it.copy(renameHidden = v) }
+    fun setWriteCoverArt(v: Boolean) = _options.update { it.copy(writeCoverArt = v) }
 
     fun clearResult() { _scanState.value = ScanUiState.Idle }
 
@@ -120,6 +122,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
         val scanPlan = lastScanPlan ?: return
         val renamePlan = lastRenamePlan ?: return
         val scanOptions = lastScanOptions ?: return
+        val writeCoverArt = _options.value.writeCoverArt
         _generateState.value = GenerateUiState.Working(GenPhase.Starting, 0, scanPlan.folders.size)
         viewModelScope.launch {
             try {
@@ -137,6 +140,17 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                     val report = PlaylistWriter(volume).execute(planToWrite) { done, total ->
                         _generateState.value =
                             GenerateUiState.Working(GenPhase.Writing, done, total)
+                    }
+                    // Optional cover art: drop a bundled folder.jpg into each music folder that
+                    // doesn't already have one (never overwrite the user's existing art).
+                    if (writeCoverArt) {
+                        val artBytes = getApplication<Application>().assets
+                            .open("folder.jpg").use { it.readBytes() }
+                        planToWrite.folders.forEach { fp ->
+                            val hasArt = volume.children(fp.folder)
+                                .any { it.name.equals("folder.jpg", ignoreCase = true) }
+                            if (!hasArt) volume.writeFile(fp.folder, "folder.jpg", artBytes, "image/jpeg")
+                        }
                     }
                     ResultModelBuilder.build(report, renameExec)
                 }

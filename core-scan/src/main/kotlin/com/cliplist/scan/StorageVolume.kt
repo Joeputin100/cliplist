@@ -20,7 +20,7 @@ sealed class RenameOutcome {
 interface StorageVolume {
     val rootNode: VolumeNode
     fun children(node: VolumeNode): List<VolumeNode>
-    fun writeFile(directory: VolumeNode, name: String, content: ByteArray): VolumeWriteResult
+    fun writeFile(directory: VolumeNode, name: String, content: ByteArray, mimeType: String): VolumeWriteResult
     fun deleteFile(directory: VolumeNode, fileName: String): Boolean
     fun renameNode(node: VolumeNode, newName: String): RenameOutcome
 }

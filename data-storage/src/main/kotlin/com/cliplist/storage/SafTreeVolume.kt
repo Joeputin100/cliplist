@@ -59,12 +59,12 @@ class SafTreeVolume(
         return result
     }
 
-    override fun writeFile(directory: VolumeNode, name: String, content: ByteArray): VolumeWriteResult {
+    override fun writeFile(directory: VolumeNode, name: String, content: ByteArray, mimeType: String): VolumeWriteResult {
         directory as SafNode
         val dirUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, directory.documentId)
         return try {
             val newUri = DocumentsContract.createDocument(
-                context.contentResolver, dirUri, "audio/x-mpegurl", name
+                context.contentResolver, dirUri, mimeType, name
             ) ?: return VolumeWriteResult.Failure("createDocument returned null for $name in ${directory.name}")
             context.contentResolver.openOutputStream(newUri, "wt")?.use { it.write(content) }
                 ?: return VolumeWriteResult.Failure("openOutputStream returned null for $name")
