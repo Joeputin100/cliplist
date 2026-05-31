@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Playlist Creator 2026</string>
+    <string name="app_tagline">适用于 SanDisk Clip Sport</string>
+    <string name="badge_new">新增</string>
+    <string name="badge_replace">替换</string>
+    <string name="choose_folder">轻触选择文件夹</string>
+    <string name="done">完成</string>
+    <string name="eject">弹出 SD 卡</string>
+    <string name="eject_note">打开安卓存储界面 — 应用无法直接弹出。</string>
+    <string name="generate">生成播放列表</string>
+    <string name="make_another">制作另一个播放列表</string>
+    <string name="music_folder">音乐文件夹</string>
+    <string name="no_preview">暂无预览。</string>
+    <string name="opt_alphabetize">曲目按字母排序</string>
+    <string name="opt_clean_names">规范文件名</string>
+    <string name="opt_clean_names_sub">SanDisk Clip Sport 的纯 ASCII 格式</string>
+    <string name="opt_rename_hidden">重命名隐藏文件</string>
+    <string name="opt_rename_hidden_sub">为了 SanDisk Clip Sport 兼容性</string>
+    <string name="opt_subfolders">搜索子文件夹</string>
+    <string name="phase_cleaning">正在清理名称…</string>
+    <string name="phase_writing">正在写入播放列表…</string>
+    <string name="preparing">正在准备…</string>
+    <string name="preview">预览</string>
+    <string name="preview_summary_fmt">%1$d 个播放列表 · %2$d 首曲目</string>
+    <string name="progress_count_fmt">%1$d / %2$d</string>
+    <string name="results_issues">完成，但存在一些问题</string>
+    <string name="results_renamed_fmt">%1$d 已重命名</string>
+    <string name="results_stats_fmt">%1$d 成功 · %2$d 失败</string>
+    <string name="results_success">播放列表已全部创建</string>
+    <string name="scan_folder">扫描文件夹</string>
+    <string name="scanning">正在扫描…</string>
+    <string name="section_playlists">播放列表</string>
+    <string name="section_renames">重命名</string>
+    <string name="section_warnings">警告</string>
+    <string name="settings">设置</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_theme">主题</string>
+    <string name="something_wrong">出错了。</string>
+    <string name="theme_dark">深色</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_system">跟随系统</string>
+    <string name="tracks_with_playlist_fmt">%1$d 首曲目 · %2$s</string>
+    <string name="within_limits">在 Clip Sport 限制内</string>
+    <string name="writing_crlf">以 CRLF 格式写入 .m3u 文件</string>
+</resources>

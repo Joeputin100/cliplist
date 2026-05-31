@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Playlist Creator 2026</string>
+    <string name="app_tagline">for SanDisk Clip Sport</string>
+    <string name="badge_new">NEW</string>
+    <string name="badge_replace">REPLACE</string>
+    <string name="choose_folder">Tap to choose a folder</string>
+    <string name="done">Done</string>
+    <string name="eject">Eject SD card</string>
+    <string name="eject_note">Opens Android\'s storage screen — apps can\'t eject directly.</string>
+    <string name="generate">Generate playlists</string>
+    <string name="make_another">Make another playlist</string>
+    <string name="music_folder">MUSIC FOLDER</string>
+    <string name="no_preview">Nothing to preview yet.</string>
+    <string name="opt_alphabetize">Alphabetize tracks</string>
+    <string name="opt_clean_names">Clean file names</string>
+    <string name="opt_clean_names_sub">Plain ASCII for SanDisk Clip Sport</string>
+    <string name="opt_rename_hidden">Rename hidden files</string>
+    <string name="opt_rename_hidden_sub">For SanDisk Clip Sport compatibility</string>
+    <string name="opt_subfolders">Search subfolders</string>
+    <string name="phase_cleaning">Cleaning names…</string>
+    <string name="phase_writing">Writing playlists…</string>
+    <string name="preparing">Preparing…</string>
+    <string name="preview">Preview</string>
+    <string name="preview_summary_fmt">%1$d playlists · %2$d tracks</string>
+    <string name="progress_count_fmt">%1$d of %2$d</string>
+    <string name="results_issues">Finished with some issues</string>
+    <string name="results_renamed_fmt">%1$d renamed</string>
+    <string name="results_stats_fmt">%1$d written · %2$d failed</string>
+    <string name="results_success">All playlists created</string>
+    <string name="scan_folder">Scan folder</string>
+    <string name="scanning">Scanning…</string>
+    <string name="section_playlists">Playlists</string>
+    <string name="section_renames">Renames</string>
+    <string name="section_warnings">Warnings</string>
+    <string name="settings">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_theme">Theme</string>
+    <string name="something_wrong">Something went wrong</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_system">Follow system</string>
+    <string name="tracks_with_playlist_fmt">%1$d tracks · %2$s</string>
+    <string name="within_limits">within Clip Sport limits</string>
+    <string name="writing_crlf">Writing .m3u files in CRLF format</string>
+</resources>

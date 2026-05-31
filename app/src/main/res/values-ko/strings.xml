@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Playlist Creator 2026</string>
+    <string name="app_tagline">SanDisk Clip Sport용</string>
+    <string name="badge_new">새로 추가됨</string>
+    <string name="badge_replace">교체</string>
+    <string name="choose_folder">폴더를 선택하려면 탭하세요</string>
+    <string name="done">완료</string>
+    <string name="eject">SD 카드 꺼내기</string>
+    <string name="eject_note">Android 저장소 화면을 엽니다 — 앱에서 직접 꺼낼 수 없습니다.</string>
+    <string name="generate">재생 목록 생성</string>
+    <string name="make_another">다른 재생 목록 만들기</string>
+    <string name="music_folder">음악 폴더</string>
+    <string name="no_preview">아직 미리 볼 내용이 없습니다.</string>
+    <string name="opt_alphabetize">트랙을 알파벳순으로 정렬</string>
+    <string name="opt_clean_names">파일 이름 정리</string>
+    <string name="opt_clean_names_sub">SanDisk Clip Sport용 일반 ASCII</string>
+    <string name="opt_rename_hidden">숨김 파일 이름 변경</string>
+    <string name="opt_rename_hidden_sub">SanDisk Clip Sport 호환성을 위해</string>
+    <string name="opt_subfolders">하위 폴더 검색</string>
+    <string name="phase_cleaning">이름 정리 중…</string>
+    <string name="phase_writing">재생 목록 작성 중…</string>
+    <string name="preparing">준비 중…</string>
+    <string name="preview">미리보기</string>
+    <string name="preview_summary_fmt">%1$d 재생목록 · %2$d 트랙</string>
+    <string name="progress_count_fmt">%2$d개 중 %1$d</string>
+    <string name="results_issues">일부 문제가 발생했지만 완료되었습니다</string>
+    <string name="results_renamed_fmt">%1$d 이름 변경됨</string>
+    <string name="results_stats_fmt">%1$d 작성됨 · %2$d 실패</string>
+    <string name="results_success">모든 재생 목록이 생성되었습니다</string>
+    <string name="scan_folder">폴더 스캔</string>
+    <string name="scanning">스캔 중…</string>
+    <string name="section_playlists">재생 목록</string>
+    <string name="section_renames">이름 변경</string>
+    <string name="section_warnings">경고</string>
+    <string name="settings">설정</string>
+    <string name="settings_language">언어</string>
+    <string name="settings_theme">테마</string>
+    <string name="something_wrong">문제가 발생했습니다.</string>
+    <string name="theme_dark">어둡게</string>
+    <string name="theme_light">밝게</string>
+    <string name="theme_system">시스템 설정 따르기</string>
+    <string name="tracks_with_playlist_fmt">%1$d 트랙 · %2$s</string>
+    <string name="within_limits">Clip Sport 제한 범위 내</string>
+    <string name="writing_crlf">CRLF 형식으로 .m3u 파일 작성 중</string>
+</resources>

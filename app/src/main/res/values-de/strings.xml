@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Playlist Creator 2026</string>
+    <string name="app_tagline">für SanDisk Clip Sport</string>
+    <string name="badge_new">NEU</string>
+    <string name="badge_replace">ERSETZEN</string>
+    <string name="choose_folder">Ordner auswählen</string>
+    <string name="done">Fertig</string>
+    <string name="eject">SD-Karte auswerfen</string>
+    <string name="eject_note">Öffnet den Speicherbildschirm von Android — Apps können nicht direkt auswerfen.</string>
+    <string name="generate">Wiedergabelisten erstellen</string>
+    <string name="make_another">Weitere Wiedergabeliste erstellen</string>
+    <string name="music_folder">MUSIKORDNER</string>
+    <string name="no_preview">Noch keine Vorschau verfügbar.</string>
+    <string name="opt_alphabetize">Titel alphabetisch sortieren</string>
+    <string name="opt_clean_names">Dateinamen bereinigen</string>
+    <string name="opt_clean_names_sub">Reines ASCII für SanDisk Clip Sport</string>
+    <string name="opt_rename_hidden">Versteckte Dateien umbenennen</string>
+    <string name="opt_rename_hidden_sub">Für SanDisk Clip Sport Kompatibilität</string>
+    <string name="opt_subfolders">Unterordner durchsuchen</string>
+    <string name="phase_cleaning">Namen bereinigen…</string>
+    <string name="phase_writing">Wiedergabelisten schreiben…</string>
+    <string name="preparing">Vorbereiten…</string>
+    <string name="preview">Vorschau</string>
+    <string name="preview_summary_fmt">%1$d Wiedergabelisten · %2$d Titel</string>
+    <string name="progress_count_fmt">%1$d von %2$d</string>
+    <string name="results_issues">Mit Problemen abgeschlossen</string>
+    <string name="results_renamed_fmt">%1$d umbenannt</string>
+    <string name="results_stats_fmt">%1$d geschrieben · %2$d fehlgeschlagen</string>
+    <string name="results_success">Alle Wiedergabelisten erstellt</string>
+    <string name="scan_folder">Ordner scannen</string>
+    <string name="scanning">Scanne…</string>
+    <string name="section_playlists">Wiedergabelisten</string>
+    <string name="section_renames">Umbenennungen</string>
+    <string name="section_warnings">Warnungen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="settings_language">Sprache</string>
+    <string name="settings_theme">Design</string>
+    <string name="something_wrong">Etwas ist schiefgelaufen</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_system">Systemstandard</string>
+    <string name="tracks_with_playlist_fmt">%1$d Titel · %2$s</string>
+    <string name="within_limits">innerhalb der Clip Sport Grenzen</string>
+    <string name="writing_crlf">.m3u-Dateien im CRLF-Format schreiben</string>
+</resources>

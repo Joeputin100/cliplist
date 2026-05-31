@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Playlist Creator 2026</string>
+    <string name="app_tagline">SanDisk Clip Sport 用</string>
+    <string name="badge_new">新規</string>
+    <string name="badge_replace">置換</string>
+    <string name="choose_folder">タップしてフォルダを選択</string>
+    <string name="done">完了</string>
+    <string name="eject">SDカードを取り出す</string>
+    <string name="eject_note">Android のストレージ画面を開きます — アプリは直接取り出しできません。</string>
+    <string name="generate">プレイリストを生成</string>
+    <string name="make_another">別のプレイリストを作成</string>
+    <string name="music_folder">音楽フォルダ</string>
+    <string name="no_preview">まだプレビューするものはありません。</string>
+    <string name="opt_alphabetize">トラックをアルファベット順に</string>
+    <string name="opt_clean_names">ファイル名をクリーンアップ</string>
+    <string name="opt_clean_names_sub">SanDisk Clip Sport 用のプレーン ASCII</string>
+    <string name="opt_rename_hidden">隠しファイルの名前を変更</string>
+    <string name="opt_rename_hidden_sub">SanDisk Clip Sport との互換性のため</string>
+    <string name="opt_subfolders">サブフォルダも検索</string>
+    <string name="phase_cleaning">名前をクリーンアップ中…</string>
+    <string name="phase_writing">プレイリストを書き込み中…</string>
+    <string name="preparing">準備中…</string>
+    <string name="preview">プレビュー</string>
+    <string name="preview_summary_fmt">%1$d 個のプレイリスト · %2$d 曲</string>
+    <string name="progress_count_fmt">%2$d 中 %1$d</string>
+    <string name="results_issues">いくつかの問題で終了しました</string>
+    <string name="results_renamed_fmt">%1$d 件の名前が変更されました</string>
+    <string name="results_stats_fmt">%1$d 件書き込み済み · %2$d 件失敗</string>
+    <string name="results_success">すべてのプレイリストが作成されました</string>
+    <string name="scan_folder">フォルダをスキャン</string>
+    <string name="scanning">スキャン中…</string>
+    <string name="section_playlists">プレイリスト</string>
+    <string name="section_renames">名前変更</string>
+    <string name="section_warnings">警告</string>
+    <string name="settings">設定</string>
+    <string name="settings_language">言語</string>
+    <string name="settings_theme">テーマ</string>
+    <string name="something_wrong">何らかの問題が発生しました</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_system">システムに従う</string>
+    <string name="tracks_with_playlist_fmt">%1$d 曲 · %2$s</string>
+    <string name="within_limits">Clip Sport の制限内</string>
+    <string name="writing_crlf">.m3u ファイルを CRLF 形式で書き込み中</string>
+</resources>

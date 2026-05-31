@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Playlist Creator 2026</string>
+    <string name="app_tagline">para SanDisk Clip Sport</string>
+    <string name="badge_new">NUEVO</string>
+    <string name="badge_replace">REEMPLAZAR</string>
+    <string name="choose_folder">Toca para elegir una carpeta</string>
+    <string name="done">Listo</string>
+    <string name="eject">Expulsar tarjeta SD</string>
+    <string name="eject_note">Abre la pantalla de almacenamiento de Android — las aplicaciones no pueden expulsar directamente.</string>
+    <string name="generate">Generar listas de reproducción</string>
+    <string name="make_another">Crear otra lista de reproducción</string>
+    <string name="music_folder">CARPETA DE MÚSICA</string>
+    <string name="no_preview">Nada que previsualizar aún.</string>
+    <string name="opt_alphabetize">Alfabetizar pistas</string>
+    <string name="opt_clean_names">Limpiar nombres de archivo</string>
+    <string name="opt_clean_names_sub">ASCII simple para SanDisk Clip Sport</string>
+    <string name="opt_rename_hidden">Renombrar archivos ocultos</string>
+    <string name="opt_rename_hidden_sub">Para compatibilidad con SanDisk Clip Sport</string>
+    <string name="opt_subfolders">Buscar subcarpetas</string>
+    <string name="phase_cleaning">Limpiando nombres…</string>
+    <string name="phase_writing">Escribiendo listas de reproducción…</string>
+    <string name="preparing">Preparando…</string>
+    <string name="preview">Vista previa</string>
+    <string name="preview_summary_fmt">%1$d listas de reproducción · %2$d pistas</string>
+    <string name="progress_count_fmt">%1$d de %2$d</string>
+    <string name="results_issues">Terminado con algunos problemas</string>
+    <string name="results_renamed_fmt">%1$d renombrados</string>
+    <string name="results_stats_fmt">%1$d escritos · %2$d fallidos</string>
+    <string name="results_success">Todas las listas de reproducción creadas</string>
+    <string name="scan_folder">Escanear carpeta</string>
+    <string name="scanning">Escaneando…</string>
+    <string name="section_playlists">Listas de reproducción</string>
+    <string name="section_renames">Renombres</string>
+    <string name="section_warnings">Advertencias</string>
+    <string name="settings">Ajustes</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_theme">Tema</string>
+    <string name="something_wrong">Algo salió mal</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_system">Seguir sistema</string>
+    <string name="tracks_with_playlist_fmt">%1$d pistas · %2$s</string>
+    <string name="within_limits">dentro de los límites de Clip Sport</string>
+    <string name="writing_crlf">Escribiendo archivos .m3u en formato CRLF</string>
+</resources>
