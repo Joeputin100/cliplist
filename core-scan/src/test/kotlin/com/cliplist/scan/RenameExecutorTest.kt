@@ -31,4 +31,20 @@ class RenameExecutorTest {
         assertEquals(1, exec.failed.size)
         assertEquals("Café.mp3", exec.failed.single().op.oldName)
     }
+
+    @Test fun `undo restores every original name`() {
+        val root = fakeDir("Music",
+            fakeFile("Café.mp3"),
+            fakeDir("Jazz:Sub", fakeFile("Tëst.mp3")))
+        val volume = FakeVolume(root)
+        val exec = RenameExecutor(volume).execute(RenamePlanner().plan(volume, clean))
+
+        val undo = RenameExecutor(volume).undo(exec)
+
+        assertEquals(3, undo.reverted)
+        assertTrue(undo.failed.isEmpty())
+        assertEquals(setOf("Café.mp3", "Jazz:Sub"), root.children.map { it.name }.toSet())
+        val sub = root.children.first { it.isDirectory } as FakeNode
+        assertEquals("Tëst.mp3", sub.children.single().name)
+    }
 }

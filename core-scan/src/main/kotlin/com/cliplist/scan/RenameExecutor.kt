@@ -32,4 +32,26 @@ class RenameExecutor(private val volume: StorageVolume) {
         }
         return RenameExecution(applied, failed)
     }
+
+    /**
+     * Reverts an execution by renaming each applied node back to its old name, newest-first
+     * (the inverse order of how they were applied). Uses the post-rename node captured in
+     * [AppliedRename], whose identity/URI is the current one.
+     */
+    fun undo(execution: RenameExecution): UndoResult {
+        var reverted = 0
+        val failed = mutableListOf<RenameFailure>()
+        for (a in execution.applied.asReversed()) {
+            when (volume.renameNode(a.node, a.oldName)) {
+                is RenameOutcome.Renamed -> reverted++
+                is RenameOutcome.Failure -> failed.add(
+                    RenameFailure(
+                        RenameOp(a.node, a.parentPath, a.newName, a.oldName, depth = 0),
+                        "undo failed for ${a.newName}"
+                    )
+                )
+            }
+        }
+        return UndoResult(reverted, failed)
+    }
 }
