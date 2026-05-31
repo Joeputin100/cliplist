@@ -6,6 +6,7 @@ compose-bom  = "2026.05.01"
 activity     = "1.13.0"
 navigation   = "2.9.8"
 lifecycle    = "2.10.0"
+datastore    = "1.2.1"
 
 [libraries]
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
@@ -18,6 +19,7 @@ activity-compose            = { module = "androidx.activity:activity-compose",  
 navigation-compose          = { module = "androidx.navigation:navigation-compose",                    version.ref = "navigation" }
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose",            version.ref = "lifecycle" }
 lifecycle-runtime-compose   = { module = "androidx.lifecycle:lifecycle-runtime-compose",              version.ref = "lifecycle" }
+datastore-preferences       = { module = "androidx.datastore:datastore-preferences",                  version.ref = "datastore" }
 
 [plugins]
 kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }
