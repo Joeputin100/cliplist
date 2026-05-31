@@ -246,7 +246,7 @@ dependencies {
         NoActionBar prevents a duplicate title bar; transparent bars let
         enableEdgeToEdge() control the window chrome.
     -->
-    <style name="Theme.ClipList" parent="android:Theme.Material.Light.NoTitleBar">
+    <style name="Theme.ClipList" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
