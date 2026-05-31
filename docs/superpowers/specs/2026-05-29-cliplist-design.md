@@ -33,7 +33,7 @@ Build a modern Android app — **ClipList** — that scans music folders and wri
 | Repo & privacy | **One private GitHub repo** holds the APK + decompile workflow + app. Decompiled source is **never committed** (CI artifact only) |
 | Languages | **10**: en, es, fr, de, pt-BR, it, ru, ja, ko, zh-CN |
 | Default language / theme | **Follow system**, both overridable in Settings |
-| Platform target | **minSdk 21, targetSdk 36** (Android 16); edge-to-edge + predictive back; Material 3 Expressive |
+| Platform target | **minSdk 24, targetSdk 36** (Android 16); edge-to-edge + predictive back; Material 3 Expressive |
 | Discoverability | App Functions (`androidx.appfunctions`) + App Actions/BII + ASO listing metadata |
 
 ## 4. Non-goals (YAGNI)
@@ -48,7 +48,7 @@ Build a modern Android app — **ClipList** — that scans music folders and wri
 - **Byte-exact output** is the hard acceptance bar (see §8).
 - **CRLF always**, regardless of host OS conventions.
 - **FAT32 reality (applies to both file *and* folder names):** illegal characters `\ / : * ? " < > |`; reserved names (`CON`, `PRN`, `AUX`, `NUL`, `COM1–9`, `LPT1–9`); case-insensitive collisions; long-name/path limits.
-- **minSdk 21** means some 2025-era features (App Functions, dynamic color, predictive-back animation) only activate on newer OS versions and must degrade cleanly.
+- **minSdk 24** (Android 7.0) is the floor: modern Jetpack Compose hard-requires API 23+, so 21 is no longer attainable; 24 keeps ~99% device coverage. Some 2025-era features (App Functions, dynamic color, predictive-back animation) still only activate on newer OS versions and must degrade cleanly.
 - **Privacy/IP:** the proprietary APK and any decompiled output stay in the private repo / CI artifacts; only original work + a written format description + synthetic fixtures could ever go public.
 
 ## 6. Architecture (isolated, independently testable modules)
@@ -195,7 +195,7 @@ Mockups will be shown to the user as **in-chat screenshots** (headless VPS) befo
 3. App scans and writes via the **SAF backend** across both internal storage and removable SD cards.
 4. Filename cleaning previews before touching disk and is fully reversible via undo — for **both files and folders**.
 5. UI runs edge-to-edge with working predictive back; theme + language follow system and are overridable.
-6. App installs and runs on Android 5.0 (API 21) through Android 16, with newer features degrading gracefully.
+6. App installs and runs on Android 7.0 (API 24) through Android 16, with newer features degrading gracefully.
 7. CI builds, tests, signs, and publishes the APK; decompiled source is never committed.
 
 ## 20. Risks & mitigations
@@ -205,7 +205,7 @@ Mockups will be shown to the user as **in-chat screenshots** (headless VPS) befo
 - **SAF scan speed on large libraries.** Mitigation: bulk `DocumentsContract` child queries instead of `DocumentFile.listFiles()`.
 - **Destructive renames (files + folders).** Mitigation: mandatory preview + undo log; bottom-up ordering; generate after rename.
 - **App Functions is alpha / API churn.** Mitigation: isolate behind a thin module, guard by OS version, treat as best-effort.
-- **minSdk 21 vs modern libraries.** Mitigation: graceful degradation; keep newest features optional.
+- **minSdk vs modern libraries.** Resolved 2026-05-30: modern Compose requires API 23+, so minSdk raised 21→24 (Android 7.0). Newer-only features still degrade gracefully above this floor.
 
 ## 21. Implementation phases (detailed plan to follow via writing-plans)
 

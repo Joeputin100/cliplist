@@ -6,7 +6,7 @@
 
 **Architecture:** Single `MainActivity` calls `enableEdgeToEdge()` then hosts a `ClipListTheme`-wrapped `AppNavGraph`. Navigation uses Compose Navigation with a `Screen` sealed class for 5 routes. Each screen is a placeholder composable. Theme uses Material 3 dynamic colour on API 31+ and a brand fallback on older devices. No ViewModels or scan logic yet — those arrive in Phase 3b.
 
-**Tech Stack:** Kotlin 2.3.20 · AGP 9.2.0 · Compose BOM 2026.05.01 · Material3 1.11.x · Navigation Compose 2.9.8 · Activity Compose 1.13.0 · Lifecycle ViewModel Compose 2.10.0 · Java 21 · minSdk 21 · targetSdk 36.
+**Tech Stack:** Kotlin 2.3.20 · AGP 9.2.0 · Compose BOM 2026.05.01 · Material3 1.11.x · Navigation Compose 2.9.8 · Activity Compose 1.13.0 · Lifecycle ViewModel Compose 2.10.0 · Java 21 · minSdk 24 · targetSdk 36.
 
 **Version provenance (verified 2026-05-30 against Google Maven `group-index.xml`):** `activity-compose` latest stable = 1.13.0 (1.9.0 in the original draft was stale); `navigation-compose` latest stable = 2.9.8 (2.10.0 still alpha); `lifecycle-viewmodel-compose` latest stable = 2.10.0 (2.11.0 still beta); `compose-bom` latest = 2026.05.01.
 
@@ -167,7 +167,7 @@ android {
 
     defaultConfig {
         applicationId = "com.cliplist.app"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
