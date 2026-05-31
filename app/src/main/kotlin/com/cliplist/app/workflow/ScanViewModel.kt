@@ -4,6 +4,7 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.cliplist.app.settings.SettingsRepository
 import com.cliplist.scan.AudioExtensions
 import com.cliplist.scan.PlaylistPlanner
 import com.cliplist.scan.PlaylistWriter
@@ -23,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -90,7 +92,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                     val scanOptions = ScanOptions(
                         recursive = opts.searchSubfolders,
                         alphabetize = opts.alphabetize,
-                        audioExtensions = AudioExtensions.DEFAULT
+                        audioExtensions = SettingsRepository(getApplication()).audioExtensions.first()
                     )
                     val scanPlan = PlaylistPlanner().plan(volume, scanOptions)
                     val renamePlan = RenamePlanner().plan(

@@ -69,12 +69,23 @@ fun HomeScreen(navController: NavController, vm: ScanViewModel) {
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp, vertical = 16.dp)
         ) {
-            Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
-            Text(
-                stringResource(R.string.app_tagline),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            androidx.compose.foundation.layout.Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceBetween,
+                verticalAlignment = androidx.compose.ui.Alignment.Top
+            ) {
+                Column {
+                    Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium)
+                    Text(
+                        stringResource(R.string.app_tagline),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                androidx.compose.material3.TextButton(
+                    onClick = { navController.navigate(com.cliplist.app.nav.Screen.Settings.route) }
+                ) { Text(stringResource(R.string.settings)) }
+            }
             Spacer(Modifier.height(20.dp))
 
             Card(onClick = { picker.launch(null) }, modifier = Modifier.fillMaxWidth()) {
