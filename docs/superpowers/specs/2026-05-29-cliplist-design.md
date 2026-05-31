@@ -1,7 +1,7 @@
-# ClipList — Design Spec
+# My Playlist Creator 2026 — Design Spec  *(internal codename: ClipList)*
 
 - **Date:** 2026-05-29
-- **Status:** Approved (design), rev. 2 (SAF-only storage + folder cleaning); awaiting written-spec review
+- **Status:** Approved — design + UI mockups locked 2026-05-30, rev. 3 (display name "My Playlist Creator 2026"; four Home toggles; non-destructive hidden-file rename; eject deep-link; edge-to-edge + editorial robustness). See §3a.
 - **Author:** Joeputin100 (with Claude)
 - **Topic:** Modern, clean-room replacement for the 10-year-old *My Music Playlist Creator* (`com.matt.mym3ucreator`, v2.1.1, 2016), purpose-built for SanDisk Clip Sport + FAT32 SD-card workflows.
 
@@ -28,13 +28,31 @@ Build a modern Android app — **ClipList** — that scans music folders and wri
 |---|---|
 | Build strategy | **Clean-room rewrite**; decompile only as a private reference to extract the exact format |
 | Storage access | **SAF only** (Storage Access Framework folder picker) — one uniform path for internal storage **and** removable SD cards; no all-files permission; Play-eligible |
-| Filename cleaning | **Rename the real files *and* folders** to ASCII/FAT32-safe names, with **mandatory preview** + **undo log** |
+| Filename cleaning | **Rename real files *and* folders** to ASCII Clip-Sport-safe names — separate toggles for visible names and hidden files; **mandatory preview + undo**; **never delete**. See §3a. |
 | Audio formats scanned | **All Clip Sport formats**: mp3, wma, m4a/aac, ogg/oga, flac, wav, plus Audible (aa/aax) — editable in Settings |
 | Repo & privacy | **One private GitHub repo** holds the APK + decompile workflow + app. Decompiled source is **never committed** (CI artifact only) |
 | Languages | **10**: en, es, fr, de, pt-BR, it, ru, ja, ko, zh-CN |
 | Default language / theme | **Follow system**, both overridable in Settings |
 | Platform target | **minSdk 24, targetSdk 36** (Android 16); edge-to-edge + predictive back; Material 3 Expressive |
 | Discoverability | App Functions (`androidx.appfunctions`) + App Actions/BII + ASO listing metadata |
+
+## 3a. UI design (locked 2026-05-30, from approved mockups)
+
+Mockups: `docs/mockups/mockups-light-dark.png` (light + dark, edge-to-edge). Source: `docs/mockups/render.py`.
+
+- **Product / display name:** **"My Playlist Creator 2026"** (`android:label`, Play listing) — successor to the old *My Music Playlist Creator*. Internal codename, package, repo, and module names stay **`cliplist`** / `com.cliplist.*` (no functional reason to rename; preserves app/signing identity).
+- **User-facing wording:** say **"SanDisk Clip Sport"**, never "FAT32," in any text the user reads. "FAT32" survives only in code comments where it is the accurate technical reason.
+- **Core principle — non-destructive by default:** prefer **rename over delete**; every file/folder change is shown in **Preview** before it happens and recorded in an **undo log**. The app never deletes a user's files. (Confirmed by user 2026-05-30.)
+- **Home — four option switches:**
+  1. **Search subfolders** (default ON) — recursive vs top-level only.
+  2. **Alphabetize tracks** (default ON) — code-point sort within each playlist; OFF preserves scan order.
+  3. **Clean file names** (default OFF) — rename real files/folders to plain ASCII safe for the Clip Sport (smart quotes→ASCII, strip illegal/emoji/control characters).
+  4. **Rename hidden files** (default OFF) — **literal rename**: strip leading dot(s) + ASCII-sanitize so a hidden `.MyTrack.mp3` becomes visible `MyTrack.mp3`. Independent of #3. **Does not delete** macOS/system junk (`._*`, `.DS_Store`); the user explicitly chose rename over delete to avoid any destructive action.
+- **Workflow screens:** Home → **Preview** (per-folder plan: NEW/REPLACE badge, track counts, rename previews, Clip-Sport limit check) → **Progress** (live; names the CRLF `.m3u` being written) → **Results** (written/failed counts).
+- **Eject:** apps **cannot** unmount removable storage (`MOUNT_UNMOUNT_FILESYSTEMS` is `signature|system`). The Results screen offers an **"Eject SD card"** button that deep-links to the system storage screen (`Settings.ACTION_INTERNAL_STORAGE_SETTINGS`), where the OS eject control lives.
+- **Theme:** Material 3 dynamic color (API 31+) with brand blue `#0053A4` / orange `#F5800F` fallback; follows system light/dark, overridable in Settings.
+- **Edge-to-edge** everywhere (`enableEdgeToEdge()` + `Scaffold` consuming `WindowInsets`); predictive back via Navigation Compose.
+- **Editorial-review robustness (hard requirement):** layouts must survive **landscape**, **360 dp width**, and **system font scale 2.0** without clipping or overlap. Enforced by: text in `sp`; no fixed heights on text containers; every screen vertically scrollable (`LazyColumn`/`verticalScroll`); and Compose `@Preview`s at `fontScale = 2.0` / `widthDp = 360` plus rotation checks.
 
 ## 4. Non-goals (YAGNI)
 

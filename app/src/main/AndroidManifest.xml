@@ -4,7 +4,7 @@
     <application
         android:name=".ClipListApp"
         android:allowBackup="true"
-        android:label="ClipList"
+        android:label="My Playlist Creator 2026"
         android:theme="@style/Theme.ClipList"
         android:supportsRtl="true">
 
