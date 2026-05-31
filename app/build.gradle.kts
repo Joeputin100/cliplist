@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.navigation.compose)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.runtime.compose)
     implementation(project(":core-scan"))
+    implementation(project(":data-storage"))
     debugImplementation(libs.compose.ui.tooling)
 }
