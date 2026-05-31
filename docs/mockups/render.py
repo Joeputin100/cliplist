@@ -17,24 +17,24 @@ CW, CH = px(W), px(H)
 
 LIGHT = dict(
     surface=(251,250,254), container=(241,240,247), container_h=(233,231,240),
-    primary=(0,83,164), on_primary=(255,255,255), pri_cont=(214,227,255),
-    on_pri_cont=(0,29,57), pri_label=(11,57,110), pri_sub=(40,74,120),
-    orange=(193,87,0), sec_cont=(255,220,196), on_sec_cont=(80,38,0),
+    primary=(14,124,123), on_primary=(255,255,255), pri_cont=(196,235,231),
+    on_pri_cont=(0,42,40), pri_label=(8,74,71), pri_sub=(28,96,92),
+    orange=(96,124,22), sec_cont=(224,239,186), on_sec_cont=(52,62,10),
     on_surf=(28,27,31), on_surf_var=(92,90,99),
     outline=(200,198,207), outline_v=(226,224,233),
     green=(24,118,71), green_cont=(188,233,201), on_green_c=(0,33,17),
-    btn_fill=(0,83,164), btn_text=(255,255,255), sysbar=(28,27,31),
+    btn_fill=(14,124,123), btn_text=(255,255,255), sysbar=(28,27,31),
     gesture=(168,166,176), page_bg=(255,255,255), strip=(120,120,130),
     scrim=(0,0,0,46))
 DARK = dict(
     surface=(17,19,24), container=(30,32,40), container_h=(41,43,52),
-    primary=(162,201,255), on_primary=(0,49,95), pri_cont=(8,68,128),
-    on_pri_cont=(212,227,255), pri_label=(186,210,248), pri_sub=(168,196,236),
-    orange=(255,184,124), sec_cont=(92,46,0), on_sec_cont=(255,220,196),
+    primary=(111,211,205), on_primary=(0,52,50), pri_cont=(10,78,75),
+    on_pri_cont=(196,238,234), pri_label=(150,222,216), pri_sub=(140,212,205),
+    orange=(190,227,138), sec_cont=(48,60,12), on_sec_cont=(224,240,190),
     on_surf=(228,226,234), on_surf_var=(170,168,178),
     outline=(92,94,104), outline_v=(48,50,59),
     green=(132,226,172), green_cont=(0,72,42), on_green_c=(192,241,206),
-    btn_fill=(162,201,255), btn_text=(0,49,95), sysbar=(232,230,238),
+    btn_fill=(111,211,205), btn_text=(0,52,50), sysbar=(232,230,238),
     gesture=(96,98,108), page_bg=(20,21,27), strip=(150,152,165),
     scrim=(0,0,0,60))
 

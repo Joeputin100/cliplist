@@ -5,6 +5,8 @@
         android:name=".ClipListApp"
         android:allowBackup="true"
         android:label="My Playlist Creator 2026"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.ClipList"
         android:supportsRtl="true">
 
