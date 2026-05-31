@@ -20,10 +20,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.cliplist.app.R
 import com.cliplist.app.nav.Screen
 import com.cliplist.app.workflow.GenerateUiState
 import com.cliplist.app.workflow.ScanViewModel
@@ -41,18 +43,18 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (result == null) {
-                Text("No results yet.", style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.no_preview), style = MaterialTheme.typography.bodyLarge)
                 return@Column
             }
             Text(
-                if (result.allSucceeded) "All playlists created" else "Finished with some issues",
+                if (result.allSucceeded) stringResource(R.string.results_success) else stringResource(R.string.results_issues),
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center
             )
             Spacer(Modifier.height(12.dp))
             Text(
-                "${result.playlistsWritten} written · ${result.totalFailed} failed" +
-                    if (result.renamesApplied > 0) " · ${result.renamesApplied} renamed" else "",
+                stringResource(R.string.results_stats_fmt, result.playlistsWritten, result.totalFailed) +
+                    if (result.renamesApplied > 0) " · " + stringResource(R.string.results_renamed_fmt, result.renamesApplied) else "",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -71,9 +73,9 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
-            ) { Text("Eject SD card") }
+            ) { Text(stringResource(R.string.eject)) }
             Text(
-                "Opens Android's storage screen — apps can't eject directly.",
+                stringResource(R.string.eject_note),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
@@ -88,7 +90,7 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
-            ) { Text("Done") }
+            ) { Text(stringResource(R.string.done)) }
             TextButton(
                 onClick = {
                     vm.resetWorkflow()
@@ -96,7 +98,7 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
                         popUpTo(Screen.Home.route) { inclusive = true }
                     }
                 }
-            ) { Text("Make another playlist") }
+            ) { Text(stringResource(R.string.make_another)) }
         }
     }
 }
