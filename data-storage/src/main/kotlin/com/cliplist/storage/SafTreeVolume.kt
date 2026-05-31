@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.provider.DocumentsContract
 import android.util.Log
+import com.cliplist.scan.RenameOutcome
 import com.cliplist.scan.StorageVolume
 import com.cliplist.scan.VolumeNode
 import com.cliplist.scan.VolumeWriteResult
@@ -98,6 +99,20 @@ class SafTreeVolume(
         } catch (e: Exception) {
             Log.e("SafTreeVolume", "delete $fileName: ${e.message}")
             false
+        }
+    }
+
+    override fun renameNode(node: VolumeNode, newName: String): RenameOutcome {
+        node as SafNode
+        val docUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, node.documentId)
+        return try {
+            val newUri = DocumentsContract.renameDocument(context.contentResolver, docUri, newName)
+                ?: return RenameOutcome.Failure("renameDocument returned null for ${node.name}")
+            // renameDocument may return a NEW document URI; derive the new id from it.
+            RenameOutcome.Renamed(SafNode(DocumentsContract.getDocumentId(newUri), newName, node.isDirectory))
+        } catch (e: Exception) {
+            Log.e("SafTreeVolume", "rename ${node.name} -> $newName: ${e.message}")
+            RenameOutcome.Failure(e.message ?: "rename failed for ${node.name}")
         }
     }
 }

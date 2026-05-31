@@ -5,6 +5,8 @@ class FakeVolume(root: FakeNode) : StorageVolume {
     val writtenFiles = mutableMapOf<String, ByteArray>()   // "folderName/fileName" -> bytes
     val deletedFiles = mutableListOf<String>()             // "folderName/fileName"
     val failFiles = mutableSetOf<String>()                 // keys that return Failure on writeFile
+    val renames = mutableListOf<Pair<String, String>>()    // (oldName, newName) in call order
+    val renameFailNames = mutableSetOf<String>()           // current name -> force a rename Failure
 
     override fun children(node: VolumeNode): List<VolumeNode> =
         (node as FakeNode).children.toList()
@@ -23,10 +25,19 @@ class FakeVolume(root: FakeNode) : StorageVolume {
         deletedFiles.add("${directory.name}/$fileName")
         return true
     }
+
+    override fun renameNode(node: VolumeNode, newName: String): RenameOutcome {
+        node as FakeNode
+        if (node.name in renameFailNames)
+            return RenameOutcome.Failure("simulated rename failure for ${node.name}")
+        renames.add(node.name to newName)
+        node.name = newName
+        return RenameOutcome.Renamed(node)
+    }
 }
 
 data class FakeNode(
-    override val name: String,
+    override var name: String,
     override val isDirectory: Boolean,
     val children: MutableList<FakeNode> = mutableListOf()
 ) : VolumeNode
@@ -36,4 +47,3 @@ fun fakeDir(name: String, vararg children: FakeNode): FakeNode =
 
 fun fakeFile(name: String): FakeNode =
     FakeNode(name, isDirectory = false)
-
