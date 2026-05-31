@@ -18,10 +18,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.cliplist.app.R
 import com.cliplist.app.nav.Screen
 import com.cliplist.app.workflow.ScanUiState
 import com.cliplist.app.workflow.ScanViewModel
@@ -38,7 +40,7 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
     Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
         if (model == null) {
             Column(Modifier.fillMaxSize().padding(padding).padding(20.dp)) {
-                Text("Nothing to preview yet.", style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.no_preview), style = MaterialTheme.typography.bodyLarge)
             }
             return@Scaffold
         }
@@ -47,30 +49,30 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
             contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 16.dp)
         ) {
             item {
-                Text("Preview", style = MaterialTheme.typography.headlineSmall)
+                Text(stringResource(R.string.preview), style = MaterialTheme.typography.headlineSmall)
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    "${model.playlists.size} playlists · ${model.totalTracks} tracks" +
-                        if (model.withinLimits) " · within Clip Sport limits" else "",
+                    stringResource(R.string.preview_summary_fmt, model.playlists.size, model.totalTracks) +
+                        if (model.withinLimits) " · " + stringResource(R.string.within_limits) else "",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.height(16.dp))
             }
             if (model.warnings.isNotEmpty()) {
-                item { SectionHeader("Warnings") }
+                item { SectionHeader(stringResource(R.string.section_warnings)) }
                 items(model.warnings) { w ->
                     WarningCard(w)
                     Spacer(Modifier.height(8.dp))
                 }
             }
-            item { SectionHeader("Playlists") }
+            item { SectionHeader(stringResource(R.string.section_playlists)) }
             items(model.playlists) { p ->
                 PlaylistCard(p)
                 Spacer(Modifier.height(8.dp))
             }
             if (model.renames.isNotEmpty()) {
-                item { SectionHeader("Renames (${model.renames.size})") }
+                item { SectionHeader(stringResource(R.string.section_renames) + " (${model.renames.size})") }
                 items(model.renames) { r ->
                     RenameCardRow(r)
                     Spacer(Modifier.height(8.dp))
@@ -84,7 +86,7 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
                         navController.navigate(Screen.Progress.route)
                     },
                     modifier = Modifier.fillMaxWidth()
-                ) { Text("Generate playlists") }
+                ) { Text(stringResource(R.string.generate)) }
             }
         }
     }
@@ -109,12 +111,12 @@ private fun PlaylistCard(p: PlaylistRow) {
         ) {
             Column {
                 Text(p.folderName, style = MaterialTheme.typography.titleMedium)
-                Text("${p.trackCount} tracks · ${p.playlistName}",
+                Text(stringResource(R.string.tracks_with_playlist_fmt, p.trackCount, p.playlistName),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Text(
-                if (p.action == PlaylistAction.NEW) "NEW" else "REPLACE",
+                if (p.action == PlaylistAction.NEW) stringResource(R.string.badge_new) else stringResource(R.string.badge_replace),
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Bold,
                 color = if (p.action == PlaylistAction.NEW)
