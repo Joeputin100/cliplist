@@ -28,8 +28,8 @@ fun AppNavGraph(
     ) {
         composable(Screen.Home.route)     { HomeScreen(navController, scanViewModel) }
         composable(Screen.Preview.route)  { PreviewScreen(navController, scanViewModel) }
-        composable(Screen.Progress.route) { ProgressScreen(navController) }
-        composable(Screen.Results.route)  { ResultsScreen(navController) }
+        composable(Screen.Progress.route) { ProgressScreen(navController, scanViewModel) }
+        composable(Screen.Results.route)  { ResultsScreen(navController, scanViewModel) }
         composable(Screen.Settings.route) { SettingsScreen(navController) }
     }
 }
