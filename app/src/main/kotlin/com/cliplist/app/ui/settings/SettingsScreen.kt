@@ -1,5 +1,6 @@
 package com.cliplist.app.ui.settings
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -60,6 +62,22 @@ fun SettingsScreen(navController: NavController, vm: SettingsViewModel) {
             }
 
             Spacer(Modifier.height(24.dp))
+            Text(stringResource(R.string.settings_language), style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary)
+            Spacer(Modifier.height(8.dp))
+            val currentLocaleTags = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+            LANGUAGES.forEach { (tag, autonym) ->
+                val selected = if (tag.isEmpty()) currentLocaleTags.isEmpty()
+                    else currentLocaleTags.equals(tag, ignoreCase = true)
+                ThemeOption(autonym ?: stringResource(R.string.language_system), selected) {
+                    AppCompatDelegate.setApplicationLocales(
+                        if (tag.isEmpty()) LocaleListCompat.getEmptyLocaleList()
+                        else LocaleListCompat.forLanguageTags(tag)
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(24.dp))
             Text("Audio formats", style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.height(8.dp))
@@ -90,3 +108,11 @@ private fun ThemeOption(label: String, selected: Boolean, onSelect: () -> Unit) 
             modifier = Modifier.padding(start = 8.dp))
     }
 }
+
+// (BCP-47 tag, autonym shown in its own language). "" = follow the system language.
+private val LANGUAGES: List<Pair<String, String?>> = listOf(
+    "" to null,
+    "en" to "English", "es" to "Español", "fr" to "Français", "de" to "Deutsch",
+    "pt-BR" to "Português (Brasil)", "it" to "Italiano", "ru" to "Русский",
+    "ja" to "日本語", "ko" to "한국어", "zh-CN" to "简体中文",
+)

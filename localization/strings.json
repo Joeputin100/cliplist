@@ -42,7 +42,11 @@
     "results_renamed_fmt": "%1$d renamed",
     "no_preview": "Nothing to preview yet.",
     "preparing": "Preparing…",
-    "something_wrong": "Something went wrong"
+    "something_wrong": "Something went wrong",
+    "language_system": "System default",
+    "settings_language_label": "Language",
+    "opt_cover_art": "Add cover art",
+    "opt_cover_art_sub": "Save a folder.jpg in each music folder"
   },
   "es": {
     "app_tagline": "para SanDisk Clip Sport",
@@ -87,7 +91,11 @@
     "results_renamed_fmt": "%1$d renombrados",
     "no_preview": "Nada que previsualizar aún.",
     "preparing": "Preparando…",
-    "something_wrong": "Algo salió mal"
+    "something_wrong": "Algo salió mal",
+    "language_system": "Predeterminado del sistema",
+    "settings_language_label": "Idioma",
+    "opt_cover_art": "Añadir carátula",
+    "opt_cover_art_sub": "Guardar un folder.jpg en cada carpeta de música"
   },
   "fr": {
     "app_tagline": "pour SanDisk Clip Sport",
@@ -132,7 +140,11 @@
     "results_renamed_fmt": "%1$d renommés",
     "no_preview": "Aucun aperçu disponible pour l'instant.",
     "preparing": "Préparation…",
-    "something_wrong": "Une erreur s'est produite."
+    "something_wrong": "Une erreur s'est produite.",
+    "language_system": "Par défaut du système",
+    "settings_language_label": "Langue",
+    "opt_cover_art": "Ajouter une pochette d'album",
+    "opt_cover_art_sub": "Enregistrer un folder.jpg dans chaque dossier de musique"
   },
   "de": {
     "app_tagline": "für SanDisk Clip Sport",
@@ -177,7 +189,11 @@
     "results_renamed_fmt": "%1$d umbenannt",
     "no_preview": "Noch keine Vorschau verfügbar.",
     "preparing": "Vorbereiten…",
-    "something_wrong": "Etwas ist schiefgelaufen"
+    "something_wrong": "Etwas ist schiefgelaufen",
+    "language_system": "Systemstandard",
+    "settings_language_label": "Sprache",
+    "opt_cover_art": "Cover-Art hinzufügen",
+    "opt_cover_art_sub": "Speichere eine folder.jpg in jedem Musikordner"
   },
   "pt-BR": {
     "app_tagline": "para SanDisk Clip Sport",
@@ -222,7 +238,11 @@
     "results_renamed_fmt": "%1$d renomeados",
     "no_preview": "Nada para pré-visualizar ainda.",
     "preparing": "Preparando…",
-    "something_wrong": "Algo deu errado"
+    "something_wrong": "Algo deu errado",
+    "language_system": "Padrão do sistema",
+    "settings_language_label": "Idioma",
+    "opt_cover_art": "Adicionar capa",
+    "opt_cover_art_sub": "Salvar um folder.jpg em cada pasta de música"
   },
   "it": {
     "app_tagline": "per SanDisk Clip Sport",
@@ -267,7 +287,11 @@
     "results_renamed_fmt": "%1$d rinominati",
     "no_preview": "Nessuna anteprima disponibile.",
     "preparing": "Preparazione…",
-    "something_wrong": "Qualcosa è andato storto"
+    "something_wrong": "Qualcosa è andato storto",
+    "language_system": "Predefinito di sistema",
+    "settings_language_label": "Lingua",
+    "opt_cover_art": "Aggiungi copertina",
+    "opt_cover_art_sub": "Salva un file folder.jpg in ogni cartella musicale"
   },
   "ru": {
     "app_tagline": "для SanDisk Clip Sport",
@@ -312,7 +336,11 @@
     "results_renamed_fmt": "%1$d переименовано",
     "no_preview": "Пока нет предпросмотра.",
     "preparing": "Подготовка…",
-    "something_wrong": "Что-то пошло не так"
+    "something_wrong": "Что-то пошло не так",
+    "language_system": "Системный по умолчанию",
+    "settings_language_label": "Язык",
+    "opt_cover_art": "Добавить обложку",
+    "opt_cover_art_sub": "Сохранить folder.jpg в каждой музыкальной папке"
   },
   "ja": {
     "app_tagline": "SanDisk Clip Sport 用",
@@ -357,7 +385,11 @@
     "results_renamed_fmt": "%1$d 件の名前が変更されました",
     "no_preview": "まだプレビューするものはありません。",
     "preparing": "準備中…",
-    "something_wrong": "何らかの問題が発生しました"
+    "something_wrong": "何らかの問題が発生しました",
+    "language_system": "システム既定",
+    "settings_language_label": "言語",
+    "opt_cover_art": "カバーアートを追加",
+    "opt_cover_art_sub": "各音楽フォルダーにfolder.jpgを保存"
   },
   "ko": {
     "app_tagline": "SanDisk Clip Sport용",
@@ -402,7 +434,11 @@
     "results_renamed_fmt": "%1$d 이름 변경됨",
     "no_preview": "아직 미리 볼 내용이 없습니다.",
     "preparing": "준비 중…",
-    "something_wrong": "문제가 발생했습니다."
+    "something_wrong": "문제가 발생했습니다.",
+    "language_system": "시스템 기본값",
+    "settings_language_label": "언어",
+    "opt_cover_art": "커버 아트 추가",
+    "opt_cover_art_sub": "각 음악 폴더에 folder.jpg를 저장"
   },
   "zh-CN": {
     "app_tagline": "适用于 SanDisk Clip Sport",
@@ -447,6 +483,10 @@
     "results_renamed_fmt": "%1$d 已重命名",
     "no_preview": "暂无预览。",
     "preparing": "正在准备…",
-    "something_wrong": "出错了。"
+    "something_wrong": "出错了。",
+    "language_system": "系统默认",
+    "settings_language_label": "语言",
+    "opt_cover_art": "添加专辑封面",
+    "opt_cover_art_sub": "在每个音乐文件夹中保存一个 folder.jpg"
   }
 }

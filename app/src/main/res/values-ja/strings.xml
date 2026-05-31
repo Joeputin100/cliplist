@@ -9,12 +9,15 @@
     <string name="eject">SDカードを取り出す</string>
     <string name="eject_note">Android のストレージ画面を開きます — アプリは直接取り出しできません。</string>
     <string name="generate">プレイリストを生成</string>
+    <string name="language_system">システム既定</string>
     <string name="make_another">別のプレイリストを作成</string>
     <string name="music_folder">音楽フォルダ</string>
     <string name="no_preview">まだプレビューするものはありません。</string>
     <string name="opt_alphabetize">トラックをアルファベット順に</string>
     <string name="opt_clean_names">ファイル名をクリーンアップ</string>
     <string name="opt_clean_names_sub">SanDisk Clip Sport 用のプレーン ASCII</string>
+    <string name="opt_cover_art">カバーアートを追加</string>
+    <string name="opt_cover_art_sub">各音楽フォルダーにfolder.jpgを保存</string>
     <string name="opt_rename_hidden">隠しファイルの名前を変更</string>
     <string name="opt_rename_hidden_sub">SanDisk Clip Sport との互換性のため</string>
     <string name="opt_subfolders">サブフォルダも検索</string>
@@ -35,6 +38,7 @@
     <string name="section_warnings">警告</string>
     <string name="settings">設定</string>
     <string name="settings_language">言語</string>
+    <string name="settings_language_label">言語</string>
     <string name="settings_theme">テーマ</string>
     <string name="something_wrong">何らかの問題が発生しました</string>
     <string name="theme_dark">ダーク</string>

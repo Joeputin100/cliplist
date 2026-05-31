@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.datastore.preferences)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
+    implementation(libs.appcompat)
     implementation(project(":core-scan"))
     implementation(project(":data-storage"))
     debugImplementation(libs.compose.ui.tooling)

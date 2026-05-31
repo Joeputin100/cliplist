@@ -9,12 +9,15 @@
     <string name="eject">弹出 SD 卡</string>
     <string name="eject_note">打开安卓存储界面 — 应用无法直接弹出。</string>
     <string name="generate">生成播放列表</string>
+    <string name="language_system">系统默认</string>
     <string name="make_another">制作另一个播放列表</string>
     <string name="music_folder">音乐文件夹</string>
     <string name="no_preview">暂无预览。</string>
     <string name="opt_alphabetize">曲目按字母排序</string>
     <string name="opt_clean_names">规范文件名</string>
     <string name="opt_clean_names_sub">SanDisk Clip Sport 的纯 ASCII 格式</string>
+    <string name="opt_cover_art">添加专辑封面</string>
+    <string name="opt_cover_art_sub">在每个音乐文件夹中保存一个 folder.jpg</string>
     <string name="opt_rename_hidden">重命名隐藏文件</string>
     <string name="opt_rename_hidden_sub">为了 SanDisk Clip Sport 兼容性</string>
     <string name="opt_subfolders">搜索子文件夹</string>
@@ -35,6 +38,7 @@
     <string name="section_warnings">警告</string>
     <string name="settings">设置</string>
     <string name="settings_language">语言</string>
+    <string name="settings_language_label">语言</string>
     <string name="settings_theme">主题</string>
     <string name="something_wrong">出错了。</string>
     <string name="theme_dark">深色</string>

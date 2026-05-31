@@ -9,12 +9,15 @@
     <string name="eject">Ejetar cartão SD</string>
     <string name="eject_note">Abre a tela de armazenamento do Android — apps não podem ejetar diretamente.</string>
     <string name="generate">Gerar playlists</string>
+    <string name="language_system">Padrão do sistema</string>
     <string name="make_another">Criar outra playlist</string>
     <string name="music_folder">PASTA DE MÚSICA</string>
     <string name="no_preview">Nada para pré-visualizar ainda.</string>
     <string name="opt_alphabetize">Organizar faixas em ordem alfabética</string>
     <string name="opt_clean_names">Limpar nomes de arquivos</string>
     <string name="opt_clean_names_sub">ASCII simples para SanDisk Clip Sport</string>
+    <string name="opt_cover_art">Adicionar capa</string>
+    <string name="opt_cover_art_sub">Salvar um folder.jpg em cada pasta de música</string>
     <string name="opt_rename_hidden">Renomear arquivos ocultos</string>
     <string name="opt_rename_hidden_sub">Para compatibilidade com SanDisk Clip Sport</string>
     <string name="opt_subfolders">Buscar subpastas</string>
@@ -35,6 +38,7 @@
     <string name="section_warnings">Avisos</string>
     <string name="settings">Configurações</string>
     <string name="settings_language">Idioma</string>
+    <string name="settings_language_label">Idioma</string>
     <string name="settings_theme">Tema</string>
     <string name="something_wrong">Algo deu errado</string>
     <string name="theme_dark">Escuro</string>

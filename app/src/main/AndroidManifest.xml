@@ -21,5 +21,15 @@
             </intent-filter>
         </activity>
 
+        <!-- Lets AppCompatDelegate.setApplicationLocales() persist the per-app language on API < 33. -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
     </application>
 </manifest>

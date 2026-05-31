@@ -9,12 +9,15 @@
     <string name="eject">Извлечь SD-карту</string>
     <string name="eject_note">Открывает экран хранилища Android — приложения не могут извлекать напрямую.</string>
     <string name="generate">Создать плейлисты</string>
+    <string name="language_system">Системный по умолчанию</string>
     <string name="make_another">Создать еще один плейлист</string>
     <string name="music_folder">МУЗЫКАЛЬНАЯ ПАПКА</string>
     <string name="no_preview">Пока нет предпросмотра.</string>
     <string name="opt_alphabetize">Сортировать треки по алфавиту</string>
     <string name="opt_clean_names">Очистить имена файлов</string>
     <string name="opt_clean_names_sub">Простой ASCII для SanDisk Clip Sport</string>
+    <string name="opt_cover_art">Добавить обложку</string>
+    <string name="opt_cover_art_sub">Сохранить folder.jpg в каждой музыкальной папке</string>
     <string name="opt_rename_hidden">Переименовать скрытые файлы</string>
     <string name="opt_rename_hidden_sub">Для совместимости с SanDisk Clip Sport</string>
     <string name="opt_subfolders">Искать в подпапках</string>
@@ -35,6 +38,7 @@
     <string name="section_warnings">Предупреждения</string>
     <string name="settings">Настройки</string>
     <string name="settings_language">Язык</string>
+    <string name="settings_language_label">Язык</string>
     <string name="settings_theme">Тема</string>
     <string name="something_wrong">Что-то пошло не так</string>
     <string name="theme_dark">Темная</string>

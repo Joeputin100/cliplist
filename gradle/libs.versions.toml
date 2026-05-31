@@ -9,6 +9,7 @@ lifecycle    = "2.10.0"
 datastore    = "1.2.1"
 google-services = "4.4.4"
 firebase-bom = "34.14.0"
+appcompat = "1.7.1"
 
 [libraries]
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
@@ -24,6 +25,7 @@ lifecycle-runtime-compose   = { module = "androidx.lifecycle:lifecycle-runtime-c
 datastore-preferences       = { module = "androidx.datastore:datastore-preferences",                  version.ref = "datastore" }
 firebase-bom                = { module = "com.google.firebase:firebase-bom",                          version.ref = "firebase-bom" }
 firebase-crashlytics        = { module = "com.google.firebase:firebase-crashlytics" }
+appcompat                   = { module = "androidx.appcompat:appcompat",                               version.ref = "appcompat" }
 
 [plugins]
 kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }
