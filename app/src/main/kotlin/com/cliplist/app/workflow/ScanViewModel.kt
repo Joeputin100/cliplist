@@ -43,9 +43,11 @@ sealed interface ScanUiState {
     data class Error(val message: String) : ScanUiState
 }
 
+enum class GenPhase { Starting, Cleaning, Writing }
+
 sealed interface GenerateUiState {
     data object Idle : GenerateUiState
-    data class Working(val phase: String, val done: Int, val total: Int) : GenerateUiState
+    data class Working(val phase: GenPhase, val done: Int, val total: Int) : GenerateUiState
     data class Done(val result: ResultModel) : GenerateUiState
     data class Error(val message: String) : GenerateUiState
 }
@@ -116,7 +118,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
         val scanPlan = lastScanPlan ?: return
         val renamePlan = lastRenamePlan ?: return
         val scanOptions = lastScanOptions ?: return
-        _generateState.value = GenerateUiState.Working("Starting…", 0, scanPlan.folders.size)
+        _generateState.value = GenerateUiState.Working(GenPhase.Starting, 0, scanPlan.folders.size)
         viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.IO) {
@@ -124,7 +126,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                     var renameExec: RenameExecution? = null
                     if (renamePlan.ops.isNotEmpty()) {
                         _generateState.value =
-                            GenerateUiState.Working("Cleaning names…", 0, renamePlan.ops.size)
+                            GenerateUiState.Working(GenPhase.Cleaning, 0, renamePlan.ops.size)
                         renameExec = RenameExecutor(volume).execute(renamePlan)
                     }
                     // After renames, filenames changed — re-scan so the .m3u lists the new names.
@@ -132,7 +134,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                         PlaylistPlanner().plan(volume, scanOptions) else scanPlan
                     val report = PlaylistWriter(volume).execute(planToWrite) { done, total ->
                         _generateState.value =
-                            GenerateUiState.Working("Writing playlists…", done, total)
+                            GenerateUiState.Working(GenPhase.Writing, done, total)
                     }
                     ResultModelBuilder.build(report, renameExec)
                 }

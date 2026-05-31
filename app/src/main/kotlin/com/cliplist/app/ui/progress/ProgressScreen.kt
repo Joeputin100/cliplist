@@ -15,11 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.cliplist.app.R
 import com.cliplist.app.nav.Screen
+import com.cliplist.app.workflow.GenPhase
 import com.cliplist.app.workflow.GenerateUiState
 import com.cliplist.app.workflow.ScanViewModel
 
@@ -44,7 +47,12 @@ fun ProgressScreen(navController: NavController, vm: ScanViewModel) {
         ) {
             when (val s = state) {
                 is GenerateUiState.Working -> {
-                    Text(s.phase, style = MaterialTheme.typography.headlineSmall)
+                    val phaseText = when (s.phase) {
+                        GenPhase.Starting -> stringResource(R.string.preparing)
+                        GenPhase.Cleaning -> stringResource(R.string.phase_cleaning)
+                        GenPhase.Writing -> stringResource(R.string.phase_writing)
+                    }
+                    Text(phaseText, style = MaterialTheme.typography.headlineSmall)
                     Spacer(Modifier.height(20.dp))
                     if (s.total > 0 && s.done > 0) {
                         LinearProgressIndicator(
@@ -52,25 +60,25 @@ fun ProgressScreen(navController: NavController, vm: ScanViewModel) {
                             modifier = Modifier.fillMaxWidth()
                         )
                         Spacer(Modifier.height(12.dp))
-                        Text("${s.done} of ${s.total}",
+                        Text(stringResource(R.string.progress_count_fmt, s.done, s.total),
                             style = MaterialTheme.typography.bodyMedium)
                     } else {
                         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                     }
                     Spacer(Modifier.height(12.dp))
-                    Text("Writing .m3u files in CRLF format",
+                    Text(stringResource(R.string.writing_crlf),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center)
                 }
                 is GenerateUiState.Error -> {
-                    Text("Something went wrong", style = MaterialTheme.typography.headlineSmall)
+                    Text(stringResource(R.string.something_wrong), style = MaterialTheme.typography.headlineSmall)
                     Spacer(Modifier.height(12.dp))
                     Text(s.message, color = MaterialTheme.colorScheme.error,
                         textAlign = TextAlign.Center)
                 }
                 else -> {
-                    Text("Preparing…", style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.preparing), style = MaterialTheme.typography.bodyLarge)
                 }
             }
         }
