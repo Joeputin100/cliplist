@@ -24,7 +24,9 @@ class SafTreeVolume(
     private inner class SafNode(
         val documentId: String,
         override val name: String,
-        override val isDirectory: Boolean
+        override val isDirectory: Boolean,
+        override val size: Long = 0,
+        override val lastModified: Long = 0,
     ) : VolumeNode
 
     override val rootNode: VolumeNode by lazy {
@@ -44,7 +46,9 @@ class SafTreeVolume(
         val projection = arrayOf(
             DocumentsContract.Document.COLUMN_DOCUMENT_ID,
             DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-            DocumentsContract.Document.COLUMN_MIME_TYPE
+            DocumentsContract.Document.COLUMN_MIME_TYPE,
+            DocumentsContract.Document.COLUMN_SIZE,
+            DocumentsContract.Document.COLUMN_LAST_MODIFIED
         )
         val result = mutableListOf<VolumeNode>()
         context.contentResolver.query(childrenUri, projection, null, null, null)?.use { cursor ->
@@ -53,7 +57,9 @@ class SafTreeVolume(
                 val name = cursor.getString(1) ?: continue
                 val mime = cursor.getString(2) ?: ""
                 val isDir = mime == DocumentsContract.Document.MIME_TYPE_DIR
-                result.add(SafNode(id, name, isDir))
+                val size = if (cursor.isNull(3)) 0L else cursor.getLong(3)
+                val mtime = if (cursor.isNull(4)) 0L else cursor.getLong(4)
+                result.add(SafNode(id, name, isDir, size, mtime))
             }
         }
         return result
@@ -72,6 +78,26 @@ class SafTreeVolume(
         } catch (e: IOException) {
             VolumeWriteResult.Failure(e.message ?: "IOException writing $name")
         }
+    }
+
+    override fun readFile(directory: VolumeNode, fileName: String): ByteArray? {
+        directory as SafNode
+        val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(treeUri, directory.documentId)
+        var targetId: String? = null
+        context.contentResolver.query(
+            childrenUri,
+            arrayOf(DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME),
+            null, null, null
+        )?.use { c ->
+            while (c.moveToNext()) {
+                if (c.getString(1)?.equals(fileName, ignoreCase = true) == true) { targetId = c.getString(0); break }
+            }
+        }
+        val id = targetId ?: return null
+        val uri = DocumentsContract.buildDocumentUriUsingTree(treeUri, id)
+        return try {
+            context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
+        } catch (e: Exception) { Log.e("SafTreeVolume", "read $fileName: ${e.message}"); null }
     }
 
     override fun deleteFile(directory: VolumeNode, fileName: String): Boolean {

@@ -23,6 +23,9 @@ class FakeVolume(root: FakeNode) : StorageVolume {
         return VolumeWriteResult.Success
     }
 
+    override fun readFile(directory: VolumeNode, fileName: String): ByteArray? =
+        writtenFiles["${directory.name}/$fileName"]
+
     override fun deleteFile(directory: VolumeNode, fileName: String): Boolean {
         deletedFiles.add("${directory.name}/$fileName")
         return true
@@ -41,11 +44,13 @@ class FakeVolume(root: FakeNode) : StorageVolume {
 data class FakeNode(
     override var name: String,
     override val isDirectory: Boolean,
-    val children: MutableList<FakeNode> = mutableListOf()
+    val children: MutableList<FakeNode> = mutableListOf(),
+    override val size: Long = 0,
+    override val lastModified: Long = 0,
 ) : VolumeNode
 
 fun fakeDir(name: String, vararg children: FakeNode): FakeNode =
     FakeNode(name, isDirectory = true, children = children.toMutableList())
 
-fun fakeFile(name: String): FakeNode =
-    FakeNode(name, isDirectory = false)
+fun fakeFile(name: String, size: Long = 0, lastModified: Long = 0): FakeNode =
+    FakeNode(name, isDirectory = false, size = size, lastModified = lastModified)

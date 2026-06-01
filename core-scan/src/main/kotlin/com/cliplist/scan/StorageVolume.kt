@@ -3,6 +3,8 @@ package com.cliplist.scan
 interface VolumeNode {
     val name: String
     val isDirectory: Boolean
+    val size: Long
+    val lastModified: Long
 }
 
 sealed class VolumeWriteResult {
@@ -21,6 +23,7 @@ interface StorageVolume {
     val rootNode: VolumeNode
     fun children(node: VolumeNode): List<VolumeNode>
     fun writeFile(directory: VolumeNode, name: String, content: ByteArray, mimeType: String): VolumeWriteResult
+    fun readFile(directory: VolumeNode, fileName: String): ByteArray?
     fun deleteFile(directory: VolumeNode, fileName: String): Boolean
     fun renameNode(node: VolumeNode, newName: String): RenameOutcome
 }
