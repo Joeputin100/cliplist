@@ -25,3 +25,10 @@
 # WorkManager instantiates workers reflectively (its consumer rules keep ListenableWorker
 # subclasses; this is explicit insurance for ours).
 -keep class com.cliplist.app.work.PlaylistBuildWorker { <init>(...); }
+
+# Room generates <Database>_Impl classes that it instantiates reflectively. R8 full mode strips
+# their no-arg constructors, which crashes WorkManager's startup (WorkDatabase is a Room DB) with
+# NoSuchMethodException WorkDatabase_Impl.<init> — i.e. the whole release build crashes on launch.
+-keep class * extends androidx.room.RoomDatabase {
+    <init>();
+}
