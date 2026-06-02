@@ -21,6 +21,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            // Supplied by CI's distribute job (decodes the keystore secret + sets these env vars).
+            System.getenv("ANDROID_KEYSTORE_FILE")?.let { ksPath ->
+                storeFile = file(ksPath)
+                storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("ANDROID_KEY_ALIAS")
+                keyPassword = System.getenv("ANDROID_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -29,6 +41,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Sign with the real upload key only when CI supplies it; otherwise unsigned.
+            if (System.getenv("ANDROID_KEYSTORE_FILE") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
