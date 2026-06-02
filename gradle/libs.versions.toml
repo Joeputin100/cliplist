@@ -12,6 +12,7 @@ firebase-bom = "34.14.0"
 appcompat = "1.7.1"
 firebase-crashlytics-plugin = "3.0.7"
 kotlinx-serialization = "1.11.0"
+androidx-work = "2.10.5"
 
 [libraries]
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
@@ -30,6 +31,7 @@ firebase-bom                = { module = "com.google.firebase:firebase-bom",    
 firebase-crashlytics        = { module = "com.google.firebase:firebase-crashlytics" }
 appcompat                   = { module = "androidx.appcompat:appcompat",                               version.ref = "appcompat" }
 kotlinx-serialization-json  = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json",           version.ref = "kotlinx-serialization" }
+androidx-work-runtime       = { module = "androidx.work:work-runtime-ktx",                             version.ref = "androidx-work" }
 
 [plugins]
 kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }

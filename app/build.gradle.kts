@@ -61,6 +61,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.appcompat)
+    implementation(libs.androidx.work.runtime)
     implementation(project(":core-scan"))
     implementation(project(":data-storage"))
     debugImplementation(libs.compose.ui.tooling)
