@@ -19,6 +19,8 @@ data class ResultModel(
     val errors: List<String>,
     val folders: List<ResultFolderRow>,
     val destination: String,
+    val totalDurationMs: Long = 0L,
+    val unreadable: List<String> = emptyList(),
 ) {
     val totalFailed: Int get() = playlistsFailed + renamesFailed
     val totalTracks: Int get() = folders.sumOf { it.trackCount }
@@ -26,7 +28,14 @@ data class ResultModel(
 }
 
 object ResultModelBuilder {
-    fun build(write: WriteReport, rename: RenameExecution?, scan: ScanPlan, destination: String): ResultModel =
+    fun build(
+        write: WriteReport,
+        rename: RenameExecution?,
+        scan: ScanPlan,
+        destination: String,
+        totalDurationMs: Long = 0L,
+        unreadable: List<String> = emptyList(),
+    ): ResultModel =
         ResultModel(
             playlistsWritten = write.written,
             playlistsFailed = write.failed,
@@ -35,6 +44,8 @@ object ResultModelBuilder {
             errors = write.errors + (rename?.failed?.map { "${it.op.oldName}: ${it.message}" } ?: emptyList()),
             folders = scan.folders.map { ResultFolderRow(it.folder.name, it.audioFiles.size) },
             destination = destination,
+            totalDurationMs = totalDurationMs,
+            unreadable = unreadable,
         )
 }
 

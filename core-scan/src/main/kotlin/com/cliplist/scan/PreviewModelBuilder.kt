@@ -2,7 +2,12 @@ package com.cliplist.scan
 
 /** Turns the engine outputs into a flat, display-ready [PreviewModel]. Pure; no I/O. */
 object PreviewModelBuilder {
-    fun build(scan: ScanPlan, rename: RenamePlan): PreviewModel {
+    fun build(
+        scan: ScanPlan,
+        rename: RenamePlan,
+        totalDurationMs: Long = 0L,
+        unreadable: List<String> = emptyList(),
+    ): PreviewModel {
         val playlists = scan.folders.map { fp ->
             PlaylistRow(
                 folderName = fp.folder.name,
@@ -33,7 +38,9 @@ object PreviewModelBuilder {
             totalTracks = scan.folders.sumOf { it.audioFiles.size },
             renames = renames,
             warnings = warnings,
-            withinLimits = scan.warnings.isEmpty()
+            withinLimits = scan.warnings.isEmpty(),
+            totalDurationMs = totalDurationMs,
+            unreadable = unreadable
         )
     }
 }

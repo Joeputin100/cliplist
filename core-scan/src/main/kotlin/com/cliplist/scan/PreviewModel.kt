@@ -23,5 +23,7 @@ data class PreviewModel(
     val totalTracks: Int,
     val renames: List<RenameRow>,
     val warnings: List<String>,
-    val withinLimits: Boolean
+    val withinLimits: Boolean,
+    val totalDurationMs: Long = 0L,
+    val unreadable: List<String> = emptyList()
 )
