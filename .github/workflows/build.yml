@@ -202,11 +202,17 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: ./gradlew :app:assembleRelease --no-daemon
 
-      - name: Push to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
+      # Use Google's first-party auth action + the official Firebase CLI rather than a third-party
+      # action — the step handles the service-account key, so supply-chain trust matters here.
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          testers: joeputin100@gmail.com
-          file: app/build/outputs/apk/release/app-release.apk
-          releaseNotes: "Automated build ${{ github.sha }}"
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Push to Firebase App Distribution
+        run: |
+          npx --yes firebase-tools@13 appdistribution:distribute \
+            "app/build/outputs/apk/release/app-release.apk" \
+            --app "${{ secrets.FIREBASE_APP_ID }}" \
+            --testers "joeputin100@gmail.com" \
+            --release-notes "Automated build ${{ github.sha }}"
