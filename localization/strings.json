@@ -70,7 +70,10 @@
     "wizard_welcome": "Welcome",
     "notif_channel_build": "Playlist creation",
     "notif_channel_build_desc": "Progress while your playlists are created",
-    "notif_build_title": "Creating playlists"
+    "notif_build_title": "Creating playlists",
+    "results_stat_time": "listening",
+    "results_duration_fmt": "%1$dh %2$dm",
+    "results_unreadable_fmt": "%1$d couldn't be read — left out"
   },
   "es": {
     "app_tagline": "para SanDisk Clip Sport",
@@ -143,7 +146,10 @@
     "wizard_welcome": "Bienvenido",
     "notif_channel_build": "Creación de listas",
     "notif_channel_build_desc": "Progreso mientras se crean tus listas",
-    "notif_build_title": "Creando listas de reproducción"
+    "notif_build_title": "Creando listas de reproducción",
+    "results_stat_time": "escucha",
+    "results_duration_fmt": "%1$dh %2$dm",
+    "results_unreadable_fmt": "%1$d no se pudieron leer — omitidos"
   },
   "fr": {
     "app_tagline": "pour SanDisk Clip Sport",
@@ -216,7 +222,10 @@
     "wizard_welcome": "Bienvenue",
     "notif_channel_build": "Création de playlists",
     "notif_channel_build_desc": "Progression pendant la création de vos playlists",
-    "notif_build_title": "Création des playlists"
+    "notif_build_title": "Création des playlists",
+    "results_stat_time": "écoute",
+    "results_duration_fmt": "%1$dh %2$dm",
+    "results_unreadable_fmt": "%1$d illisibles — ignorés"
   },
   "de": {
     "app_tagline": "für SanDisk Clip Sport",
@@ -289,7 +298,10 @@
     "wizard_welcome": "Willkommen",
     "notif_channel_build": "Playlist-Erstellung",
     "notif_channel_build_desc": "Fortschritt beim Erstellen deiner Playlists",
-    "notif_build_title": "Playlists werden erstellt"
+    "notif_build_title": "Playlists werden erstellt",
+    "results_stat_time": "Hörzeit",
+    "results_duration_fmt": "%1$dh %2$dm",
+    "results_unreadable_fmt": "%1$d nicht lesbar — ausgelassen"
   },
   "pt-BR": {
     "app_tagline": "para SanDisk Clip Sport",
@@ -362,7 +374,10 @@
     "wizard_welcome": "Bem-vindo",
     "notif_channel_build": "Criação de playlists",
     "notif_channel_build_desc": "Progresso enquanto suas playlists são criadas",
-    "notif_build_title": "Criando playlists"
+    "notif_build_title": "Criando playlists",
+    "results_stat_time": "audição",
+    "results_duration_fmt": "%1$dh %2$dm",
+    "results_unreadable_fmt": "%1$d não puderam ser lidos — omitidos"
   },
   "it": {
     "app_tagline": "per SanDisk Clip Sport",
@@ -435,7 +450,10 @@
     "wizard_welcome": "Benvenuto",
     "notif_channel_build": "Creazione playlist",
     "notif_channel_build_desc": "Avanzamento durante la creazione delle playlist",
-    "notif_build_title": "Creazione delle playlist"
+    "notif_build_title": "Creazione delle playlist",
+    "results_stat_time": "ascolto",
+    "results_duration_fmt": "%1$dh %2$dm",
+    "results_unreadable_fmt": "%1$d illeggibili — esclusi"
   },
   "ru": {
     "app_tagline": "для SanDisk Clip Sport",
@@ -508,7 +526,10 @@
     "wizard_welcome": "Добро пожаловать",
     "notif_channel_build": "Создание плейлистов",
     "notif_channel_build_desc": "Ход создания плейлистов",
-    "notif_build_title": "Создание плейлистов"
+    "notif_build_title": "Создание плейлистов",
+    "results_stat_time": "прослушивание",
+    "results_duration_fmt": "%1$d ч %2$d мин",
+    "results_unreadable_fmt": "%1$d не удалось прочитать — пропущены"
   },
   "ja": {
     "app_tagline": "SanDisk Clip Sport 用",
@@ -581,7 +602,10 @@
     "wizard_welcome": "ようこそ",
     "notif_channel_build": "プレイリストの作成",
     "notif_channel_build_desc": "プレイリスト作成中の進捗",
-    "notif_build_title": "プレイリストを作成中"
+    "notif_build_title": "プレイリストを作成中",
+    "results_stat_time": "再生時間",
+    "results_duration_fmt": "%1$d時間%2$d分",
+    "results_unreadable_fmt": "%1$d 件読み取れず — 除外しました"
   },
   "ko": {
     "app_tagline": "SanDisk Clip Sport용",
@@ -654,7 +678,10 @@
     "wizard_welcome": "환영합니다",
     "notif_channel_build": "재생목록 생성",
     "notif_channel_build_desc": "재생목록 생성 진행 상황",
-    "notif_build_title": "재생목록 만드는 중"
+    "notif_build_title": "재생목록 만드는 중",
+    "results_stat_time": "재생 시간",
+    "results_duration_fmt": "%1$d시간 %2$d분",
+    "results_unreadable_fmt": "%1$d개를 읽을 수 없어 제외함"
   },
   "zh-CN": {
     "app_tagline": "适用于 SanDisk Clip Sport",
@@ -727,6 +754,9 @@
     "wizard_welcome": "欢迎",
     "notif_channel_build": "播放列表创建",
     "notif_channel_build_desc": "创建播放列表时的进度",
-    "notif_build_title": "正在创建播放列表"
+    "notif_build_title": "正在创建播放列表",
+    "results_stat_time": "时长",
+    "results_duration_fmt": "%1$d小时%2$d分",
+    "results_unreadable_fmt": "%1$d 个无法读取 — 已忽略"
   }
 }

@@ -35,6 +35,7 @@
     <string name="preview_summary_fmt">%1$d 個のプレイリスト · %2$d 曲</string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="progress_count_fmt">%2$d 中 %1$d</string>
+    <string name="results_duration_fmt">%1$d時間%2$d分</string>
     <string name="results_folder_tracks_fmt">%1$d曲</string>
     <string name="results_folders_written">フォルダー書き込み済み</string>
     <string name="results_in_destination_fmt">%1$s内</string>
@@ -42,9 +43,11 @@
     <string name="results_renamed_fmt">%1$d 件の名前が変更されました</string>
     <string name="results_stat_playlists">プレイリスト</string>
     <string name="results_stat_renamed">名前変更済み</string>
+    <string name="results_stat_time">再生時間</string>
     <string name="results_stat_tracks">曲</string>
     <string name="results_stats_fmt">%1$d 件書き込み済み · %2$d 件失敗</string>
     <string name="results_success">すべてのプレイリストが作成されました</string>
+    <string name="results_unreadable_fmt">%1$d 件読み取れず — 除外しました</string>
     <string name="scan_folder">フォルダをスキャン</string>
     <string name="scanning">スキャン中…</string>
     <string name="section_playlists">プレイリスト</string>

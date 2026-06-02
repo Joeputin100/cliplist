@@ -35,6 +35,7 @@
     <string name="preview_summary_fmt">%1$d playlists · %2$d faixas</string>
     <string name="privacy_policy">Política de privacidade</string>
     <string name="progress_count_fmt">%1$d de %2$d</string>
+    <string name="results_duration_fmt">%1$dh %2$dm</string>
     <string name="results_folder_tracks_fmt">%1$d faixas</string>
     <string name="results_folders_written">PASTAS GRAVADAS</string>
     <string name="results_in_destination_fmt">em %1$s</string>
@@ -42,9 +43,11 @@
     <string name="results_renamed_fmt">%1$d renomeados</string>
     <string name="results_stat_playlists">listas de reprodução</string>
     <string name="results_stat_renamed">renomeadas</string>
+    <string name="results_stat_time">audição</string>
     <string name="results_stat_tracks">faixas</string>
     <string name="results_stats_fmt">%1$d gravados · %2$d falharam</string>
     <string name="results_success">Todas as playlists criadas</string>
+    <string name="results_unreadable_fmt">%1$d não puderam ser lidos — omitidos</string>
     <string name="scan_folder">Escanear pasta</string>
     <string name="scanning">Escaneando…</string>
     <string name="section_playlists">Playlists</string>

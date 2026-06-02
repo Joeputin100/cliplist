@@ -35,6 +35,7 @@
     <string name="preview_summary_fmt">%1$d listes de lecture · %2$d pistes</string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="progress_count_fmt">%1$d sur %2$d</string>
+    <string name="results_duration_fmt">%1$dh %2$dm</string>
     <string name="results_folder_tracks_fmt">%1$d pistes</string>
     <string name="results_folders_written">DOSSIERS ÉCRITS</string>
     <string name="results_in_destination_fmt">dans %1$s</string>
@@ -42,9 +43,11 @@
     <string name="results_renamed_fmt">%1$d renommés</string>
     <string name="results_stat_playlists">listes de lecture</string>
     <string name="results_stat_renamed">renommées</string>
+    <string name="results_stat_time">écoute</string>
     <string name="results_stat_tracks">pistes</string>
     <string name="results_stats_fmt">%1$d écrits · %2$d échecs</string>
     <string name="results_success">Toutes les listes de lecture créées</string>
+    <string name="results_unreadable_fmt">%1$d illisibles — ignorés</string>
     <string name="scan_folder">Scanner le dossier</string>
     <string name="scanning">Analyse en cours…</string>
     <string name="section_playlists">Listes de lecture</string>

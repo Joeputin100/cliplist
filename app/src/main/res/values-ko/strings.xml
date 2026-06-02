@@ -35,6 +35,7 @@
     <string name="preview_summary_fmt">%1$d 재생목록 · %2$d 트랙</string>
     <string name="privacy_policy">개인정보처리방침</string>
     <string name="progress_count_fmt">%2$d개 중 %1$d</string>
+    <string name="results_duration_fmt">%1$d시간 %2$d분</string>
     <string name="results_folder_tracks_fmt">트랙 %1$d개</string>
     <string name="results_folders_written">폴더 기록됨</string>
     <string name="results_in_destination_fmt">%1$s에 저장됨</string>
@@ -42,9 +43,11 @@
     <string name="results_renamed_fmt">%1$d 이름 변경됨</string>
     <string name="results_stat_playlists">재생목록</string>
     <string name="results_stat_renamed">이름 변경됨</string>
+    <string name="results_stat_time">재생 시간</string>
     <string name="results_stat_tracks">트랙</string>
     <string name="results_stats_fmt">%1$d 작성됨 · %2$d 실패</string>
     <string name="results_success">모든 재생 목록이 생성되었습니다</string>
+    <string name="results_unreadable_fmt">%1$d개를 읽을 수 없어 제외함</string>
     <string name="scan_folder">폴더 스캔</string>
     <string name="scanning">스캔 중…</string>
     <string name="section_playlists">재생 목록</string>

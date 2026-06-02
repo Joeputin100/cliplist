@@ -35,6 +35,7 @@
     <string name="preview_summary_fmt">%1$d playlists · %2$d tracks</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="progress_count_fmt">%1$d of %2$d</string>
+    <string name="results_duration_fmt">%1$dh %2$dm</string>
     <string name="results_folder_tracks_fmt">%1$d tracks</string>
     <string name="results_folders_written">FOLDERS WRITTEN</string>
     <string name="results_in_destination_fmt">in %1$s</string>
@@ -42,9 +43,11 @@
     <string name="results_renamed_fmt">%1$d renamed</string>
     <string name="results_stat_playlists">playlists</string>
     <string name="results_stat_renamed">renamed</string>
+    <string name="results_stat_time">listening</string>
     <string name="results_stat_tracks">tracks</string>
     <string name="results_stats_fmt">%1$d written · %2$d failed</string>
     <string name="results_success">All playlists created</string>
+    <string name="results_unreadable_fmt">%1$d couldn\'t be read — left out</string>
     <string name="scan_folder">Scan folder</string>
     <string name="scanning">Scanning…</string>
     <string name="section_playlists">Playlists</string>

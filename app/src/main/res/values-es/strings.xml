@@ -35,6 +35,7 @@
     <string name="preview_summary_fmt">%1$d listas de reproducción · %2$d pistas</string>
     <string name="privacy_policy">Política de privacidad</string>
     <string name="progress_count_fmt">%1$d de %2$d</string>
+    <string name="results_duration_fmt">%1$dh %2$dm</string>
     <string name="results_folder_tracks_fmt">%1$d pistas</string>
     <string name="results_folders_written">Carpetas escritas</string>
     <string name="results_in_destination_fmt">en %1$s</string>
@@ -42,9 +43,11 @@
     <string name="results_renamed_fmt">%1$d renombrados</string>
     <string name="results_stat_playlists">listas de reproducción</string>
     <string name="results_stat_renamed">renombradas</string>
+    <string name="results_stat_time">escucha</string>
     <string name="results_stat_tracks">pistas</string>
     <string name="results_stats_fmt">%1$d escritos · %2$d fallidos</string>
     <string name="results_success">Todas las listas de reproducción creadas</string>
+    <string name="results_unreadable_fmt">%1$d no se pudieron leer — omitidos</string>
     <string name="scan_folder">Escanear carpeta</string>
     <string name="scanning">Escaneando…</string>
     <string name="section_playlists">Listas de reproducción</string>

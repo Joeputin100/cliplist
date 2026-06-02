@@ -51,12 +51,24 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
             item {
                 Text(stringResource(R.string.preview), style = MaterialTheme.typography.headlineSmall)
                 Spacer(Modifier.height(8.dp))
+                val summary = stringResource(R.string.preview_summary_fmt, model.playlists.size, model.totalTracks)
+                val minutes = (model.totalDurationMs / 60000L).toInt()
+                val durationPart = if (minutes > 0)
+                    " · " + stringResource(R.string.results_duration_fmt, minutes / 60, minutes % 60) else ""
+                val limitsPart = if (model.withinLimits) " · " + stringResource(R.string.within_limits) else ""
                 Text(
-                    stringResource(R.string.preview_summary_fmt, model.playlists.size, model.totalTracks) +
-                        if (model.withinLimits) " · " + stringResource(R.string.within_limits) else "",
+                    summary + durationPart + limitsPart,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                if (model.unreadable.isNotEmpty()) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        stringResource(R.string.results_unreadable_fmt, model.unreadable.size),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
                 Spacer(Modifier.height(16.dp))
             }
             if (model.warnings.isNotEmpty()) {
