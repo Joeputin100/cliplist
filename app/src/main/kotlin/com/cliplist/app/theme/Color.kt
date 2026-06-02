@@ -12,9 +12,11 @@ private val BrandLime = Color(0xFFA8CF45)
 val LightColorScheme = lightColorScheme(
     primary   = BrandTeal,
     secondary = BrandLime,
+    tertiary  = Color(0xFF2E6B5E),   // deep green — loader hub / third accent
 )
 
 val DarkColorScheme = darkColorScheme(
     primary   = Color(0xFF6FD3CD),
     secondary = Color(0xFFBFE38A),
+    tertiary  = Color(0xFF9CE0C4),   // light mint-green — loader hub / third accent
 )
