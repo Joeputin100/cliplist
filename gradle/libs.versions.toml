@@ -11,6 +11,7 @@ google-services = "4.4.4"
 firebase-bom = "34.14.0"
 appcompat = "1.7.1"
 firebase-crashlytics-plugin = "3.0.7"
+kotlinx-serialization = "1.11.0"
 
 [libraries]
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
@@ -28,6 +29,7 @@ datastore-preferences       = { module = "androidx.datastore:datastore-preferenc
 firebase-bom                = { module = "com.google.firebase:firebase-bom",                          version.ref = "firebase-bom" }
 firebase-crashlytics        = { module = "com.google.firebase:firebase-crashlytics" }
 appcompat                   = { module = "androidx.appcompat:appcompat",                               version.ref = "appcompat" }
+kotlinx-serialization-json  = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json",           version.ref = "kotlinx-serialization" }
 
 [plugins]
 kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }
@@ -36,4 +38,5 @@ android-application = { id = "com.android.application",  version.ref = "agp" }
 compose-compiler    = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-services     = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 # kotlin-android intentionally absent — AGP 9.0+ has built-in Kotlin support.
