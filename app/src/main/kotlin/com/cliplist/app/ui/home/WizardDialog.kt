@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.cliplist.app.R
+import com.cliplist.app.ui.components.AppLogo
 
 /**
  * First-run welcome wizard. Shown once per session until the user unchecks "Show this next time".
@@ -50,11 +51,7 @@ fun WizardDialog(onDismiss: () -> Unit, onDontShowAgain: () -> Unit) {
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(R.mipmap.ic_launcher),
-                    contentDescription = null,
-                    modifier = Modifier.size(56.dp).clip(CircleShape)
-                )
+                AppLogo(modifier = Modifier.size(56.dp).clip(CircleShape))
                 Spacer(Modifier.height(12.dp))
                 Text(
                     stringResource(R.string.wizard_welcome),

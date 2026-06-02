@@ -41,6 +41,7 @@ import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cliplist.app.R
 import com.cliplist.app.settings.SettingsViewModel
+import com.cliplist.app.ui.components.AppLogo
 import com.cliplist.app.settings.ThemeMode
 import com.cliplist.scan.AudioExtensions
 
@@ -63,11 +64,7 @@ fun SettingsDrawer(vm: SettingsViewModel, onPrivacy: () -> Unit) {
     ) {
         // Header: small logo + "Settings"
         Row(verticalAlignment = Alignment.CenterVertically) {
-            androidx.compose.foundation.Image(
-                painter = painterResource(R.mipmap.ic_launcher),
-                contentDescription = null,
-                modifier = Modifier.size(36.dp).clip(CircleShape)
-            )
+            AppLogo(modifier = Modifier.size(36.dp).clip(CircleShape))
             Spacer(Modifier.size(12.dp))
             Text(stringResource(R.string.settings), style = MaterialTheme.typography.titleLarge)
         }

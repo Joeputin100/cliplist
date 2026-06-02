@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.cliplist.app.R
+import com.cliplist.app.ui.components.AppLogo
 import com.cliplist.app.nav.Screen
 import com.cliplist.app.settings.SettingsViewModel
 import com.cliplist.app.ui.settings.SettingsDrawer
@@ -132,11 +133,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        painter = painterResource(R.mipmap.ic_launcher),
-                        contentDescription = null,
-                        modifier = Modifier.size(64.dp).clip(CircleShape)
-                    )
+                    AppLogo(modifier = Modifier.size(64.dp).clip(CircleShape))
                     Spacer(Modifier.height(8.dp))
                     Text(
                         stringResource(R.string.app_name),
