@@ -128,6 +128,10 @@ class SafTreeVolume(
         }
     }
 
+    /** The content URI for [node], so an [com.cliplist.scan.AudioProbe] can open it for reading. */
+    fun documentUri(node: VolumeNode): Uri =
+        DocumentsContract.buildDocumentUriUsingTree(treeUri, (node as SafNode).documentId)
+
     override fun renameNode(node: VolumeNode, newName: String): RenameOutcome {
         node as SafNode
         val docUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, node.documentId)

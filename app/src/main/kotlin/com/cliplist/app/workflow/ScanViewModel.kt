@@ -11,6 +11,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.cliplist.app.settings.SettingsRepository
 import com.cliplist.app.work.PlaylistBuildWorker
+import com.cliplist.scan.MetadataPass
 import com.cliplist.scan.PlaylistPlanner
 import com.cliplist.scan.PreviewModel
 import com.cliplist.scan.PreviewModelBuilder
@@ -19,6 +20,7 @@ import com.cliplist.scan.RenamePlanner
 import com.cliplist.scan.ResultModel
 import com.cliplist.scan.ResultModelCodec
 import com.cliplist.scan.ScanOptions
+import com.cliplist.storage.AudioProbes
 import com.cliplist.storage.StorageVolumes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -125,13 +127,17 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
             try {
                 val model = withContext(Dispatchers.IO) {
                     val volume = StorageVolumes.forUri(getApplication(), f.uri)
+                    val probe = AudioProbes.forVolume(getApplication(), volume)
                     val settings = SettingsRepository(getApplication())
+                    val audioExts = settings.audioExtensions.first()
                     val scanOptions = ScanOptions(
                         recursive = opts.searchSubfolders,
                         alphabetize = opts.alphabetize,
-                        audioExtensions = settings.audioExtensions.first()
+                        audioExtensions = audioExts
                     )
                     val scanPlan = PlaylistPlanner().plan(volume, scanOptions)
+                    // Metadata pass: real durations + drop unreadable files (cache-accelerated).
+                    val analyzed = MetadataPass.run(volume, probe, scanPlan, audioExts)
                     val renamePlan = RenamePlanner().plan(
                         volume,
                         RenameOptions(
@@ -139,7 +145,9 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                             renameHidden = settings.renameHidden.first()
                         )
                     )
-                    PreviewModelBuilder.build(scanPlan, renamePlan)
+                    PreviewModelBuilder.build(
+                        analyzed.plan, renamePlan, analyzed.totalDurationMs, analyzed.unreadable
+                    )
                 }
                 _scanState.value = ScanUiState.Ready(model)
             } catch (e: Exception) {

@@ -42,8 +42,8 @@ class ResumeTest {
             deleteRecursively()
             mkdirs()
         }
-        File(testDir, "01 Song.mp3").writeText("x")
-        File(testDir, "02 Song.mp3").writeText("x")
+        File(testDir, "01 Song.mp3").writeBytes(TestAudio.mp3Bytes())
+        File(testDir, "02 Song.mp3").writeBytes(TestAudio.mp3Bytes())
     }
 
     @After

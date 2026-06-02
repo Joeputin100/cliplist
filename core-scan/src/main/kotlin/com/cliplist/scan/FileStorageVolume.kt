@@ -45,6 +45,9 @@ class FileStorageVolume(private val root: File) : StorageVolume {
         return if (f.renameTo(target)) RenameOutcome.Renamed(FileNode(target))
         else RenameOutcome.Failure("rename failed: ${f.name} -> $newName")
     }
+
+    /** The filesystem path of [node], so a file-based AudioProbe can open it. */
+    fun pathOf(node: VolumeNode): String = (node as FileNode).file.absolutePath
 }
 
 private class FileNode(val file: File) : VolumeNode {

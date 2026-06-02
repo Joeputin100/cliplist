@@ -11,6 +11,7 @@ import androidx.work.workDataOf
 import com.cliplist.app.R
 import com.cliplist.app.settings.SettingsRepository
 import com.cliplist.app.workflow.GenPhase
+import com.cliplist.scan.MetadataPass
 import com.cliplist.scan.PlaylistPlanner
 import com.cliplist.scan.PlaylistWriter
 import com.cliplist.scan.RenameExecution
@@ -20,6 +21,7 @@ import com.cliplist.scan.RenamePlanner
 import com.cliplist.scan.ResultModelBuilder
 import com.cliplist.scan.ResultModelCodec
 import com.cliplist.scan.ScanOptions
+import com.cliplist.storage.AudioProbes
 import com.cliplist.storage.StorageVolumes
 import kotlinx.coroutines.flow.first
 import java.io.File
@@ -50,6 +52,7 @@ class PlaylistBuildWorker(
         return try {
             setForeground(getForegroundInfo())
             val volume = StorageVolumes.forUri(ctx, treeUri)
+            val probe = AudioProbes.forVolume(ctx, volume)
             val settings = SettingsRepository(ctx)
             val scanOptions = ScanOptions(
                 recursive = recursive,
@@ -71,23 +74,27 @@ class PlaylistBuildWorker(
                 renameExec = RenameExecutor(volume).execute(renamePlan)
             }
 
-            // Re-plan after renames so the .m3u lists the final names.
+            // Re-plan after renames, then the metadata pass (real durations + drop unreadable).
             val planToWrite = PlaylistPlanner().plan(volume, scanOptions)
-            val report = PlaylistWriter(volume).execute(planToWrite) { done, total ->
+            val analyzed = MetadataPass.run(volume, probe, planToWrite, scanOptions.audioExtensions)
+            val report = PlaylistWriter(volume).execute(analyzed.plan) { done, total ->
                 update(GenPhase.Writing, done, total, indeterminate = false)
             }
 
             // Optional cover art — drop a bundled folder.jpg where none exists (never overwrite).
             if (settings.writeCoverArt.first()) {
                 val artBytes = ctx.assets.open("folder.jpg").use { it.readBytes() }
-                planToWrite.folders.forEach { fp ->
+                analyzed.plan.folders.forEach { fp ->
                     val hasArt = volume.children(fp.folder)
                         .any { it.name.equals("folder.jpg", ignoreCase = true) }
                     if (!hasArt) volume.writeFile(fp.folder, "folder.jpg", artBytes, "image/jpeg")
                 }
             }
 
-            val result = ResultModelBuilder.build(report, renameExec, planToWrite, displayName)
+            val result = ResultModelBuilder.build(
+                report, renameExec, analyzed.plan, displayName,
+                analyzed.totalDurationMs, analyzed.unreadable,
+            )
             File(ctx.filesDir, RESULT_FILE).writeText(ResultModelCodec.encode(result))
             Result.success()
         } catch (e: Exception) {

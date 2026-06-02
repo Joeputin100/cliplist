@@ -51,8 +51,8 @@ class GenerateFlowTest {
             deleteRecursively()
             mkdirs()
         }
-        File(testDir, "01 Song.mp3").writeText("x")
-        File(testDir, "02 Song.mp3").writeText("x")
+        File(testDir, "01 Song.mp3").writeBytes(TestAudio.mp3Bytes())
+        File(testDir, "02 Song.mp3").writeBytes(TestAudio.mp3Bytes())
 
         Intents.init()
         Intents.intending(hasAction(Intent.ACTION_OPEN_DOCUMENT_TREE)).respondWith(
