@@ -11,6 +11,7 @@ env:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   jvm-tests:
@@ -77,3 +78,42 @@ jobs:
           path: app/build/outputs/apk/androidTest/debug/*.apk
           retention-days: 7
           if-no-files-found: warn
+
+  # On-device flow test (Firebase Test Lab). main-only to stay within FTL's free daily quota.
+  ftl-flow-test:
+    name: "FTL flow test (Android 14)"
+    runs-on: ubuntu-latest
+    needs: android-build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download app APK
+        uses: actions/download-artifact@v4
+        with:
+          name: app-debug-apk
+          path: apk/app
+
+      - name: Download androidTest APK
+        uses: actions/download-artifact@v4
+        with:
+          name: app-androidtest-apk
+          path: apk/test
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: static-webbing-461904-c4
+
+      - name: Run FTL instrumentation flow test
+        run: |
+          gcloud firebase test android run \
+            --type instrumentation \
+            --app apk/app/app-debug.apk \
+            --test apk/test/app-debug-androidTest.apk \
+            --test-targets "class com.cliplist.app.GenerateFlowTest" \
+            --device model=MediumPhone.arm,version=34,locale=en,orientation=portrait \
+            --timeout 300s --quiet
