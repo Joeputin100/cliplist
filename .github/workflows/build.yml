@@ -3,8 +3,10 @@ name: Build and test
 on:
   push:
     branches: [main]
+    tags: ['v*']
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -93,7 +95,7 @@ jobs:
     name: "FTL flow test (Android 14)"
     runs-on: ubuntu-latest
     needs: android-build
-    if: github.ref == 'refs/heads/main'
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
     steps:
       - name: Download app APK
         uses: actions/download-artifact@v4
@@ -134,7 +136,7 @@ jobs:
     name: "FTL release R8 smoke (Android 14)"
     runs-on: ubuntu-latest
     needs: android-build
-    if: github.ref == 'refs/heads/main'
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
     steps:
       - name: Download release APK (unsigned)
         uses: actions/download-artifact@v4
