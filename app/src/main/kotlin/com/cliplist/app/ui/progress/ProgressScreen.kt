@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,12 +21,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.cliplist.app.R
 import com.cliplist.app.nav.Screen
+import com.cliplist.app.ui.components.WavyLinearLoader
 import com.cliplist.app.ui.components.ZoetropeLoader
 import com.cliplist.app.workflow.GenPhase
 import com.cliplist.app.workflow.GenerateUiState
 import com.cliplist.app.workflow.ScanViewModel
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ProgressScreen(navController: NavController, vm: ScanViewModel) {
     val state by vm.generateState.collectAsStateWithLifecycle()
@@ -60,7 +58,7 @@ fun ProgressScreen(navController: NavController, vm: ScanViewModel) {
                     Text(phaseText, style = MaterialTheme.typography.headlineSmall)
                     Spacer(Modifier.height(20.dp))
                     if (s.total > 0 && s.done > 0) {
-                        LinearWavyProgressIndicator(
+                        WavyLinearLoader(
                             progress = { s.done.toFloat() / s.total.toFloat() },
                             modifier = Modifier.fillMaxWidth()
                         )
