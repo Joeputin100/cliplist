@@ -19,7 +19,7 @@ import com.cliplist.scan.RenamePlanner
 import com.cliplist.scan.ResultModel
 import com.cliplist.scan.ResultModelCodec
 import com.cliplist.scan.ScanOptions
-import com.cliplist.storage.SafTreeVolume
+import com.cliplist.storage.StorageVolumes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -124,7 +124,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             try {
                 val model = withContext(Dispatchers.IO) {
-                    val volume = SafTreeVolume(getApplication(), f.uri)
+                    val volume = StorageVolumes.forUri(getApplication(), f.uri)
                     val settings = SettingsRepository(getApplication())
                     val scanOptions = ScanOptions(
                         recursive = opts.searchSubfolders,

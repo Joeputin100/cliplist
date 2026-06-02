@@ -20,7 +20,7 @@ import com.cliplist.scan.RenamePlanner
 import com.cliplist.scan.ResultModelBuilder
 import com.cliplist.scan.ResultModelCodec
 import com.cliplist.scan.ScanOptions
-import com.cliplist.storage.SafTreeVolume
+import com.cliplist.storage.StorageVolumes
 import kotlinx.coroutines.flow.first
 import java.io.File
 
@@ -49,7 +49,7 @@ class PlaylistBuildWorker(
 
         return try {
             setForeground(getForegroundInfo())
-            val volume = SafTreeVolume(ctx, treeUri)
+            val volume = StorageVolumes.forUri(ctx, treeUri)
             val settings = SettingsRepository(ctx)
             val scanOptions = ScanOptions(
                 recursive = recursive,

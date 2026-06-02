@@ -80,14 +80,19 @@ fun HomeScreen(
         ActivityResultContracts.OpenDocumentTree()
     ) { uri ->
         if (uri != null) {
-            context.contentResolver.takePersistableUriPermission(
-                uri,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-            )
-            val docId = DocumentsContract.getTreeDocumentId(uri)
-            val name = docId.substringAfterLast('/').substringAfterLast(':').ifEmpty { "Selected folder" }
-            val removable = StorageHeuristics.isRemovableTreeDocumentId(docId)
-            vm.setFolder(SelectedFolder(uri, name, removable))
+            if (uri.scheme == "content") {
+                context.contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                )
+                val docId = DocumentsContract.getTreeDocumentId(uri)
+                val name = docId.substringAfterLast('/').substringAfterLast(':').ifEmpty { "Selected folder" }
+                val removable = StorageHeuristics.isRemovableTreeDocumentId(docId)
+                vm.setFolder(SelectedFolder(uri, name, removable))
+            } else {
+                // file:// (instrumented tests stub the picker): no SAF permission to persist.
+                vm.setFolder(SelectedFolder(uri, uri.lastPathSegment ?: "Selected folder", isRemovable = false))
+            }
         }
     }
 
