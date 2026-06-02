@@ -79,6 +79,15 @@ jobs:
           retention-days: 7
           if-no-files-found: warn
 
+      - name: Upload release APK (unsigned)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-unsigned-apk
+          path: app/build/outputs/apk/release/*.apk
+          retention-days: 7
+          if-no-files-found: warn
+
   # On-device flow test (Firebase Test Lab). main-only to stay within FTL's free daily quota.
   ftl-flow-test:
     name: "FTL flow test (Android 14)"
@@ -114,6 +123,51 @@ jobs:
             --type instrumentation \
             --app apk/app/app-debug.apk \
             --test apk/test/app-debug-androidTest.apk \
-            --test-targets "class com.cliplist.app.GenerateFlowTest" \
+            --test-targets "class com.cliplist.app.GenerateFlowTest,class com.cliplist.app.ResumeTest" \
             --device model=MediumPhone.arm,version=34,locale=en,orientation=portrait \
+            --results-bucket=static-webbing-461904-c4-ftl-results \
             --timeout 300s --quiet
+
+  # On-device R8 smoke test: sign the minified release APK with an ephemeral key, then Robo-crawl
+  # it to confirm R8 / resource-shrinking didn't break startup. main-only.
+  ftl-release-smoke:
+    name: "FTL release R8 smoke (Android 14)"
+    runs-on: ubuntu-latest
+    needs: android-build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download release APK (unsigned)
+        uses: actions/download-artifact@v4
+        with:
+          name: app-release-unsigned-apk
+          path: apk/release
+
+      - name: Sign the release APK with an ephemeral key
+        run: |
+          UNSIGNED=$(ls apk/release/*.apk | head -1)
+          keytool -genkeypair -keystore /tmp/r.jks -storepass android -keypass android \
+            -alias r -keyalg RSA -keysize 2048 -validity 30 -dname "CN=FTL R8 Smoke"
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/zipalign" -f -p 4 "$UNSIGNED" /tmp/aligned.apk
+          "$BT/apksigner" sign --ks /tmp/r.jks --ks-pass pass:android --key-pass pass:android \
+            --out /tmp/app-release-signed.apk /tmp/aligned.apk
+          "$BT/apksigner" verify /tmp/app-release-signed.apk && echo "release APK signed OK"
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: static-webbing-461904-c4
+
+      - name: Robo-crawl the signed release (R8) build
+        run: |
+          gcloud firebase test android run \
+            --type robo \
+            --app /tmp/app-release-signed.apk \
+            --device model=MediumPhone.arm,version=34,locale=en,orientation=portrait \
+            --results-bucket=static-webbing-461904-c4-ftl-results \
+            --timeout 120s --quiet
