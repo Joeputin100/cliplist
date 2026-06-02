@@ -2,6 +2,7 @@ package com.cliplist.app.ui.preview
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,7 +31,6 @@ import com.cliplist.app.workflow.ScanUiState
 import com.cliplist.app.workflow.ScanViewModel
 import com.cliplist.scan.PlaylistAction
 import com.cliplist.scan.PlaylistRow
-import com.cliplist.scan.PreviewModel
 import com.cliplist.scan.RenameRow
 
 @Composable
@@ -44,11 +45,10 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
             }
             return@Scaffold
         }
-        LazyColumn(
-            modifier = Modifier.fillMaxSize().padding(padding).padding(horizontal = 16.dp),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 16.dp)
-        ) {
-            item {
+
+        Column(Modifier.fillMaxSize().padding(padding)) {
+            // Fixed top: summary + the action button, so it's always reachable on long lists.
+            Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp)) {
                 Text(stringResource(R.string.preview), style = MaterialTheme.typography.headlineSmall)
                 Spacer(Modifier.height(8.dp))
                 val summary = stringResource(R.string.preview_summary_fmt, model.playlists.size, model.totalTracks)
@@ -70,28 +70,6 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
                     )
                 }
                 Spacer(Modifier.height(16.dp))
-            }
-            if (model.warnings.isNotEmpty()) {
-                item { SectionHeader(stringResource(R.string.section_warnings)) }
-                items(model.warnings) { w ->
-                    WarningCard(w)
-                    Spacer(Modifier.height(8.dp))
-                }
-            }
-            item { SectionHeader(stringResource(R.string.section_playlists)) }
-            items(model.playlists) { p ->
-                PlaylistCard(p)
-                Spacer(Modifier.height(8.dp))
-            }
-            if (model.renames.isNotEmpty()) {
-                item { SectionHeader(stringResource(R.string.section_renames) + " (${model.renames.size})") }
-                items(model.renames) { r ->
-                    RenameCardRow(r)
-                    Spacer(Modifier.height(8.dp))
-                }
-            }
-            item {
-                Spacer(Modifier.height(16.dp))
                 Button(
                     onClick = {
                         vm.generate()
@@ -99,6 +77,34 @@ fun PreviewScreen(navController: NavController, vm: ScanViewModel) {
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) { Text(stringResource(R.string.generate)) }
+            }
+
+            HorizontalDivider()
+
+            LazyColumn(
+                modifier = Modifier.weight(1f).fillMaxWidth(),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
+            ) {
+                if (model.warnings.isNotEmpty()) {
+                    item { SectionHeader(stringResource(R.string.section_warnings)) }
+                    items(model.warnings) { w ->
+                        WarningCard(w)
+                        Spacer(Modifier.height(8.dp))
+                    }
+                }
+                item { SectionHeader(stringResource(R.string.section_playlists)) }
+                items(model.playlists) { p ->
+                    PlaylistCard(p)
+                    Spacer(Modifier.height(8.dp))
+                }
+                if (model.renames.isNotEmpty()) {
+                    item { SectionHeader(stringResource(R.string.section_renames) + " (${model.renames.size})") }
+                    items(model.renames) { r ->
+                        RenameCardRow(r)
+                        Spacer(Modifier.height(8.dp))
+                    }
+                }
+                item { Spacer(Modifier.height(8.dp)) }
             }
         }
     }

@@ -23,14 +23,14 @@ object PreviewModelBuilder {
             scan.warnings.forEach { w ->
                 when (w) {
                     is PlanWarning.TooManyTracksInFolder ->
-                        add("\"${w.folderName}\" has ${w.count} tracks (Clip Sport max is 1000).")
+                        add("\"${w.folderName}\" has ${w.count} songs — that's more than the Clip Sport fits in one playlist (around 1,000), so some may not show up.")
                     is PlanWarning.TooManyPlaylists ->
-                        add("${w.count} playlists — Clip Sport handles about 50.")
+                        add("You're making ${w.count} playlists — the Clip Sport works best with about 50 or fewer.")
                 }
             }
             rename.collisions.forEach { c ->
-                val where = c.parentPath.ifEmpty { "the root folder" }
-                add("Skipped in $where: ${c.sources.joinToString(", ")} → \"${c.targetName}\" would collide.")
+                val where = c.parentPath.ifEmpty { "your main folder" }
+                add("In $where, tidying these names would leave them all called \"${c.targetName}\", so we left them as they are: ${c.sources.joinToString(", ")}.")
             }
         }
         return PreviewModel(
