@@ -16,6 +16,9 @@
     <string name="make_another">Weitere Wiedergabeliste erstellen</string>
     <string name="music_folder">MUSIKORDNER</string>
     <string name="no_preview">Noch keine Vorschau verfügbar.</string>
+    <string name="notif_build_title">Playlists werden erstellt</string>
+    <string name="notif_channel_build">Playlist-Erstellung</string>
+    <string name="notif_channel_build_desc">Fortschritt beim Erstellen deiner Playlists</string>
     <string name="open_settings">Einstellungen öffnen</string>
     <string name="opt_alphabetize">Titel alphabetisch sortieren</string>
     <string name="opt_clean_names">Dateinamen bereinigen</string>

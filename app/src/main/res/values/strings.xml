@@ -16,6 +16,9 @@
     <string name="make_another">Make another playlist</string>
     <string name="music_folder">MUSIC FOLDER</string>
     <string name="no_preview">Nothing to preview yet.</string>
+    <string name="notif_build_title">Creating playlists</string>
+    <string name="notif_channel_build">Playlist creation</string>
+    <string name="notif_channel_build_desc">Progress while your playlists are created</string>
     <string name="open_settings">Open settings</string>
     <string name="opt_alphabetize">Alphabetize tracks</string>
     <string name="opt_clean_names">Clean file names</string>

@@ -16,6 +16,9 @@
     <string name="make_another">Crear otra lista de reproducción</string>
     <string name="music_folder">CARPETA DE MÚSICA</string>
     <string name="no_preview">Nada que previsualizar aún.</string>
+    <string name="notif_build_title">Creando listas de reproducción</string>
+    <string name="notif_channel_build">Creación de listas</string>
+    <string name="notif_channel_build_desc">Progreso mientras se crean tus listas</string>
     <string name="open_settings">Abrir ajustes</string>
     <string name="opt_alphabetize">Alfabetizar pistas</string>
     <string name="opt_clean_names">Limpiar nombres de archivo</string>

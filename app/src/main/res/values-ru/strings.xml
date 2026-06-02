@@ -16,6 +16,9 @@
     <string name="make_another">Создать еще один плейлист</string>
     <string name="music_folder">МУЗЫКАЛЬНАЯ ПАПКА</string>
     <string name="no_preview">Пока нет предпросмотра.</string>
+    <string name="notif_build_title">Создание плейлистов</string>
+    <string name="notif_channel_build">Создание плейлистов</string>
+    <string name="notif_channel_build_desc">Ход создания плейлистов</string>
     <string name="open_settings">Открыть настройки</string>
     <string name="opt_alphabetize">Сортировать треки по алфавиту</string>
     <string name="opt_clean_names">Очистить имена файлов</string>

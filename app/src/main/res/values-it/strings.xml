@@ -16,6 +16,9 @@
     <string name="make_another">Crea un\'altra playlist</string>
     <string name="music_folder">CARTELLA MUSICA</string>
     <string name="no_preview">Nessuna anteprima disponibile.</string>
+    <string name="notif_build_title">Creazione delle playlist</string>
+    <string name="notif_channel_build">Creazione playlist</string>
+    <string name="notif_channel_build_desc">Avanzamento durante la creazione delle playlist</string>
     <string name="open_settings">Apri impostazioni</string>
     <string name="opt_alphabetize">Ordina tracce alfabeticamente</string>
     <string name="opt_clean_names">Pulisci nomi file</string>

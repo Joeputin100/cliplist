@@ -16,6 +16,9 @@
     <string name="make_another">Créer une autre liste de lecture</string>
     <string name="music_folder">DOSSIER MUSIQUE</string>
     <string name="no_preview">Aucun aperçu disponible pour l\'instant.</string>
+    <string name="notif_build_title">Création des playlists</string>
+    <string name="notif_channel_build">Création de playlists</string>
+    <string name="notif_channel_build_desc">Progression pendant la création de vos playlists</string>
     <string name="open_settings">Ouvrir les paramètres</string>
     <string name="opt_alphabetize">Classer les titres par ordre alphabétique</string>
     <string name="opt_clean_names">Nettoyer les noms de fichiers</string>

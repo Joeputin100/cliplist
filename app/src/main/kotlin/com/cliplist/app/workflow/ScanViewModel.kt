@@ -4,21 +4,21 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.cliplist.app.settings.SettingsRepository
-import com.cliplist.scan.AudioExtensions
+import com.cliplist.app.work.PlaylistBuildWorker
 import com.cliplist.scan.PlaylistPlanner
-import com.cliplist.scan.PlaylistWriter
 import com.cliplist.scan.PreviewModel
 import com.cliplist.scan.PreviewModelBuilder
-import com.cliplist.scan.RenameExecution
-import com.cliplist.scan.RenameExecutor
 import com.cliplist.scan.RenameOptions
-import com.cliplist.scan.RenamePlan
 import com.cliplist.scan.RenamePlanner
 import com.cliplist.scan.ResultModel
-import com.cliplist.scan.ResultModelBuilder
+import com.cliplist.scan.ResultModelCodec
 import com.cliplist.scan.ScanOptions
-import com.cliplist.scan.ScanPlan
 import com.cliplist.storage.SafTreeVolume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 data class WorkflowOptions(
     val searchSubfolders: Boolean = true,
@@ -66,10 +67,49 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
     private val _generateState = MutableStateFlow<GenerateUiState>(GenerateUiState.Idle)
     val generateState: StateFlow<GenerateUiState> = _generateState.asStateFlow()
 
-    // Raw plans retained from the last scan, needed to actually execute.
-    private var lastScanPlan: ScanPlan? = null
-    private var lastRenamePlan: RenamePlan? = null
-    private var lastScanOptions: ScanOptions? = null
+    init {
+        // Mirror the foreground build worker into generateState. This is what surfaces a build that
+        // kept running in the background (or was re-run by WorkManager after a process kill) the
+        // moment we're foregrounded again.
+        viewModelScope.launch {
+            WorkManager.getInstance(getApplication())
+                .getWorkInfosForUniqueWorkFlow(PlaylistBuildWorker.WORK_NAME)
+                .collect { infos ->
+                    val active = setOf(
+                        WorkInfo.State.ENQUEUED, WorkInfo.State.RUNNING, WorkInfo.State.BLOCKED,
+                    )
+                    val info = infos.firstOrNull { it.state in active }
+                        ?: infos.lastOrNull() ?: return@collect
+                    when (info.state) {
+                        WorkInfo.State.ENQUEUED, WorkInfo.State.RUNNING, WorkInfo.State.BLOCKED -> {
+                            val p = info.progress
+                            val phase = GenPhase.entries.getOrElse(
+                                p.getInt(PlaylistBuildWorker.KEY_PHASE, 0)
+                            ) { GenPhase.Starting }
+                            _generateState.value = GenerateUiState.Working(
+                                phase,
+                                p.getInt(PlaylistBuildWorker.KEY_DONE, 0),
+                                p.getInt(PlaylistBuildWorker.KEY_TOTAL, 0),
+                            )
+                        }
+                        WorkInfo.State.SUCCEEDED -> {
+                            val result = withContext(Dispatchers.IO) {
+                                val f = File(
+                                    getApplication<Application>().filesDir,
+                                    PlaylistBuildWorker.RESULT_FILE,
+                                )
+                                ResultModelCodec.decode(if (f.exists()) f.readText() else null)
+                            }
+                            if (result != null) _generateState.value = GenerateUiState.Done(result)
+                        }
+                        WorkInfo.State.FAILED -> _generateState.value = GenerateUiState.Error(
+                            info.outputData.getString(PlaylistBuildWorker.KEY_ERROR) ?: "Generation failed"
+                        )
+                        WorkInfo.State.CANCELLED -> Unit
+                    }
+                }
+        }
+    }
 
     fun setFolder(folder: SelectedFolder) { _folder.value = folder }
     fun setSearchSubfolders(v: Boolean) = _options.update { it.copy(searchSubfolders = v) }
@@ -99,9 +139,6 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                             renameHidden = settings.renameHidden.first()
                         )
                     )
-                    lastScanPlan = scanPlan
-                    lastRenamePlan = renamePlan
-                    lastScanOptions = scanOptions
                     PreviewModelBuilder.build(scanPlan, renamePlan)
                 }
                 _scanState.value = ScanUiState.Ready(model)
@@ -112,56 +149,33 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Applies renames (if any), re-scans so playlists reference the cleaned names, writes the
-     * playlists with progress, and publishes a ResultModel. No-op if no scan has been run.
+     * Enqueues the playlist build as a unique foreground-service job. The worker re-derives
+     * everything from the folder URI + settings, so it survives process death; progress and the
+     * final result flow back through [generateState] via the WorkInfo observer in [init].
      */
     fun generate() {
         val f = _folder.value ?: return
-        val scanPlan = lastScanPlan ?: return
-        val renamePlan = lastRenamePlan ?: return
-        val scanOptions = lastScanOptions ?: return
-        _generateState.value = GenerateUiState.Working(GenPhase.Starting, 0, scanPlan.folders.size)
-        viewModelScope.launch {
-            try {
-                val result = withContext(Dispatchers.IO) {
-                    val volume = SafTreeVolume(getApplication(), f.uri)
-                    val writeCoverArt = SettingsRepository(getApplication()).writeCoverArt.first()
-                    var renameExec: RenameExecution? = null
-                    if (renamePlan.ops.isNotEmpty()) {
-                        _generateState.value =
-                            GenerateUiState.Working(GenPhase.Cleaning, 0, renamePlan.ops.size)
-                        renameExec = RenameExecutor(volume).execute(renamePlan)
-                    }
-                    // After renames, filenames changed — re-scan so the .m3u lists the new names.
-                    val planToWrite = if (renamePlan.ops.isNotEmpty())
-                        PlaylistPlanner().plan(volume, scanOptions) else scanPlan
-                    val report = PlaylistWriter(volume).execute(planToWrite) { done, total ->
-                        _generateState.value =
-                            GenerateUiState.Working(GenPhase.Writing, done, total)
-                    }
-                    // Optional cover art: drop a bundled folder.jpg into each music folder that
-                    // doesn't already have one (never overwrite the user's existing art).
-                    if (writeCoverArt) {
-                        val artBytes = getApplication<Application>().assets
-                            .open("folder.jpg").use { it.readBytes() }
-                        planToWrite.folders.forEach { fp ->
-                            val hasArt = volume.children(fp.folder)
-                                .any { it.name.equals("folder.jpg", ignoreCase = true) }
-                            if (!hasArt) volume.writeFile(fp.folder, "folder.jpg", artBytes, "image/jpeg")
-                        }
-                    }
-                    ResultModelBuilder.build(report, renameExec, planToWrite, f.displayName)
-                }
-                _generateState.value = GenerateUiState.Done(result)
-            } catch (e: Exception) {
-                _generateState.value = GenerateUiState.Error(e.message ?: "Generation failed")
-            }
-        }
+        val opts = _options.value
+        _generateState.value = GenerateUiState.Working(GenPhase.Starting, 0, 0)
+        val request = OneTimeWorkRequestBuilder<PlaylistBuildWorker>()
+            .setInputData(
+                workDataOf(
+                    PlaylistBuildWorker.KEY_TREE_URI to f.uri.toString(),
+                    PlaylistBuildWorker.KEY_DISPLAY_NAME to f.displayName,
+                    PlaylistBuildWorker.KEY_RECURSIVE to opts.searchSubfolders,
+                    PlaylistBuildWorker.KEY_ALPHABETIZE to opts.alphabetize,
+                )
+            )
+            .build()
+        WorkManager.getInstance(getApplication())
+            .enqueueUniqueWork(PlaylistBuildWorker.WORK_NAME, ExistingWorkPolicy.REPLACE, request)
     }
 
     /** Resets everything for "make another playlist". */
     fun resetWorkflow() {
         _scanState.value = ScanUiState.Idle
         _generateState.value = GenerateUiState.Idle
+        WorkManager.getInstance(getApplication())
+            .cancelUniqueWork(PlaylistBuildWorker.WORK_NAME)
     }
 }

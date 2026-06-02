@@ -67,7 +67,10 @@
     "wizard_step2": "Pick options, then Scan to preview",
     "wizard_step3": "Generate — one .m3u per folder",
     "wizard_subtitle": "Make Clip Sport playlists in 3 steps",
-    "wizard_welcome": "Welcome"
+    "wizard_welcome": "Welcome",
+    "notif_channel_build": "Playlist creation",
+    "notif_channel_build_desc": "Progress while your playlists are created",
+    "notif_build_title": "Creating playlists"
   },
   "es": {
     "app_tagline": "para SanDisk Clip Sport",
@@ -137,7 +140,10 @@
     "wizard_step2": "Elige las opciones, luego Escanear para previsualizar",
     "wizard_step3": "Generar — un .m3u por carpeta",
     "wizard_subtitle": "Crea listas de reproducción de Clip Sport en 3 pasos",
-    "wizard_welcome": "Bienvenido"
+    "wizard_welcome": "Bienvenido",
+    "notif_channel_build": "Creación de listas",
+    "notif_channel_build_desc": "Progreso mientras se crean tus listas",
+    "notif_build_title": "Creando listas de reproducción"
   },
   "fr": {
     "app_tagline": "pour SanDisk Clip Sport",
@@ -207,7 +213,10 @@
     "wizard_step2": "Choisissez les options, puis Scannez pour prévisualiser",
     "wizard_step3": "Générer — un .m3u par dossier",
     "wizard_subtitle": "Créez des listes de lecture Clip Sport en 3 étapes",
-    "wizard_welcome": "Bienvenue"
+    "wizard_welcome": "Bienvenue",
+    "notif_channel_build": "Création de playlists",
+    "notif_channel_build_desc": "Progression pendant la création de vos playlists",
+    "notif_build_title": "Création des playlists"
   },
   "de": {
     "app_tagline": "für SanDisk Clip Sport",
@@ -277,7 +286,10 @@
     "wizard_step2": "Optionen auswählen, dann scannen zur Vorschau",
     "wizard_step3": "Generieren — eine .m3u pro Ordner",
     "wizard_subtitle": "Erstellen Sie Clip Sport Wiedergabelisten in 3 Schritten",
-    "wizard_welcome": "Willkommen"
+    "wizard_welcome": "Willkommen",
+    "notif_channel_build": "Playlist-Erstellung",
+    "notif_channel_build_desc": "Fortschritt beim Erstellen deiner Playlists",
+    "notif_build_title": "Playlists werden erstellt"
   },
   "pt-BR": {
     "app_tagline": "para SanDisk Clip Sport",
@@ -347,7 +359,10 @@
     "wizard_step2": "Escolha as opções e depois escaneie para pré-visualizar",
     "wizard_step3": "Gerar — um .m3u por pasta",
     "wizard_subtitle": "Crie listas de reprodução do Clip Sport em 3 etapas",
-    "wizard_welcome": "Bem-vindo"
+    "wizard_welcome": "Bem-vindo",
+    "notif_channel_build": "Criação de playlists",
+    "notif_channel_build_desc": "Progresso enquanto suas playlists são criadas",
+    "notif_build_title": "Criando playlists"
   },
   "it": {
     "app_tagline": "per SanDisk Clip Sport",
@@ -417,7 +432,10 @@
     "wizard_step2": "Scegli le opzioni, quindi scansiona per l'anteprima",
     "wizard_step3": "Genera — un .m3u per cartella",
     "wizard_subtitle": "Crea playlist Clip Sport in 3 passaggi",
-    "wizard_welcome": "Benvenuto"
+    "wizard_welcome": "Benvenuto",
+    "notif_channel_build": "Creazione playlist",
+    "notif_channel_build_desc": "Avanzamento durante la creazione delle playlist",
+    "notif_build_title": "Creazione delle playlist"
   },
   "ru": {
     "app_tagline": "для SanDisk Clip Sport",
@@ -487,7 +505,10 @@
     "wizard_step2": "Выберите параметры, затем Сканировать для предпросмотра",
     "wizard_step3": "Сгенерируйте — один .m3u для каждой папки",
     "wizard_subtitle": "Создавайте плейлисты Clip Sport за 3 шага",
-    "wizard_welcome": "Добро пожаловать"
+    "wizard_welcome": "Добро пожаловать",
+    "notif_channel_build": "Создание плейлистов",
+    "notif_channel_build_desc": "Ход создания плейлистов",
+    "notif_build_title": "Создание плейлистов"
   },
   "ja": {
     "app_tagline": "SanDisk Clip Sport 用",
@@ -557,7 +578,10 @@
     "wizard_step2": "オプションを選択後、スキャンしてプレビュー",
     "wizard_step3": "生成 — フォルダーごとに1つの.m3u",
     "wizard_subtitle": "3つのステップでClip Sportのプレイリストを作成",
-    "wizard_welcome": "ようこそ"
+    "wizard_welcome": "ようこそ",
+    "notif_channel_build": "プレイリストの作成",
+    "notif_channel_build_desc": "プレイリスト作成中の進捗",
+    "notif_build_title": "プレイリストを作成中"
   },
   "ko": {
     "app_tagline": "SanDisk Clip Sport용",
@@ -627,7 +651,10 @@
     "wizard_step2": "옵션을 선택한 다음, 스캔하여 미리보기",
     "wizard_step3": "생성 — 폴더당 .m3u 파일 하나",
     "wizard_subtitle": "3단계로 Clip Sport 재생목록 만들기",
-    "wizard_welcome": "환영합니다"
+    "wizard_welcome": "환영합니다",
+    "notif_channel_build": "재생목록 생성",
+    "notif_channel_build_desc": "재생목록 생성 진행 상황",
+    "notif_build_title": "재생목록 만드는 중"
   },
   "zh-CN": {
     "app_tagline": "适用于 SanDisk Clip Sport",
@@ -697,6 +724,9 @@
     "wizard_step2": "选择选项，然后扫描以预览",
     "wizard_step3": "生成 — 每个文件夹一个 .m3u",
     "wizard_subtitle": "通过 3 个步骤制作 Clip Sport 播放列表",
-    "wizard_welcome": "欢迎"
+    "wizard_welcome": "欢迎",
+    "notif_channel_build": "播放列表创建",
+    "notif_channel_build_desc": "创建播放列表时的进度",
+    "notif_build_title": "正在创建播放列表"
   }
 }

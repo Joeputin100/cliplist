@@ -16,6 +16,9 @@
     <string name="make_another">別のプレイリストを作成</string>
     <string name="music_folder">音楽フォルダ</string>
     <string name="no_preview">まだプレビューするものはありません。</string>
+    <string name="notif_build_title">プレイリストを作成中</string>
+    <string name="notif_channel_build">プレイリストの作成</string>
+    <string name="notif_channel_build_desc">プレイリスト作成中の進捗</string>
     <string name="open_settings">設定を開く</string>
     <string name="opt_alphabetize">トラックをアルファベット順に</string>
     <string name="opt_clean_names">ファイル名をクリーンアップ</string>

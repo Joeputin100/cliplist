@@ -16,6 +16,9 @@
     <string name="make_another">다른 재생 목록 만들기</string>
     <string name="music_folder">음악 폴더</string>
     <string name="no_preview">아직 미리 볼 내용이 없습니다.</string>
+    <string name="notif_build_title">재생목록 만드는 중</string>
+    <string name="notif_channel_build">재생목록 생성</string>
+    <string name="notif_channel_build_desc">재생목록 생성 진행 상황</string>
     <string name="open_settings">설정 열기</string>
     <string name="opt_alphabetize">트랙을 알파벳순으로 정렬</string>
     <string name="opt_clean_names">파일 이름 정리</string>
