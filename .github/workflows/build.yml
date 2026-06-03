@@ -7,9 +7,15 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      device:
+        description: "FTL device spec: model,version,locale,orientation"
+        required: false
+        default: "model=MediumPhone.arm,version=34,locale=en,orientation=portrait"
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FTL_DEVICE: ${{ github.event.inputs.device || 'model=MediumPhone.arm,version=34,locale=en,orientation=portrait' }}
 
 permissions:
   contents: read
@@ -126,7 +132,7 @@ jobs:
             --app apk/app/app-debug.apk \
             --test apk/test/app-debug-androidTest.apk \
             --test-targets "class com.cliplist.app.GenerateFlowTest,class com.cliplist.app.ResumeTest" \
-            --device model=MediumPhone.arm,version=34,locale=en,orientation=portrait \
+            --device "$FTL_DEVICE" \
             --results-bucket=static-webbing-461904-c4-ftl-results \
             --timeout 300s --quiet
 
@@ -170,7 +176,7 @@ jobs:
           gcloud firebase test android run \
             --type robo \
             --app /tmp/app-release-signed.apk \
-            --device model=MediumPhone.arm,version=34,locale=en,orientation=portrait \
+            --device "$FTL_DEVICE" \
             --results-bucket=static-webbing-461904-c4-ftl-results \
             --timeout 120s --quiet
 
