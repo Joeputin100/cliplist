@@ -14,6 +14,7 @@ build/
 captures/
 .externalNativeBuild/
 .cxx/
+.kotlin/
 *.aab
 
 # --- IDE ---
