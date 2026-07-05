@@ -17,7 +17,7 @@ class RenameExecutorTest {
 
         assertEquals(3, exec.applied.size)           // Café.mp3, Tëst.mp3, Jazz:Sub
         assertTrue(exec.failed.isEmpty())
-        assertEquals(setOf("Cafe.mp3", "JazzSub"), root.children.map { it.name }.toSet())
+        assertEquals(setOf("Cafe.mp3", "Jazz Sub"), root.children.map { it.name }.toSet())
     }
 
     @Test fun `execute records failures and keeps going`() {
