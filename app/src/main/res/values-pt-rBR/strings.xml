@@ -9,7 +9,7 @@
     <string name="choose_folder">Toque para escolher uma pasta</string>
     <string name="done">Concluído</string>
     <string name="eject">Ejetar cartão SD</string>
-    <string name="eject_note">Abre a tela de armazenamento do Android — apps não podem ejetar diretamente.</string>
+    <string name="eject_note">Abre as configurações do cartão SD — desmonte-o lá para ejetar com segurança.</string>
     <string name="format_dialog_done">Concluído</string>
     <string name="generate">Gerar playlists</string>
     <string name="language_system">Padrão do sistema</string>

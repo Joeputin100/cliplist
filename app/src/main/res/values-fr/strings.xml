@@ -9,7 +9,7 @@
     <string name="choose_folder">Appuyez pour choisir un dossier</string>
     <string name="done">Terminé</string>
     <string name="eject">Éjecter la carte SD</string>
-    <string name="eject_note">Ouvre l\'écran de stockage d\'Android — les applications ne peuvent pas éjecter directement.</string>
+    <string name="eject_note">Ouvre les paramètres de la carte SD — démontez-la là pour l\'éjecter en toute sécurité.</string>
     <string name="format_dialog_done">Terminé</string>
     <string name="generate">Générer les listes de lecture</string>
     <string name="language_system">Par défaut du système</string>

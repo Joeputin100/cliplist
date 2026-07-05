@@ -76,7 +76,9 @@ class PlaylistBuildWorker(
 
             // Re-plan after renames, then the metadata pass (real durations + drop unreadable).
             val planToWrite = PlaylistPlanner().plan(volume, scanOptions)
-            val analyzed = MetadataPass.run(volume, probe, planToWrite, scanOptions.audioExtensions)
+            val analyzed = MetadataPass.run(volume, probe, planToWrite, scanOptions.audioExtensions) { done, total ->
+                update(GenPhase.Starting, done, total, indeterminate = false)
+            }
             val report = PlaylistWriter(volume).execute(analyzed.plan) { done, total ->
                 update(GenPhase.Writing, done, total, indeterminate = false)
             }

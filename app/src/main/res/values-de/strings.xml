@@ -9,7 +9,7 @@
     <string name="choose_folder">Ordner auswählen</string>
     <string name="done">Fertig</string>
     <string name="eject">SD-Karte auswerfen</string>
-    <string name="eject_note">Öffnet den Speicherbildschirm von Android — Apps können nicht direkt auswerfen.</string>
+    <string name="eject_note">Öffnet die SD-Karten-Einstellungen — dort lässt sich die Karte sicher auswerfen.</string>
     <string name="format_dialog_done">Fertig</string>
     <string name="generate">Wiedergabelisten erstellen</string>
     <string name="language_system">Systemstandard</string>

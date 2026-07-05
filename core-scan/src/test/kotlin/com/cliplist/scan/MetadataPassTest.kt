@@ -22,6 +22,20 @@ class MetadataPassTest {
         assertEquals(listOf("bad.mp3"), r.unreadable)
     }
 
+    @Test fun `reports per-folder progress`() {
+        val vol = FakeVolume(
+            fakeDir("Music",
+                fakeDir("Rock", fakeFile("a.mp3", 1, 1)),
+                fakeDir("Jazz", fakeFile("b.mp3", 2, 2)))
+        )
+        val probe = FakeAudioProbe(mapOf("a.mp3" to ProbeResult(1000, true), "b.mp3" to ProbeResult(1000, true)))
+
+        val ticks = mutableListOf<Pair<Int, Int>>()
+        MetadataPass.run(vol, probe, planFor(vol), exts) { done, total -> ticks += done to total }
+
+        assertEquals(listOf(1 to 2, 2 to 2), ticks)
+    }
+
     @Test fun `a folder with no readable audio is dropped`() {
         val bad = fakeFile("bad.mp3", 2, 2)
         val vol = FakeVolume(fakeDir("Rock", bad))

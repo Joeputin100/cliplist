@@ -9,7 +9,7 @@
     <string name="choose_folder">Tocca per scegliere una cartella</string>
     <string name="done">Fatto</string>
     <string name="eject">Espelli scheda SD</string>
-    <string name="eject_note">Apre la schermata di archiviazione di Android — le app non possono espellere direttamente.</string>
+    <string name="eject_note">Apre le impostazioni della scheda SD — smontala lì per espellerla in modo sicuro.</string>
     <string name="format_dialog_done">Fatto</string>
     <string name="generate">Genera playlist</string>
     <string name="language_system">Predefinito di sistema</string>

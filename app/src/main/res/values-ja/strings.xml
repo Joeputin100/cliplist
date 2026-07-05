@@ -9,7 +9,7 @@
     <string name="choose_folder">タップしてフォルダを選択</string>
     <string name="done">完了</string>
     <string name="eject">SDカードを取り出す</string>
-    <string name="eject_note">Android のストレージ画面を開きます — アプリは直接取り出しできません。</string>
+    <string name="eject_note">SDカードの設定画面を開きます — そこで安全に取り外せます。</string>
     <string name="format_dialog_done">完了</string>
     <string name="generate">プレイリストを生成</string>
     <string name="language_system">システム既定</string>

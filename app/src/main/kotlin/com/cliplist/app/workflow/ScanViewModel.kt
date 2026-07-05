@@ -37,11 +37,17 @@ data class WorkflowOptions(
     val alphabetize: Boolean = true,
 )
 
-data class SelectedFolder(val uri: Uri, val displayName: String, val isRemovable: Boolean = false)
+data class SelectedFolder(
+    val uri: Uri,
+    val displayName: String,
+    /** FAT volume UUID (e.g. "1704-050E") when the folder is on removable media; null otherwise. */
+    val removableVolumeUuid: String? = null,
+)
 
 sealed interface ScanUiState {
     data object Idle : ScanUiState
-    data object Scanning : ScanUiState
+    /** total == 0 while folders are still being enumerated (indeterminate). */
+    data class Scanning(val done: Int = 0, val total: Int = 0) : ScanUiState
     data class Ready(val model: PreviewModel) : ScanUiState
     data class Error(val message: String) : ScanUiState
 }
@@ -122,7 +128,7 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
     fun scan() {
         val f = _folder.value ?: return
         val opts = _options.value
-        _scanState.value = ScanUiState.Scanning
+        _scanState.value = ScanUiState.Scanning()
         viewModelScope.launch {
             try {
                 val model = withContext(Dispatchers.IO) {
@@ -137,7 +143,9 @@ class ScanViewModel(app: Application) : AndroidViewModel(app) {
                     )
                     val scanPlan = PlaylistPlanner().plan(volume, scanOptions)
                     // Metadata pass: real durations + drop unreadable files (cache-accelerated).
-                    val analyzed = MetadataPass.run(volume, probe, scanPlan, audioExts)
+                    val analyzed = MetadataPass.run(volume, probe, scanPlan, audioExts) { done, total ->
+                        _scanState.value = ScanUiState.Scanning(done, total)
+                    }
                     val renamePlan = RenamePlanner().plan(
                         volume,
                         RenameOptions(

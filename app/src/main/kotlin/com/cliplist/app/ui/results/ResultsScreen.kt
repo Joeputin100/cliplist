@@ -1,6 +1,7 @@
 package com.cliplist.app.ui.results
 
 import android.content.Intent
+import android.provider.DocumentsContract
 import android.provider.Settings
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -58,6 +59,13 @@ import com.cliplist.app.workflow.GenerateUiState
 import com.cliplist.app.workflow.ScanViewModel
 import com.cliplist.scan.ResultFolderRow
 import com.cliplist.scan.ResultModel
+import com.cliplist.scan.StorageHeuristics
+
+// DocumentsContract.ACTION_DOCUMENT_ROOT_SETTINGS / Root.MIME_TYPE_ITEM — @hide constants, but
+// the Settings app's exported PublicVolumeSettingsActivity has filtered on exactly this
+// action + MIME type since Android 6, so the string values are stable.
+private const val ACTION_DOCUMENT_ROOT_SETTINGS = "android.provider.action.DOCUMENT_ROOT_SETTINGS"
+private const val MIME_TYPE_DOCUMENT_ROOT = "vnd.android.document/root"
 
 /** The animated "Living summary" Results page: gradient hero, count-up stats, staggered tiles. */
 @Composable
@@ -118,7 +126,7 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
                 Text(
                     stringResource(R.string.results_folders_written),
                     style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Spacer(Modifier.height(12.dp))
@@ -137,10 +145,20 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
 
         item {
             Spacer(Modifier.height(12.dp))
-            if (folder?.isRemovable == true) {
+            val volumeUuid = folder?.removableVolumeUuid
+            if (volumeUuid != null) {
                 OutlinedButton(
                     onClick = {
-                        runCatching {
+                        // The volume's own settings page (with the Unmount button) — the same
+                        // intent the system Files app fires on a storage root's ⚙ action.
+                        val volumeSettings = Intent(ACTION_DOCUMENT_ROOT_SETTINGS).setDataAndType(
+                            DocumentsContract.buildRootUri(
+                                StorageHeuristics.EXTERNAL_STORAGE_AUTHORITY, volumeUuid
+                            ),
+                            MIME_TYPE_DOCUMENT_ROOT,
+                        )
+                        runCatching { context.startActivity(volumeSettings) }.recoverCatching {
+                            // OEM Settings without that page: fall back to the storage overview.
                             context.startActivity(Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS))
                         }
                     },
@@ -149,7 +167,7 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
                 Text(
                     stringResource(R.string.eject_note),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                 )
@@ -172,7 +190,9 @@ private fun GradientHero(result: ResultModel, started: Boolean) {
         animationSpec = tween(500, easing = FastOutSlowInEasing),
         label = "check",
     )
-    val onHero = Color.White
+    // onPrimary, not hardcoded white: in dark schemes primary/secondary are light pastels,
+    // where white text all but disappears — onPrimary flips to a dark tone there.
+    val onHero = MaterialTheme.colorScheme.onPrimary
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -246,7 +266,7 @@ private fun StatChip(value: String, label: String, modifier: Modifier = Modifier
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(value, style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
-        Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurface)
     }
 }
 
@@ -290,30 +310,31 @@ private fun PlaylistTile(row: ResultFolderRow, visible: Boolean, delayMs: Int, m
             .padding(horizontal = 14.dp),
         contentAlignment = Alignment.CenterStart,
     ) {
+        val onTile = MaterialTheme.colorScheme.onPrimary
         Row(verticalAlignment = Alignment.CenterVertically) {
-            EqGlyph()
+            EqGlyph(onTile)
             Spacer(Modifier.size(10.dp))
             Column {
                 Text(
                     row.folderName,
                     style = MaterialTheme.typography.titleSmall,
-                    color = Color.White,
+                    color = onTile,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
                 Text(
                     stringResource(R.string.results_folder_tracks_fmt, row.trackCount),
                     style = MaterialTheme.typography.labelSmall,
-                    color = Color.White.copy(alpha = 0.85f),
+                    color = onTile.copy(alpha = 0.85f),
                 )
             }
         }
     }
 }
 
-/** A small equalizer glyph (four white rounded bars). */
+/** A small equalizer glyph (four rounded bars). */
 @Composable
-private fun EqGlyph() {
+private fun EqGlyph(color: Color) {
     val heights = floatArrayOf(0.45f, 1f, 0.65f, 0.85f)
     Canvas(Modifier.size(18.dp, 20.dp)) {
         val barW = size.width / 7f
@@ -321,7 +342,7 @@ private fun EqGlyph() {
             val x = i * (barW + barW / 2f) + barW / 2f
             val barH = size.height * h
             drawLine(
-                color = Color.White,
+                color = color,
                 start = Offset(x, size.height),
                 end = Offset(x, size.height - barH),
                 strokeWidth = barW,

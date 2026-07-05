@@ -9,7 +9,7 @@
     <string name="choose_folder">Tap to choose a folder</string>
     <string name="done">Done</string>
     <string name="eject">Eject SD card</string>
-    <string name="eject_note">Opens Android\'s storage screen — apps can\'t eject directly.</string>
+    <string name="eject_note">Opens the SD card\'s settings — unmount it there to eject safely.</string>
     <string name="format_dialog_done">Done</string>
     <string name="generate">Generate playlists</string>
     <string name="language_system">System default</string>

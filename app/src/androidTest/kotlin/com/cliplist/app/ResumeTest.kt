@@ -58,7 +58,7 @@ class ResumeTest {
         // Original session: enqueue the build (unique work).
         instr.runOnMainSync {
             val vm1 = ScanViewModel(app)
-            vm1.setFolder(SelectedFolder(Uri.fromFile(testDir), "ResumeTest", isRemovable = false))
+            vm1.setFolder(SelectedFolder(Uri.fromFile(testDir), "ResumeTest"))
             vm1.generate()
         }
 

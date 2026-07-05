@@ -50,6 +50,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.cliplist.app.R
 import com.cliplist.app.ui.components.AppLogo
+import com.cliplist.app.ui.components.WavyLinearLoader
+import com.cliplist.app.ui.components.ZoetropeLoader
 import com.cliplist.app.nav.Screen
 import com.cliplist.app.settings.SettingsViewModel
 import com.cliplist.app.ui.settings.SettingsDrawer
@@ -87,11 +89,11 @@ fun HomeScreen(
                 )
                 val docId = DocumentsContract.getTreeDocumentId(uri)
                 val name = docId.substringAfterLast('/').substringAfterLast(':').ifEmpty { "Selected folder" }
-                val removable = StorageHeuristics.isRemovableTreeDocumentId(docId)
-                vm.setFolder(SelectedFolder(uri, name, removable))
+                val volumeUuid = StorageHeuristics.removableVolumeUuid(uri.authority, docId)
+                vm.setFolder(SelectedFolder(uri, name, volumeUuid))
             } else {
                 // file:// (instrumented tests stub the picker): no SAF permission to persist.
-                vm.setFolder(SelectedFolder(uri, uri.lastPathSegment ?: "Selected folder", isRemovable = false))
+                vm.setFolder(SelectedFolder(uri, uri.lastPathSegment ?: "Selected folder"))
             }
         }
     }
@@ -174,13 +176,36 @@ fun HomeScreen(
                 ToggleRow(stringResource(R.string.opt_alphabetize), options.alphabetize, vm::setAlphabetize)
                 Spacer(Modifier.height(24.dp))
 
-                val scanning = scanState is ScanUiState.Scanning
+                val scanning = scanState as? ScanUiState.Scanning
                 Button(
                     onClick = { vm.scan() },
-                    enabled = folder != null && !scanning,
+                    enabled = folder != null && scanning == null,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(if (scanning) stringResource(R.string.scanning) else stringResource(R.string.scan_folder))
+                    Text(if (scanning != null) stringResource(R.string.scanning) else stringResource(R.string.scan_folder))
+                }
+                // Same loader pair as the generate Progress screen: indeterminate zoetrope while
+                // folders are enumerated, determinate wave once the metadata pass reports counts.
+                scanning?.let { s ->
+                    Spacer(Modifier.height(24.dp))
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        ZoetropeLoader(size = 48.dp)
+                        if (s.total > 0 && s.done > 0) {
+                            Spacer(Modifier.height(16.dp))
+                            WavyLinearLoader(
+                                progress = { s.done.toFloat() / s.total.toFloat() },
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            Spacer(Modifier.height(8.dp))
+                            Text(
+                                stringResource(R.string.progress_count_fmt, s.done, s.total),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
                 }
                 (scanState as? ScanUiState.Error)?.let {
                     Spacer(Modifier.height(12.dp))

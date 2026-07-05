@@ -9,7 +9,7 @@
     <string name="choose_folder">Toca para elegir una carpeta</string>
     <string name="done">Listo</string>
     <string name="eject">Expulsar tarjeta SD</string>
-    <string name="eject_note">Abre la pantalla de almacenamiento de Android — las aplicaciones no pueden expulsar directamente.</string>
+    <string name="eject_note">Abre los ajustes de la tarjeta SD — desmóntala allí para expulsarla de forma segura.</string>
     <string name="format_dialog_done">Hecho</string>
     <string name="generate">Generar listas de reproducción</string>
     <string name="language_system">Predeterminado del sistema</string>

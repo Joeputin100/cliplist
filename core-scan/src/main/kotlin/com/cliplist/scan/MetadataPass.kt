@@ -21,15 +21,18 @@ object MetadataPass {
         probe: AudioProbe,
         scanPlan: ScanPlan,
         audioExtensions: Set<String>,
+        onProgress: (done: Int, total: Int) -> Unit = { _, _ -> },
     ): AnalyzedScan {
         val analyzer = FolderMetadataAnalyzer(volume, probe)
         var totalDurationMs = 0L
         val unreadable = mutableListOf<String>()
-        val folders = scanPlan.folders.mapNotNull { fp ->
+        val total = scanPlan.folders.size
+        val folders = scanPlan.folders.mapIndexedNotNull { index, fp ->
             val audioNodes = volume.children(fp.folder).filter {
                 !it.isDirectory && AudioExtensions.isAudio(it.name, audioExtensions)
             }
             val analysis = analyzer.analyze(fp.folder, audioNodes)
+            onProgress(index + 1, total)
             totalDurationMs += analysis.totalDurationMs
             unreadable += analysis.unreadable
             val readable = analysis.readableFiles.toSet()

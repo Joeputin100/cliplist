@@ -9,7 +9,7 @@
     <string name="choose_folder">轻触选择文件夹</string>
     <string name="done">完成</string>
     <string name="eject">弹出 SD 卡</string>
-    <string name="eject_note">打开安卓存储界面 — 应用无法直接弹出。</string>
+    <string name="eject_note">打开 SD 卡设置页面 — 可在其中安全卸载。</string>
     <string name="format_dialog_done">完成</string>
     <string name="generate">生成播放列表</string>
     <string name="language_system">系统默认</string>

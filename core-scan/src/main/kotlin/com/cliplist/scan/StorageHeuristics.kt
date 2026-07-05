@@ -2,14 +2,22 @@ package com.cliplist.scan
 
 /** Pure heuristics over SAF identifiers. */
 object StorageHeuristics {
+
+    /** The system documents provider that serves internal storage, SD cards and USB drives. */
+    const val EXTERNAL_STORAGE_AUTHORITY = "com.android.externalstorage.documents"
+
     /**
-     * A SAF tree document id looks like "<volume>:<path>", e.g. "primary:Music" (internal
-     * shared storage) or "1A2B-3C4D:Music" (a removable SD card / USB volume). Internal
-     * volumes use the reserved ids "primary"/"home"; anything else is removable.
+     * The FAT volume UUID (e.g. "1704-050E") of the removable volume a SAF tree lives on, or null
+     * when the tree is not on removable media. A tree document id looks like "<volume>:<path>" —
+     * internal shared storage uses the reserved volume ids "primary"/"home", while removable
+     * volumes use their filesystem UUID. Anything served by a non-system provider (cloud drives,
+     * network shares) is never removable media, whatever its document id looks like.
      */
-    fun isRemovableTreeDocumentId(treeDocumentId: String): Boolean {
+    fun removableVolumeUuid(authority: String?, treeDocumentId: String): String? {
+        if (authority != EXTERNAL_STORAGE_AUTHORITY) return null
         val volume = treeDocumentId.substringBefore(':')
-        return !volume.equals("primary", ignoreCase = true) &&
-               !volume.equals("home", ignoreCase = true)
+        val internal = volume.equals("primary", ignoreCase = true) ||
+            volume.equals("home", ignoreCase = true)
+        return if (internal || volume.isEmpty()) null else volume
     }
 }
