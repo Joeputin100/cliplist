@@ -30,4 +30,10 @@ class RenameRulesTest {
     @Test fun `no options means no rename`() {
         assertNull(RenameRules.desiredName(fakeFile("Café.mp3"), none))
     }
+    @Test fun `app's own metadata cache is never renamed`() {
+        assertNull(RenameRules.desiredName(fakeFile("mpc-metadata.json"), all))
+    }
+    @Test fun `metadata cache is protected regardless of case (FAT32 is case-insensitive)`() {
+        assertNull(RenameRules.desiredName(fakeFile("MPC-Metadata.JSON"), all))
+    }
 }
