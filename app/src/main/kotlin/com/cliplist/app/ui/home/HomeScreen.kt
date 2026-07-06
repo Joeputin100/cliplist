@@ -50,6 +50,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.cliplist.app.R
 import com.cliplist.app.ui.components.AppLogo
+import com.cliplist.app.ui.components.InfoDot
 import com.cliplist.app.ui.components.WavyLinearLoader
 import com.cliplist.app.ui.components.ZoetropeLoader
 import com.cliplist.app.nav.Screen
@@ -172,8 +173,10 @@ fun HomeScreen(
                 }
                 Spacer(Modifier.height(16.dp))
 
-                ToggleRow(stringResource(R.string.opt_subfolders), options.searchSubfolders, vm::setSearchSubfolders)
-                ToggleRow(stringResource(R.string.opt_alphabetize), options.alphabetize, vm::setAlphabetize)
+                ToggleRow(stringResource(R.string.opt_subfolders), options.searchSubfolders, vm::setSearchSubfolders,
+                    R.string.opt_subfolders, R.string.info_subfolders)
+                ToggleRow(stringResource(R.string.opt_alphabetize), options.alphabetize, vm::setAlphabetize,
+                    R.string.opt_alphabetize, R.string.info_alphabetize)
                 Spacer(Modifier.height(24.dp))
 
                 val scanning = scanState as? ScanUiState.Scanning
@@ -234,18 +237,22 @@ fun HomeScreen(
 private fun ToggleRow(
     title: String,
     checked: Boolean,
-    onChange: (Boolean) -> Unit
+    onChange: (Boolean) -> Unit,
+    infoTitleRes: Int? = null,
+    infoBodyRes: Int? = null,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(
-            title,
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.fillMaxWidth(0.8f)
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(0.8f),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f, fill = false))
+            if (infoTitleRes != null && infoBodyRes != null) InfoDot(infoTitleRes, infoBodyRes)
+        }
         Switch(checked = checked, onCheckedChange = onChange)
     }
 }
