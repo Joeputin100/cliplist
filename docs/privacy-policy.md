@@ -1,6 +1,6 @@
 # Privacy Policy — My Playlist Creator 2026
 
-_Last updated: 2026-05-31_
+_Last updated: 2026-07-06_
 
 **My Playlist Creator 2026** ("the app") creates `.m3u` playlists for SanDisk Clip Sport
 players. This policy explains, in plain language, what the app does and does not do with
@@ -42,4 +42,4 @@ that version is released.
 
 ## Contact
 
-Questions about this policy: **[your-contact-email@example.com]**
+Questions about this policy: **joeputin100@gmail.com**
