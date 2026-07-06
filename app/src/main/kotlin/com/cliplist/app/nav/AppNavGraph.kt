@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cliplist.app.settings.SettingsViewModel
+import com.cliplist.app.ui.help.HelpScreen
 import com.cliplist.app.ui.home.HomeScreen
 import com.cliplist.app.ui.preview.PreviewScreen
 import com.cliplist.app.ui.privacy.PrivacyScreen
@@ -33,5 +34,6 @@ fun AppNavGraph(
         composable(Screen.Progress.route) { ProgressScreen(navController, scanViewModel) }
         composable(Screen.Results.route)  { ResultsScreen(navController, scanViewModel) }
         composable(Screen.Privacy.route)  { PrivacyScreen(navController) }
+        composable(Screen.Help.route)     { HelpScreen(navController, settingsViewModel) }
     }
 }
