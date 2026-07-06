@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">GitHubで見る</string>
+    <string name="about_license">フリーソフトウェア — GNU GPL v3</string>
+    <string name="about_license_sub">このアプリは自由に使用、共有、改良できます。改良版も自由であり続ける必要があります。</string>
+    <string name="about_report">問題を報告</string>
+    <string name="about_story">Matt Duss氏によるMy Playlist Creatorの、モダンでオープンソースの復活版です — Clip Sportの利用者が10年間頼ってきた小さなアプリでしたが、開発が終了しPlay Storeから姿を消しました。このアプリは同じバイト単位で完全一致するプレイリスト形式を、今日のAndroid向けにゼロから作り直したものです。オリジナルの作者やSanDiskとは無関係であり、それらの承認を受けたものでもありません。</string>
+    <string name="about_title">アプリについて</string>
+    <string name="about_version_fmt">バージョン %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">SanDisk Clip Sport 用</string>
     <string name="audio_formats">オーディオ形式</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">SDカードの設定画面を開きます — そこで安全に取り外せます。</string>
     <string name="format_dialog_done">完了</string>
     <string name="generate">プレイリストを生成</string>
+    <string name="help_a_clean">Clip Sportはファイル名の記号やアクセント付き文字でうまく動作しないことがあります。このオプションはカード上のファイルとフォルダの名前を、通常の英数字だけにリネームします（「Rock &amp; Roll!.mp3」は「Rock and Roll.mp3」になります）。プレビューには変更前にすべてのリネームが一覧表示されます。</string>
+    <string name="help_a_eject">生成後、結果ページで「SDカードを取り出す」をタップしてください。カード自体の設定画面が開くので、そこで「マウント解除」をタップしてからカードを外してください。</string>
+    <string name="help_a_formats">設定 → オーディオ形式で選択した形式がプレイリストに含まれます。Clip Sport自体はMP3、WMA、AAC、WAV、FLACを再生できます。</string>
+    <string name="help_a_hidden">名前がドットで始まるファイルはプレーヤーから見えません。このオプションはドットを取り除き、プレーヤーが認識できるようにします。</string>
+    <string name="help_a_make">1. フォルダカードをタップして音楽フォルダまたはSDカードを選択します。\n2. フォルダをスキャンをタップしてプレビューを確認します。\n3. プレイリストを生成をタップします。\n音楽が含まれる各フォルダに.m3uプレイリストが1つずつ書き込まれます。</string>
+    <string name="help_a_notshow">カードを安全に取り出し、プレーヤーに再度挿入してください。Clip Sportは起動時に音楽データベースを再構築します — しばらくお待ちください。各プレイリストはフォルダ名にちなんで名付けられます。</string>
+    <string name="help_a_where">各音楽フォルダの中に、フォルダ名にちなんだ.m3uファイルとして保存されます。データがカードの外に出ることはありません — このアプリはインターネットにアクセスしません。</string>
+    <string name="help_q_clean">「ファイル名をクリーンアップ」とは何ですか？</string>
+    <string name="help_q_eject">安全に取り出すにはどうすればいいですか？</string>
+    <string name="help_q_formats">対応しているオーディオ形式は何ですか？</string>
+    <string name="help_q_hidden">「隠しファイルの名前を変更」とは何ですか？</string>
+    <string name="help_q_make">プレイリストの作り方は？</string>
+    <string name="help_q_notshow">プレイリストがClip Sportに表示されないのはなぜですか？</string>
+    <string name="help_q_where">プレイリストはどこに保存されますか？</string>
+    <string name="help_show_wizard">ようこそガイドをもう一度表示</string>
+    <string name="help_title">ヘルプ</string>
+    <string name="info_alphabetize">各プレイリストのトラックをアルファベット順に並べ替えます。オフにすると、カード本来のファイル順が保たれます。</string>
+    <string name="info_cover_art">アルバムアート画像（folder.jpg）がまだない各音楽フォルダに、小さなアートワークを保存します。これによりプレーヤーがアートワークを表示できるようになります。</string>
+    <string name="info_dialog_ok">OK</string>
+    <string name="info_subfolders">選択したフォルダの中のフォルダもスキャンします。音楽が含まれる各サブフォルダには、それぞれ専用のプレイリストが作成されます。</string>
     <string name="language_system">システム既定</string>
     <string name="make_another">別のプレイリストを作成</string>
     <string name="music_folder">音楽フォルダ</string>

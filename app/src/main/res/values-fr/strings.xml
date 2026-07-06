@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">Voir sur GitHub</string>
+    <string name="about_license">Logiciel libre — GNU GPL v3</string>
+    <string name="about_license_sub">Vous pouvez utiliser, partager et améliorer cette application ; les améliorations doivent rester libres.</string>
+    <string name="about_report">Signaler un problème</string>
+    <string name="about_story">Un renouveau moderne et open source de My Playlist Creator par Matt Duss — la petite application dont dépendaient les propriétaires de Clip Sport pendant une décennie, jusqu\'à ce qu\'elle soit abandonnée et disparaisse du Play Store. Cette application écrit exactement le même format de liste de lecture, octet pour octet, reconstruit de zéro pour l\'Android d\'aujourd\'hui. Non affiliée à l\'auteur original ni à SanDisk, et non approuvée par eux.</string>
+    <string name="about_title">À propos</string>
+    <string name="about_version_fmt">Version %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">pour SanDisk Clip Sport</string>
     <string name="audio_formats">Formats audio</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">Ouvre les paramètres de la carte SD — démontez-la là pour l\'éjecter en toute sécurité.</string>
     <string name="format_dialog_done">Terminé</string>
     <string name="generate">Générer les listes de lecture</string>
+    <string name="help_a_clean">Le Clip Sport peut avoir des soucis avec les symboles et les lettres accentuées dans les noms de fichiers. Cette option renomme les fichiers et dossiers de la carte avec des lettres et chiffres simples (« Rock &amp; Roll!.mp3 » devient « Rock and Roll.mp3 »). L\'aperçu liste chaque renommage avant que rien ne soit modifié.</string>
+    <string name="help_a_eject">Une fois la génération terminée, appuyez sur « Éjecter la carte SD » sur la page des résultats. Cela ouvre les paramètres propres à la carte — appuyez sur Démonter, puis retirez la carte.</string>
+    <string name="help_a_formats">Les formats sélectionnés dans Paramètres → Formats audio sont inclus dans les listes de lecture. Le Clip Sport lit lui-même les MP3, WMA, AAC, WAV et FLAC.</string>
+    <string name="help_a_hidden">Les fichiers dont le nom commence par un point sont invisibles pour le lecteur. Cette option supprime le point pour que le lecteur puisse les voir.</string>
+    <string name="help_a_make">1. Appuyez sur la carte du dossier et choisissez votre dossier de musique ou votre carte SD.\n2. Appuyez sur Scanner le dossier et vérifiez l\'aperçu.\n3. Appuyez sur Générer les listes de lecture.\nUne liste .m3u est écrite dans chaque dossier contenant de la musique.</string>
+    <string name="help_a_notshow">Éjectez la carte en toute sécurité et réinsérez-la dans le lecteur. Le Clip Sport reconstruit sa base de données musicale au démarrage — laissez-lui un instant. Chaque liste de lecture porte le nom de son dossier.</string>
+    <string name="help_a_where">Dans chaque dossier de musique, sous forme de fichier .m3u portant le nom du dossier. Rien ne quitte la carte — l\'application n\'a pas accès à internet.</string>
+    <string name="help_q_clean">Que fait « Nettoyer les noms de fichiers » ?</string>
+    <string name="help_q_eject">Comment éjecter la carte en toute sécurité ?</string>
+    <string name="help_q_formats">Quels formats audio sont pris en charge ?</string>
+    <string name="help_q_hidden">Que fait « Renommer les fichiers cachés » ?</string>
+    <string name="help_q_make">Comment créer des listes de lecture ?</string>
+    <string name="help_q_notshow">Pourquoi mes listes de lecture n\'apparaissent-elles pas sur le Clip Sport ?</string>
+    <string name="help_q_where">Où sont enregistrées les listes de lecture ?</string>
+    <string name="help_show_wizard">Réafficher le guide de bienvenue</string>
+    <string name="help_title">Aide</string>
+    <string name="info_alphabetize">Classe les titres de chaque liste de lecture par ordre alphabétique. Désactivez cette option pour conserver l\'ordre des fichiers propre à la carte.</string>
+    <string name="info_cover_art">Enregistre une petite image de pochette (folder.jpg) dans chaque dossier de musique qui n\'en a pas déjà une, afin que le lecteur puisse afficher la pochette.</string>
+    <string name="info_dialog_ok">OK</string>
+    <string name="info_subfolders">Analyse aussi les dossiers à l\'intérieur de celui que vous avez choisi. Chaque sous-dossier contenant de la musique obtient sa propre liste de lecture.</string>
     <string name="language_system">Par défaut du système</string>
     <string name="make_another">Créer une autre liste de lecture</string>
     <string name="music_folder">DOSSIER MUSIQUE</string>

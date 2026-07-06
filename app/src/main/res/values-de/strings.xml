@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">Auf GitHub ansehen</string>
+    <string name="about_license">Freie Software — GNU GPL v3</string>
+    <string name="about_license_sub">Diese App darf verwendet, weitergegeben und verbessert werden; Verbesserungen müssen frei bleiben.</string>
+    <string name="about_report">Problem melden</string>
+    <string name="about_story">Eine moderne Open-Source-Wiederbelebung von My Playlist Creator von Matt Duss — der kleinen App, auf die sich Clip Sport Besitzer ein Jahrzehnt lang verlassen haben, bis sie eingestellt wurde und aus dem Play Store verschwand. Diese App schreibt dasselbe byte-exakte Wiedergabelisten-Format, von Grund auf neu gebaut für das heutige Android. Nicht verbunden mit oder unterstützt vom ursprünglichen Autor oder von SanDisk.</string>
+    <string name="about_title">Über</string>
+    <string name="about_version_fmt">Version %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">für SanDisk Clip Sport</string>
     <string name="audio_formats">Audioformate</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">Öffnet die SD-Karten-Einstellungen — dort lässt sich die Karte sicher auswerfen.</string>
     <string name="format_dialog_done">Fertig</string>
     <string name="generate">Wiedergabelisten erstellen</string>
+    <string name="help_a_clean">Der Clip Sport kann bei Symbolen und Akzentbuchstaben in Dateinamen Probleme haben. Diese Option benennt Dateien und Ordner auf der Karte in einfache Buchstaben und Zahlen um („Rock &amp; Roll!.mp3“ wird zu „Rock and Roll.mp3“). Die Vorschau listet jede Umbenennung auf, bevor etwas geändert wird.</string>
+    <string name="help_a_eject">Nach dem Erstellen auf der Ergebnisseite auf „SD-Karte auswerfen“ tippen. Das öffnet die Einstellungen der Karte selbst — dort auf Trennen tippen und danach die Karte entfernen.</string>
+    <string name="help_a_formats">Die unter Einstellungen → Audioformate ausgewählten Formate werden in Wiedergabelisten aufgenommen. Der Clip Sport selbst spielt MP3, WMA, AAC, WAV und FLAC ab.</string>
+    <string name="help_a_hidden">Dateien, deren Name mit einem Punkt beginnt, sind für den Player unsichtbar. Diese Option entfernt den Punkt, damit der Player sie sehen kann.</string>
+    <string name="help_a_make">1. Auf die Ordnerkarte tippen und den Musikordner oder die SD-Karte auswählen.\n2. Auf Ordner scannen tippen und die Vorschau prüfen.\n3. Auf Wiedergabelisten erstellen tippen.\nIn jeden Ordner mit Musik wird eine .m3u-Wiedergabeliste geschrieben.</string>
+    <string name="help_a_notshow">Die Karte sicher auswerfen und wieder in den Player einlegen. Der Clip Sport baut seine Musikdatenbank beim Start neu auf — das dauert einen Moment. Jede Wiedergabeliste trägt den Namen ihres Ordners.</string>
+    <string name="help_a_where">In jedem Musikordner, als .m3u-Datei mit dem Namen des Ordners. Nichts verlässt die Karte — die App hat keinen Internetzugriff.</string>
+    <string name="help_q_clean">Was macht „Dateinamen bereinigen“?</string>
+    <string name="help_q_eject">Wie wird die Karte sicher ausgeworfen?</string>
+    <string name="help_q_formats">Welche Audioformate werden unterstützt?</string>
+    <string name="help_q_hidden">Was macht „Versteckte Dateien umbenennen“?</string>
+    <string name="help_q_make">Wie werden Wiedergabelisten erstellt?</string>
+    <string name="help_q_notshow">Warum erscheinen meine Wiedergabelisten nicht auf dem Clip Sport?</string>
+    <string name="help_q_where">Wo werden die Wiedergabelisten gespeichert?</string>
+    <string name="help_show_wizard">Willkommens-Anleitung erneut anzeigen</string>
+    <string name="help_title">Hilfe</string>
+    <string name="info_alphabetize">Sortiert die Titel jeder Wiedergabeliste alphabetisch. Zum Beibehalten der eigenen Dateireihenfolge der Karte deaktivieren.</string>
+    <string name="info_cover_art">Speichert ein kleines Cover-Art-Bild (folder.jpg) in jedem Musikordner, der noch keines hat, damit der Player das Cover anzeigen kann.</string>
+    <string name="info_dialog_ok">OK</string>
+    <string name="info_subfolders">Durchsucht auch Ordner innerhalb des gewählten Ordners. Jeder Unterordner mit Musik erhält eine eigene Wiedergabeliste.</string>
     <string name="language_system">Systemstandard</string>
     <string name="make_another">Weitere Wiedergabeliste erstellen</string>
     <string name="music_folder">MUSIKORDNER</string>

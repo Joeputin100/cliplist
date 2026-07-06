@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">Visualizza su GitHub</string>
+    <string name="about_license">Software libero — GNU GPL v3</string>
+    <string name="about_license_sub">Puoi usare, condividere e migliorare questa app; i miglioramenti devono restare liberi.</string>
+    <string name="about_report">Segnala un problema</string>
+    <string name="about_story">Una rinascita moderna e open source di My Playlist Creator di Matt Duss — la piccola app su cui i proprietari di Clip Sport hanno fatto affidamento per un decennio, finché non è stata abbandonata ed è sparita dal Play Store. Questa app scrive lo stesso formato di playlist byte per byte, ricostruito da zero per l\'Android di oggi. Non è affiliata né approvata dall\'autore originale o da SanDisk.</string>
+    <string name="about_title">Informazioni</string>
+    <string name="about_version_fmt">Versione %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">per SanDisk Clip Sport</string>
     <string name="audio_formats">Formati audio</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">Apre le impostazioni della scheda SD — smontala lì per espellerla in modo sicuro.</string>
     <string name="format_dialog_done">Fatto</string>
     <string name="generate">Genera playlist</string>
+    <string name="help_a_clean">Il Clip Sport può avere problemi con simboli e lettere accentate nei nomi dei file. Questa opzione rinomina file e cartelle sulla scheda usando solo lettere e numeri (\"Rock &amp; Roll!.mp3\" diventa \"Rock and Roll.mp3\"). L\'anteprima elenca ogni ridenominazione prima che venga applicata.</string>
+    <string name="help_a_eject">Dopo la generazione, tocca \"Espelli scheda SD\" nella pagina dei risultati. Si aprono le impostazioni della scheda stessa — tocca Smonta lì, poi rimuovi la scheda.</string>
+    <string name="help_a_formats">I formati selezionati in Impostazioni → Formati audio vengono inclusi nelle playlist. Il Clip Sport stesso riproduce MP3, WMA, AAC, WAV e FLAC.</string>
+    <string name="help_a_hidden">I file il cui nome inizia con un punto sono invisibili per il lettore. Questa opzione rimuove il punto in modo che il lettore possa vederli.</string>
+    <string name="help_a_make">1. Tocca la scheda della cartella e scegli la cartella musicale o la SD card.\n2. Tocca Scansiona cartella e controlla l\'anteprima.\n3. Tocca Genera playlist.\nUna playlist .m3u viene scritta in ogni cartella che contiene musica.</string>
+    <string name="help_a_notshow">Espelli la scheda in modo sicuro e reinseriscila nel lettore. Il Clip Sport ricostruisce il suo database musicale all\'avvio — dagli un momento. Ogni playlist prende il nome dalla sua cartella.</string>
+    <string name="help_a_where">Dentro ogni cartella musicale, come file .m3u con il nome della cartella. Niente lascia la scheda — l\'app non ha accesso a internet.</string>
+    <string name="help_q_clean">Cosa fa \"Pulisci nomi file\"?</string>
+    <string name="help_q_eject">Come si espelle in sicurezza?</string>
+    <string name="help_q_formats">Quali formati audio sono supportati?</string>
+    <string name="help_q_hidden">Cosa fa \"Rinomina file nascosti\"?</string>
+    <string name="help_q_make">Come si creano le playlist?</string>
+    <string name="help_q_notshow">Perché le mie playlist non compaiono sul Clip Sport?</string>
+    <string name="help_q_where">Dove vengono salvate le playlist?</string>
+    <string name="help_show_wizard">Mostra di nuovo la guida di benvenuto</string>
+    <string name="help_title">Aiuto</string>
+    <string name="info_alphabetize">Ordina le tracce di ogni playlist in ordine alfabetico. Disattiva per mantenere l\'ordine dei file originale della scheda.</string>
+    <string name="info_cover_art">Salva una piccola immagine di copertina (folder.jpg) in ogni cartella musicale che non ne ha già una, così il lettore può mostrare la copertina.</string>
+    <string name="info_dialog_ok">OK</string>
+    <string name="info_subfolders">Analizza anche le cartelle all\'interno di quella scelta. Ogni sottocartella che contiene musica ottiene la propria playlist.</string>
     <string name="language_system">Predefinito di sistema</string>
     <string name="make_another">Crea un\'altra playlist</string>
     <string name="music_folder">CARTELLA MUSICA</string>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">在 GitHub 上查看</string>
+    <string name="about_license">自由软件 — GNU GPL v3</string>
+    <string name="about_license_sub">可以自由使用、分享和改进此应用；改进后的版本也必须保持自由。</string>
+    <string name="about_report">报告问题</string>
+    <string name="about_story">这是 Matt Duss 开发的 My Playlist Creator 的现代开源复刻版 — Clip Sport 用户曾依赖这款小应用长达十年，直到它被放弃并从 Play 商店下架。此应用重写了完全相同、逐字节一致的播放列表格式，为当今的 Android 从零打造。与原作者或 SanDisk 无关，也未获得他们的认可。</string>
+    <string name="about_title">关于</string>
+    <string name="about_version_fmt">版本 %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">适用于 SanDisk Clip Sport</string>
     <string name="audio_formats">音频格式</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">打开 SD 卡设置页面 — 可在其中安全卸载。</string>
     <string name="format_dialog_done">完成</string>
     <string name="generate">生成播放列表</string>
+    <string name="help_a_clean">Clip Sport 可能无法正确处理文件名中的符号和带重音的字母。此选项会将卡上的文件和文件夹重命名为纯字母和数字（“Rock &amp; Roll!.mp3” 变为 “Rock and Roll.mp3”）。预览会列出更改前的每一项重命名。</string>
+    <string name="help_a_eject">生成完成后，在结果页面点按“弹出 SD 卡”。这会打开卡本身的设置 — 在其中点按卸载，然后取出卡。</string>
+    <string name="help_a_formats">在“设置 → 音频格式”中选择的格式会包含在播放列表中。Clip Sport 本身支持播放 MP3、WMA、AAC、WAV 和 FLAC。</string>
+    <string name="help_a_hidden">文件名以点开头的文件对播放器不可见。此选项会去除该点，使播放器能够识别这些文件。</string>
+    <string name="help_a_make">1. 点按文件夹卡片，选择音乐文件夹或 SD 卡。\n2. 点按扫描文件夹并查看预览。\n3. 点按生成播放列表。\n每个包含音乐的文件夹中都会写入一个 .m3u 播放列表。</string>
+    <string name="help_a_notshow">安全弹出卡后重新插入播放器。Clip Sport 启动时会重建音乐数据库 — 请稍等片刻。每个播放列表都以其所在文件夹命名。</string>
+    <string name="help_a_where">保存在每个音乐文件夹内，是以文件夹命名的 .m3u 文件。任何内容都不会离开这张卡 — 此应用没有网络访问权限。</string>
+    <string name="help_q_clean">“规范文件名”是做什么的？</string>
+    <string name="help_q_eject">如何安全弹出？</string>
+    <string name="help_q_formats">支持哪些音频格式？</string>
+    <string name="help_q_hidden">“重命名隐藏文件”是做什么的？</string>
+    <string name="help_q_make">如何制作播放列表？</string>
+    <string name="help_q_notshow">为什么我的播放列表没有显示在 Clip Sport 上？</string>
+    <string name="help_q_where">播放列表保存在哪里？</string>
+    <string name="help_show_wizard">再次显示欢迎指南</string>
+    <string name="help_title">帮助</string>
+    <string name="info_alphabetize">按字母顺序排列每个播放列表中的曲目。关闭此选项可保留卡上原有的文件顺序。</string>
+    <string name="info_cover_art">为每个尚无封面的音乐文件夹保存一张小的专辑封面图片（folder.jpg），以便播放器显示封面。</string>
+    <string name="info_dialog_ok">确定</string>
+    <string name="info_subfolders">同时扫描所选文件夹内部的文件夹。每个包含音乐的子文件夹都会获得自己的播放列表。</string>
     <string name="language_system">系统默认</string>
     <string name="make_another">制作另一个播放列表</string>
     <string name="music_folder">音乐文件夹</string>

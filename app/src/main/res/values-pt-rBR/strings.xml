@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">Ver no GitHub</string>
+    <string name="about_license">Software livre — GNU GPL v3</string>
+    <string name="about_license_sub">Você pode usar, compartilhar e melhorar este app; as melhorias precisam continuar livres.</string>
+    <string name="about_report">Relatar um problema</string>
+    <string name="about_story">Uma revitalização moderna e de código aberto do My Playlist Creator, de Matt Duss — o pequeno app do qual os donos de Clip Sport dependiam havia uma década, até ser abandonado e desaparecer da Play Store. Este app grava o mesmo formato de playlist byte a byte, reconstruído do zero para o Android de hoje. Não é afiliado nem endossado pelo autor original ou pela SanDisk.</string>
+    <string name="about_title">Sobre</string>
+    <string name="about_version_fmt">Versão %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">para SanDisk Clip Sport</string>
     <string name="audio_formats">Formatos de áudio</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">Abre as configurações do cartão SD — desmonte-o lá para ejetar com segurança.</string>
     <string name="format_dialog_done">Concluído</string>
     <string name="generate">Gerar playlists</string>
+    <string name="help_a_clean">O Clip Sport pode travar com símbolos e letras acentuadas nos nomes de arquivo. Esta opção renomeia arquivos e pastas no cartão para letras e números simples (\"Rock &amp; Roll!.mp3\" vira \"Rock and Roll.mp3\"). A prévia lista cada renomeação antes de qualquer alteração.</string>
+    <string name="help_a_eject">Depois de gerar, toque em \"Ejetar cartão SD\" na página de resultados. Isso abre as configurações do próprio cartão — toque em Desmontar lá, depois remova o cartão.</string>
+    <string name="help_a_formats">Os formatos selecionados em Configurações → Formatos de áudio são incluídos nas playlists. O próprio Clip Sport reproduz MP3, WMA, AAC, WAV e FLAC.</string>
+    <string name="help_a_hidden">Arquivos cujo nome começa com um ponto ficam invisíveis para o player. Esta opção remove o ponto para que o player possa vê-los.</string>
+    <string name="help_a_make">1. Toque no cartão da pasta e escolha sua pasta de música ou cartão SD.\n2. Toque em Escanear pasta e confira a prévia.\n3. Toque em Gerar playlists.\nUma playlist .m3u é gravada em cada pasta que contém música.</string>
+    <string name="help_a_notshow">Ejete o cartão com segurança e reinsira-o no player. O Clip Sport reconstrói o banco de dados de música ao iniciar — dê um tempo a ele. Cada playlist recebe o nome da sua pasta.</string>
+    <string name="help_a_where">Dentro de cada pasta de música, como um arquivo .m3u com o nome da pasta. Nada sai do cartão — o app não tem acesso à internet.</string>
+    <string name="help_q_clean">O que \"Limpar nomes de arquivos\" faz?</string>
+    <string name="help_q_eject">Como ejetar com segurança?</string>
+    <string name="help_q_formats">Quais formatos de áudio são compatíveis?</string>
+    <string name="help_q_hidden">O que \"Renomear arquivos ocultos\" faz?</string>
+    <string name="help_q_make">Como faço playlists?</string>
+    <string name="help_q_notshow">Por que minhas playlists não aparecem no Clip Sport?</string>
+    <string name="help_q_where">Onde as playlists são salvas?</string>
+    <string name="help_show_wizard">Mostrar o guia de boas-vindas novamente</string>
+    <string name="help_title">Ajuda</string>
+    <string name="info_alphabetize">Organiza as faixas de cada playlist em ordem alfabética. Desative para manter a ordem de arquivos original do cartão.</string>
+    <string name="info_cover_art">Salva uma pequena imagem de capa (folder.jpg) em cada pasta de música que ainda não tenha uma, para que o player possa exibir a capa.</string>
+    <string name="info_dialog_ok">OK</string>
+    <string name="info_subfolders">Também escaneia as pastas dentro da pasta escolhida. Cada subpasta que contém música recebe sua própria playlist.</string>
     <string name="language_system">Padrão do sistema</string>
     <string name="make_another">Criar outra playlist</string>
     <string name="music_folder">PASTA DE MÚSICA</string>

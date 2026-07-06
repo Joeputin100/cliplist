@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">Ver en GitHub</string>
+    <string name="about_license">Software libre — GNU GPL v3</string>
+    <string name="about_license_sub">Puedes usar, compartir y mejorar esta app; las mejoras deben seguir siendo libres.</string>
+    <string name="about_report">Informar de un problema</string>
+    <string name="about_story">Un renacimiento moderno y de código abierto de My Playlist Creator, de Matt Duss — la pequeña app de la que dependían los propietarios de Clip Sport durante una década, hasta que fue abandonada y desapareció de la Play Store. Esta app escribe el mismo formato de lista de reproducción, byte a byte, reconstruido desde cero para el Android actual. No está afiliada ni respaldada por el autor original ni por SanDisk.</string>
+    <string name="about_title">Acerca de</string>
+    <string name="about_version_fmt">Versión %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">para SanDisk Clip Sport</string>
     <string name="audio_formats">Formatos de audio</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">Abre los ajustes de la tarjeta SD — desmóntala allí para expulsarla de forma segura.</string>
     <string name="format_dialog_done">Hecho</string>
     <string name="generate">Generar listas de reproducción</string>
+    <string name="help_a_clean">El Clip Sport puede fallar con símbolos y letras acentuadas en los nombres de archivo. Esta opción renombra archivos y carpetas de la tarjeta usando solo letras y números (\"Rock &amp; Roll!.mp3\" pasa a ser \"Rock and Roll.mp3\"). La vista previa muestra cada cambio antes de aplicarlo.</string>
+    <string name="help_a_eject">Después de generar, toca \"Expulsar tarjeta SD\" en la página de resultados. Se abren los ajustes propios de la tarjeta — toca Desmontar allí y luego retira la tarjeta.</string>
+    <string name="help_a_formats">Los formatos seleccionados en Ajustes → Formatos de audio se incluyen en las listas de reproducción. El propio Clip Sport reproduce MP3, WMA, AAC, WAV y FLAC.</string>
+    <string name="help_a_hidden">Los archivos cuyo nombre empieza con un punto son invisibles para el reproductor. Esta opción quita el punto para que el reproductor pueda verlos.</string>
+    <string name="help_a_make">1. Toca la tarjeta de carpeta y elige tu carpeta de música o tarjeta SD.\n2. Toca Escanear carpeta y revisa la vista previa.\n3. Toca Generar listas de reproducción.\nSe escribe una lista .m3u en cada carpeta que contiene música.</string>
+    <string name="help_a_notshow">Expulsa la tarjeta de forma segura y vuelve a insertarla en el reproductor. El Clip Sport reconstruye su base de datos de música al iniciarse — dale un momento. Cada lista de reproducción lleva el nombre de su carpeta.</string>
+    <string name="help_a_where">Dentro de cada carpeta de música, como un archivo .m3u con el nombre de la carpeta. Nada sale de la tarjeta — la app no tiene acceso a internet.</string>
+    <string name="help_q_clean">¿Qué hace \"Limpiar nombres de archivo\"?</string>
+    <string name="help_q_eject">¿Cómo expulso la tarjeta de forma segura?</string>
+    <string name="help_q_formats">¿Qué formatos de audio son compatibles?</string>
+    <string name="help_q_hidden">¿Qué hace \"Renombrar archivos ocultos\"?</string>
+    <string name="help_q_make">¿Cómo creo listas de reproducción?</string>
+    <string name="help_q_notshow">¿Por qué no aparecen mis listas de reproducción en el Clip Sport?</string>
+    <string name="help_q_where">¿Dónde se guardan las listas de reproducción?</string>
+    <string name="help_show_wizard">Mostrar la guía de bienvenida de nuevo</string>
+    <string name="help_title">Ayuda</string>
+    <string name="info_alphabetize">Ordena las pistas de cada lista de reproducción alfabéticamente. Desactívalo para conservar el orden de archivos propio de la tarjeta.</string>
+    <string name="info_cover_art">Guarda una pequeña imagen de carátula (folder.jpg) en cada carpeta de música que no tenga una, para que el reproductor pueda mostrar la carátula.</string>
+    <string name="info_dialog_ok">Aceptar</string>
+    <string name="info_subfolders">También escanea las carpetas dentro de la que elegiste. Cada subcarpeta que contiene música obtiene su propia lista de reproducción.</string>
     <string name="language_system">Predeterminado del sistema</string>
     <string name="make_another">Crear otra lista de reproducción</string>
     <string name="music_folder">CARPETA DE MÚSICA</string>

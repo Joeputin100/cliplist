@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_github">Смотреть на GitHub</string>
+    <string name="about_license">Свободное ПО — GNU GPL v3</string>
+    <string name="about_license_sub">Это приложение можно использовать, передавать другим и улучшать; улучшения должны оставаться свободными.</string>
+    <string name="about_report">Сообщить о проблеме</string>
+    <string name="about_story">Современное возрождение с открытым исходным кодом My Playlist Creator от Matt Duss — небольшого приложения, на которое владельцы Clip Sport полагались десять лет, пока оно не было заброшено и не исчезло из Play Store. Это приложение создаёт точно такой же, побайтово идентичный формат плейлиста, написанный заново для современного Android. Не связано с оригинальным автором или SanDisk и не одобрено ими.</string>
+    <string name="about_title">О программе</string>
+    <string name="about_version_fmt">Версия %1$s</string>
     <string name="app_name">My Playlist Creator 2026</string>
     <string name="app_tagline">для SanDisk Clip Sport</string>
     <string name="audio_formats">Аудиоформаты</string>
@@ -12,6 +19,26 @@
     <string name="eject_note">Открывает настройки SD-карты — там её можно безопасно извлечь.</string>
     <string name="format_dialog_done">Готово</string>
     <string name="generate">Создать плейлисты</string>
+    <string name="help_a_clean">Clip Sport может испытывать проблемы с символами и буквами с диакритическими знаками в именах файлов. Этот параметр переименовывает файлы и папки на карте, оставляя только буквы и цифры (\"Rock &amp; Roll!.mp3\" становится \"Rock and Roll.mp3\"). В превью показано каждое переименование до того, как что-либо изменится.</string>
+    <string name="help_a_eject">После создания плейлистов нажмите \"Извлечь SD-карту\" на странице результатов. Откроются настройки самой карты — там нужно нажать Отключить, а затем извлечь карту.</string>
+    <string name="help_a_formats">Форматы, выбранные в Настройки → Аудиоформаты, включаются в плейлисты. Сам Clip Sport воспроизводит MP3, WMA, AAC, WAV и FLAC.</string>
+    <string name="help_a_hidden">Файлы, имя которых начинается с точки, невидимы для плеера. Этот параметр убирает точку, чтобы плеер мог их видеть.</string>
+    <string name="help_a_make">1. Нажмите на карточку папки и выберите музыкальную папку или SD-карту.\n2. Нажмите Сканировать папку и проверьте превью.\n3. Нажмите Создать плейлисты.\nВ каждую папку с музыкой записывается один плейлист .m3u.</string>
+    <string name="help_a_notshow">Безопасно извлеките карту и вставьте её обратно в плеер. При запуске Clip Sport заново создаёт базу данных музыки — это займёт некоторое время. Каждый плейлист называется по имени своей папки.</string>
+    <string name="help_a_where">Внутри каждой музыкальной папки, в виде файла .m3u с именем папки. Ничего не покидает карту — у приложения нет доступа в интернет.</string>
+    <string name="help_q_clean">Что делает \"Очистить имена файлов\"?</string>
+    <string name="help_q_eject">Как безопасно извлечь карту?</string>
+    <string name="help_q_formats">Какие аудиоформаты поддерживаются?</string>
+    <string name="help_q_hidden">Что делает \"Переименовать скрытые файлы\"?</string>
+    <string name="help_q_make">Как создать плейлисты?</string>
+    <string name="help_q_notshow">Почему мои плейлисты не отображаются на Clip Sport?</string>
+    <string name="help_q_where">Где сохраняются плейлисты?</string>
+    <string name="help_show_wizard">Показать приветствие снова</string>
+    <string name="help_title">Справка</string>
+    <string name="info_alphabetize">Сортирует треки в каждом плейлисте по алфавиту. Отключите, чтобы сохранить собственный порядок файлов на карте.</string>
+    <string name="info_cover_art">Сохраняет небольшое изображение обложки (folder.jpg) в каждой музыкальной папке, где его ещё нет, чтобы плеер мог показывать обложку.</string>
+    <string name="info_dialog_ok">ОК</string>
+    <string name="info_subfolders">Также сканирует папки внутри выбранной папки. Каждая подпапка с музыкой получает свой плейлист.</string>
     <string name="language_system">Системный по умолчанию</string>
     <string name="make_another">Создать еще один плейлист</string>
     <string name="music_folder">МУЗЫКАЛЬНАЯ ПАПКА</string>
