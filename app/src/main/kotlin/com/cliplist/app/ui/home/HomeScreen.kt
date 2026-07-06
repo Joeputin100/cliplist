@@ -113,6 +113,14 @@ fun HomeScreen(
                     onPrivacy = {
                         scope.launch { drawerState.close() }
                         navController.navigate(Screen.Privacy.route)
+                    },
+                    onHelp = {
+                        scope.launch { drawerState.close() }
+                        navController.navigate(Screen.Help.route)
+                    },
+                    onAbout = {
+                        scope.launch { drawerState.close() }
+                        navController.navigate(Screen.About.route)
                     }
                 )
             }

@@ -42,12 +42,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cliplist.app.R
 import com.cliplist.app.settings.SettingsViewModel
 import com.cliplist.app.ui.components.AppLogo
+import com.cliplist.app.ui.components.InfoDot
 import com.cliplist.app.settings.ThemeMode
 import com.cliplist.scan.AudioExtensions
 
 /** The Settings drawer content (lives inside Home's ModalDrawerSheet). */
 @Composable
-fun SettingsDrawer(vm: SettingsViewModel, onPrivacy: () -> Unit) {
+fun SettingsDrawer(vm: SettingsViewModel, onPrivacy: () -> Unit, onHelp: () -> Unit, onAbout: () -> Unit) {
     val themeMode by vm.themeMode.collectAsStateWithLifecycle()
     val exts by vm.audioExtensions.collectAsStateWithLifecycle()
     val cleanNames by vm.cleanNames.collectAsStateWithLifecycle()
@@ -117,19 +118,25 @@ fun SettingsDrawer(vm: SettingsViewModel, onPrivacy: () -> Unit) {
             title = stringResource(R.string.opt_clean_names),
             subtitle = stringResource(R.string.opt_clean_names_sub),
             checked = cleanNames,
-            onChange = vm::setCleanNames
+            onChange = vm::setCleanNames,
+            infoTitleRes = R.string.opt_clean_names,
+            infoBodyRes = R.string.help_a_clean
         )
         SwitchRow(
             title = stringResource(R.string.opt_rename_hidden),
             subtitle = stringResource(R.string.opt_rename_hidden_sub),
             checked = renameHidden,
-            onChange = vm::setRenameHidden
+            onChange = vm::setRenameHidden,
+            infoTitleRes = R.string.opt_rename_hidden,
+            infoBodyRes = R.string.help_a_hidden
         )
         SwitchRow(
             title = stringResource(R.string.opt_cover_art),
             subtitle = stringResource(R.string.opt_cover_art_sub),
             checked = writeCoverArt,
-            onChange = vm::setWriteCoverArt
+            onChange = vm::setWriteCoverArt,
+            infoTitleRes = R.string.opt_cover_art,
+            infoBodyRes = R.string.info_cover_art
         )
         // Audio formats row (count badge) -> dialog
         Row(
@@ -150,21 +157,16 @@ fun SettingsDrawer(vm: SettingsViewModel, onPrivacy: () -> Unit) {
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary
             )
+            InfoDot(R.string.audio_formats, R.string.help_a_formats)
         }
         Spacer(Modifier.height(24.dp))
 
         // ABOUT
         SectionLabel(stringResource(R.string.settings_about))
         Spacer(Modifier.height(4.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { onPrivacy() }
-                .padding(vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(stringResource(R.string.privacy_policy), style = MaterialTheme.typography.titleMedium)
-        }
+        DrawerLink(stringResource(R.string.help_title), onHelp)
+        DrawerLink(stringResource(R.string.about_title), onAbout)
+        DrawerLink(stringResource(R.string.privacy_policy), onPrivacy)
     }
 
     if (showFormats) {
@@ -231,7 +233,9 @@ private fun SwitchRow(
     title: String,
     subtitle: String?,
     checked: Boolean,
-    onChange: (Boolean) -> Unit
+    onChange: (Boolean) -> Unit,
+    infoTitleRes: Int? = null,
+    infoBodyRes: Int? = null
 ) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp),
@@ -239,7 +243,10 @@ private fun SwitchRow(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column(Modifier.fillMaxWidth(0.78f)) {
-            Text(title, style = MaterialTheme.typography.titleMedium)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(title, style = MaterialTheme.typography.titleMedium)
+                if (infoTitleRes != null && infoBodyRes != null) InfoDot(infoTitleRes, infoBodyRes)
+            }
             if (subtitle != null) {
                 Text(
                     subtitle,
@@ -249,6 +256,16 @@ private fun SwitchRow(
             }
         }
         Switch(checked = checked, onCheckedChange = onChange)
+    }
+}
+
+@Composable
+private fun DrawerLink(title: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth().clickable { onClick() }.padding(vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(title, style = MaterialTheme.typography.titleMedium)
     }
 }
 
