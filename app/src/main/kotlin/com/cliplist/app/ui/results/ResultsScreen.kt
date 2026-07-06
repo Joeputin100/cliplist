@@ -29,6 +29,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -76,12 +77,14 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
     val result = (state as? GenerateUiState.Done)?.result
 
     if (result == null) {
-        Column(
-            Modifier.fillMaxSize().padding(24.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(stringResource(R.string.no_preview), style = MaterialTheme.typography.bodyLarge)
+        Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
+            Column(
+                Modifier.fillMaxSize().padding(padding).padding(24.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(stringResource(R.string.no_preview), style = MaterialTheme.typography.bodyLarge)
+            }
         }
         return
     }
@@ -97,8 +100,11 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
 
     val tileRows = result.folders.chunked(2)
 
+    // Scaffold padding keeps the page below the status bar and above the gesture bar
+    // (edge-to-edge is on; the sibling screens get this from their own Scaffolds).
+    Scaffold(modifier = Modifier.fillMaxSize()) { scaffoldPadding ->
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp),
+        modifier = Modifier.fillMaxSize().padding(scaffoldPadding).padding(horizontal = 20.dp),
         contentPadding = PaddingValues(vertical = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -180,6 +186,7 @@ fun ResultsScreen(navController: NavController, vm: ScanViewModel) {
                 Text(stringResource(R.string.make_another))
             }
         }
+    }
     }
 }
 
