@@ -18,6 +18,9 @@ androidx-test-runner = "1.7.0"
 androidx-test-rules = "1.7.0"
 androidx-test-uiautomator = "2.3.0"
 androidx-test-espresso = "3.7.0"
+appfunctions = "1.0.0-alpha09"
+ksp          = "2.3.9"
+junit4       = "4.13.2"
 
 [libraries]
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
@@ -45,6 +48,10 @@ androidx-test-espresso-core    = { module = "androidx.test.espresso:espresso-cor
 androidx-test-espresso-intents = { module = "androidx.test.espresso:espresso-intents",                 version.ref = "androidx-test-espresso" }
 compose-ui-test-junit4         = { module = "androidx.compose.ui:ui-test-junit4" }
 compose-ui-test-manifest       = { module = "androidx.compose.ui:ui-test-manifest" }
+appfunctions                   = { module = "androidx.appfunctions:appfunctions",                       version.ref = "appfunctions" }
+appfunctions-service           = { module = "androidx.appfunctions:appfunctions-service",               version.ref = "appfunctions" }
+appfunctions-compiler          = { module = "androidx.appfunctions:appfunctions-compiler",              version.ref = "appfunctions" }
+junit4                         = { module = "junit:junit",                                              version.ref = "junit4" }
 
 [plugins]
 kotlin-jvm          = { id = "org.jetbrains.kotlin.jvm",  version.ref = "kotlin" }
@@ -54,4 +61,6 @@ compose-compiler    = { id = "org.jetbrains.kotlin.plugin.compose", version.ref 
 google-services     = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp                  = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # kotlin-android intentionally absent — AGP 9.0+ has built-in Kotlin support.
+# KSP 2.3.6+ detects and runs under built-in Kotlin, so we do NOT set android.builtInKotlin=false.

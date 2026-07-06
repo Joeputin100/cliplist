@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.ksp)
     // kotlin-android intentionally absent: AGP 9.0+ has built-in Kotlin support.
 }
 
@@ -64,6 +65,12 @@ kotlin {
     }
 }
 
+// App Functions codegen runs through KSP. aggregateAppFunctions=true marks this as the final app
+// module, so the compiler aggregates every @AppFunction across the dependency graph into one inventory.
+ksp {
+    arg("appfunctions:aggregateAppFunctions", "true")
+}
+
 dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
@@ -81,7 +88,17 @@ dependencies {
     implementation(libs.androidx.work.runtime)
     implementation(project(":core-scan"))
     implementation(project(":data-storage"))
+
+    // App Functions (alpha): on-device functions an assistant (e.g. Gemini) can discover and call.
+    // appfunctions = annotations/runtime, appfunctions-service = the host service, compiler = KSP codegen.
+    implementation(libs.appfunctions)
+    implementation(libs.appfunctions.service)
+    ksp(libs.appfunctions.compiler)
+
     debugImplementation(libs.compose.ui.tooling)
+
+    // Pure-JVM unit tests for the App Function logic (runs via :app:testDebugUnitTest).
+    testImplementation(libs.junit4)
 
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.androidx.test.ext.junit)
