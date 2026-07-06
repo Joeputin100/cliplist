@@ -147,7 +147,10 @@ fun SettingsDrawer(vm: SettingsViewModel, onPrivacy: () -> Unit, onHelp: () -> U
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(stringResource(R.string.audio_formats), style = MaterialTheme.typography.titleMedium)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(stringResource(R.string.audio_formats), style = MaterialTheme.typography.titleMedium)
+                InfoDot(R.string.audio_formats, R.string.help_a_formats)
+            }
             Text(
                 stringResource(
                     R.string.audio_formats_count_fmt,
@@ -157,7 +160,6 @@ fun SettingsDrawer(vm: SettingsViewModel, onPrivacy: () -> Unit, onHelp: () -> U
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary
             )
-            InfoDot(R.string.audio_formats, R.string.help_a_formats)
         }
         Spacer(Modifier.height(24.dp))
 
