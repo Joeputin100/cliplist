@@ -13,9 +13,6 @@
   <img src="https://img.shields.io/badge/ANDROID-7.0%2B-A8CF45?style=for-the-badge" alt="Android 7.0 and up">
 </p>
 
-<!-- SCREENSHOTS: activate when docs/screenshots/{home,preview,results}.png land.
-     Uncomment the table below as-is. Keep widths equal; captions stay <sub><b>.
-
 <table align="center">
   <tr>
     <td align="center"><img src="docs/screenshots/home.png" alt="Home — pick your SD card and scan" width="260"></td>
@@ -28,7 +25,6 @@
     <td align="center"><sub><b>Results</b></sub></td>
   </tr>
 </table>
--->
 
 <p align="center">· · ·</p>
 
