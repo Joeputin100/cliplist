@@ -32,4 +32,3 @@ Thumbs.db
 /decompiled/
 /.decompile-work/
 
-# NOTE: reference/*.apk IS intentionally tracked (private repo, CI input).

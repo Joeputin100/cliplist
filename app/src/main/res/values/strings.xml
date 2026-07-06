@@ -25,7 +25,7 @@
     <string name="help_a_hidden">Files whose names start with a dot are invisible to the player. This option removes the dot so the player can see them.</string>
     <string name="help_a_make">1. Tap the folder card and choose your music folder or SD card.\n2. Tap Scan folder and check the preview.\n3. Tap Generate playlists.\nOne .m3u playlist is written into each folder that contains music.</string>
     <string name="help_a_notshow">Eject the card safely and reinsert it into the player. The Clip Sport rebuilds its music database when it starts — give it a moment. Each playlist is named after its folder.</string>
-    <string name="help_a_where">Inside each music folder, as a .m3u file named after the folder. Nothing leaves the card — the app has no internet access.</string>
+    <string name="help_a_where">Inside each music folder, as a .m3u file named after the folder. Your music and playlists never leave the card.</string>
     <string name="help_q_clean">What does \"Clean file names\" do?</string>
     <string name="help_q_eject">How do I eject safely?</string>
     <string name="help_q_formats">Which audio formats are supported?</string>

@@ -25,7 +25,7 @@
     <string name="help_a_hidden">Arquivos cujo nome começa com um ponto ficam invisíveis para o player. Esta opção remove o ponto para que o player possa vê-los.</string>
     <string name="help_a_make">1. Toque no cartão da pasta e escolha sua pasta de música ou cartão SD.\n2. Toque em Escanear pasta e confira a prévia.\n3. Toque em Gerar playlists.\nUma playlist .m3u é gravada em cada pasta que contém música.</string>
     <string name="help_a_notshow">Ejete o cartão com segurança e reinsira-o no player. O Clip Sport reconstrói o banco de dados de música ao iniciar — dê um tempo a ele. Cada playlist recebe o nome da sua pasta.</string>
-    <string name="help_a_where">Dentro de cada pasta de música, como um arquivo .m3u com o nome da pasta. Nada sai do cartão — o app não tem acesso à internet.</string>
+    <string name="help_a_where">Dentro de cada pasta de música, como um arquivo .m3u com o nome da pasta. Sua música e suas playlists nunca saem do cartão.</string>
     <string name="help_q_clean">O que \"Limpar nomes de arquivos\" faz?</string>
     <string name="help_q_eject">Como ejetar com segurança?</string>
     <string name="help_q_formats">Quais formatos de áudio são compatíveis?</string>

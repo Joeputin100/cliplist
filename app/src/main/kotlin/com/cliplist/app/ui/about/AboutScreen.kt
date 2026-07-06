@@ -85,6 +85,11 @@ fun AboutScreen(navController: NavController) {
                     color = MaterialTheme.colorScheme.onSurface,
                 )
             }
+            Text(
+                stringResource(R.string.app_tagline),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
             Spacer(Modifier.height(20.dp))
             Text(stringResource(R.string.about_story), style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(24.dp))

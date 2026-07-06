@@ -25,7 +25,7 @@
     <string name="help_a_hidden">Dateien, deren Name mit einem Punkt beginnt, sind für den Player unsichtbar. Diese Option entfernt den Punkt, damit der Player sie sehen kann.</string>
     <string name="help_a_make">1. Auf die Ordnerkarte tippen und den Musikordner oder die SD-Karte auswählen.\n2. Auf Ordner scannen tippen und die Vorschau prüfen.\n3. Auf Wiedergabelisten erstellen tippen.\nIn jeden Ordner mit Musik wird eine .m3u-Wiedergabeliste geschrieben.</string>
     <string name="help_a_notshow">Die Karte sicher auswerfen und wieder in den Player einlegen. Der Clip Sport baut seine Musikdatenbank beim Start neu auf — das dauert einen Moment. Jede Wiedergabeliste trägt den Namen ihres Ordners.</string>
-    <string name="help_a_where">In jedem Musikordner, als .m3u-Datei mit dem Namen des Ordners. Nichts verlässt die Karte — die App hat keinen Internetzugriff.</string>
+    <string name="help_a_where">In jedem Musikordner, als .m3u-Datei mit dem Namen des Ordners. Deine Musik und deine Wiedergabelisten verlassen nie die Karte.</string>
     <string name="help_q_clean">Was macht „Dateinamen bereinigen“?</string>
     <string name="help_q_eject">Wie wird die Karte sicher ausgeworfen?</string>
     <string name="help_q_formats">Welche Audioformate werden unterstützt?</string>

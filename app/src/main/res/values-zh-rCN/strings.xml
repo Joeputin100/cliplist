@@ -25,7 +25,7 @@
     <string name="help_a_hidden">文件名以点开头的文件对播放器不可见。此选项会去除该点，使播放器能够识别这些文件。</string>
     <string name="help_a_make">1. 点按文件夹卡片，选择音乐文件夹或 SD 卡。\n2. 点按扫描文件夹并查看预览。\n3. 点按生成播放列表。\n每个包含音乐的文件夹中都会写入一个 .m3u 播放列表。</string>
     <string name="help_a_notshow">安全弹出卡后重新插入播放器。Clip Sport 启动时会重建音乐数据库 — 请稍等片刻。每个播放列表都以其所在文件夹命名。</string>
-    <string name="help_a_where">保存在每个音乐文件夹内，是以文件夹命名的 .m3u 文件。任何内容都不会离开这张卡 — 此应用没有网络访问权限。</string>
+    <string name="help_a_where">保存在每个音乐文件夹内，是以文件夹命名的 .m3u 文件。音乐和播放列表永远不会离开这张卡。</string>
     <string name="help_q_clean">“规范文件名”是做什么的？</string>
     <string name="help_q_eject">如何安全弹出？</string>
     <string name="help_q_formats">支持哪些音频格式？</string>

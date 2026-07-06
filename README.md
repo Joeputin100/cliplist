@@ -47,7 +47,7 @@ For a decade, Clip Sport owners leaned on one tool: *My Playlist Creator* by **M
 - 🖼️ **Cover art** — optional `folder.jpg` for players that show artwork
 - ⏏️ **Safe eject** — deep link straight to the volume's Unmount page
 - 🌍 **10 languages** — English, Español, Français, Deutsch, Português (Brasil), Italiano, Русский, 日本語, 한국어, 简体中文
-- 🔒 **Zero internet permission** — your music never leaves the card
+- 🔒 **Private by design** — no accounts, no ads, no tracking. Only anonymous crash reports ever leave your device.
 
 ## The format, frozen
 

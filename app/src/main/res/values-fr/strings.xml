@@ -25,7 +25,7 @@
     <string name="help_a_hidden">Les fichiers dont le nom commence par un point sont invisibles pour le lecteur. Cette option supprime le point pour que le lecteur puisse les voir.</string>
     <string name="help_a_make">1. Appuyez sur la carte du dossier et choisissez votre dossier de musique ou votre carte SD.\n2. Appuyez sur Scanner le dossier et vérifiez l\'aperçu.\n3. Appuyez sur Générer les listes de lecture.\nUne liste .m3u est écrite dans chaque dossier contenant de la musique.</string>
     <string name="help_a_notshow">Éjectez la carte en toute sécurité et réinsérez-la dans le lecteur. Le Clip Sport reconstruit sa base de données musicale au démarrage — laissez-lui un instant. Chaque liste de lecture porte le nom de son dossier.</string>
-    <string name="help_a_where">Dans chaque dossier de musique, sous forme de fichier .m3u portant le nom du dossier. Rien ne quitte la carte — l\'application n\'a pas accès à internet.</string>
+    <string name="help_a_where">Dans chaque dossier de musique, sous forme de fichier .m3u portant le nom du dossier. Votre musique et vos listes de lecture ne quittent jamais la carte.</string>
     <string name="help_q_clean">Que fait « Nettoyer les noms de fichiers » ?</string>
     <string name="help_q_eject">Comment éjecter la carte en toute sécurité ?</string>
     <string name="help_q_formats">Quels formats audio sont pris en charge ?</string>

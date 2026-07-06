@@ -25,7 +25,7 @@
     <string name="help_a_hidden">Los archivos cuyo nombre empieza con un punto son invisibles para el reproductor. Esta opción quita el punto para que el reproductor pueda verlos.</string>
     <string name="help_a_make">1. Toca la tarjeta de carpeta y elige tu carpeta de música o tarjeta SD.\n2. Toca Escanear carpeta y revisa la vista previa.\n3. Toca Generar listas de reproducción.\nSe escribe una lista .m3u en cada carpeta que contiene música.</string>
     <string name="help_a_notshow">Expulsa la tarjeta de forma segura y vuelve a insertarla en el reproductor. El Clip Sport reconstruye su base de datos de música al iniciarse — dale un momento. Cada lista de reproducción lleva el nombre de su carpeta.</string>
-    <string name="help_a_where">Dentro de cada carpeta de música, como un archivo .m3u con el nombre de la carpeta. Nada sale de la tarjeta — la app no tiene acceso a internet.</string>
+    <string name="help_a_where">Dentro de cada carpeta de música, como un archivo .m3u con el nombre de la carpeta. Tu música y tus listas de reproducción nunca salen de la tarjeta.</string>
     <string name="help_q_clean">¿Qué hace \"Limpiar nombres de archivo\"?</string>
     <string name="help_q_eject">¿Cómo expulso la tarjeta de forma segura?</string>
     <string name="help_q_formats">¿Qué formatos de audio son compatibles?</string>
