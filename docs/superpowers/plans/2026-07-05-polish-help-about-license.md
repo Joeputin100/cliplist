@@ -682,9 +682,30 @@ git push origin main
 
 ### Task 11: Screenshots + showcase README + repo metadata
 
+**Design brief (user directive — do not water down):** the GitHub page must look like it was
+built by a famous design studio for an award competition judged by Banksy. Concretely:
+- **Custom hero banner** committed under `docs/readme-assets/`: dark and light variants served
+  via `<picture>` + `prefers-color-scheme`. Aesthetic: stencil / spray-paint street-art energy
+  meets crisp product design — bold condensed display type, the teal→lime brand gradient,
+  a stenciled Clip Sport / SD-card motif, tagline with attitude (e.g. "ABANDONWARE DIES.
+  THE MUSIC DOESN'T."). Two viable production paths, in order of preference:
+  1. Vertex AI image generation (see memory: google-genai + ADC, model `gemini-3-pro-image`)
+     for painterly spray texture, post-processed to exact size (1280×400).
+  2. Hand-authored SVG using feTurbulence/displacement filters for spray grit — convert
+     display text to paths (GitHub's image proxy has no webfonts).
+- **The whole README is art-directed**: strong vertical rhythm, centered hero block,
+  screenshot row presented cleanly (consistent width, alt text), section glyphs used
+  sparingly, one accent color discipline (brand teal/lime), no default-README smell.
+  Badges styled consistently (shields.io `for-the-badge` or flat-square, one style only).
+- Keep every claim factual (byte-identical format, GPLv3, 10 languages, no internet
+  permission) — swagger in tone, precision in facts. Credit to Matt Duss stays prominent
+  and respectful.
+
 **Files:**
 - Create: `docs/screenshots/home.png`, `docs/screenshots/preview.png`, `docs/screenshots/results.png` (names by content)
-- Rewrite: `README.md`
+- Create: `docs/readme-assets/hero-dark.png` (or `.svg`), `docs/readme-assets/hero-light.png` (or `.svg`)
+- Rewrite: `README.md` (the markdown skeleton below is the CONTENT baseline; elevate its
+  presentation per the design brief — the brief wins wherever they conflict)
 
 - [ ] **Step 1: Screenshots.** Ask the user for 3–4 phone screenshots (Home, Preview or Progress, Results — light or dark, their choice). (FTL emulator shots are a fallback but look sterile; the user's Samsung shots are better.) Save under `docs/screenshots/`. **Checkpoint — needs user input.**
 
