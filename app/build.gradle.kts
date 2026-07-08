@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.play.publisher)
     // kotlin-android intentionally absent: AGP 9.0+ has built-in Kotlin support.
 }
 
@@ -17,7 +18,7 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = (System.getenv("VERSION_CODE") ?: "1").toInt()
-        versionName = "1.0.0"
+        versionName = System.getenv("VERSION_NAME") ?: "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -92,4 +93,13 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.intents)
     androidTestImplementation(libs.compose.ui.test.junit4)
     debugImplementation(libs.compose.ui.test.manifest)
+}
+
+play {
+    // CI writes the key file and sets this env var; absent locally → publishing tasks
+    // simply can't run, which is correct (no local publishing).
+    System.getenv("PLAY_SA_KEY_FILE")?.let { serviceAccountCredentials.set(file(it)) }
+    track.set("alpha")                     // Console name: Closed testing
+    defaultToAppBundles.set(true)
+    releaseStatus.set(com.github.triplet.gradle.androidpublisher.ReleaseStatus.DRAFT)
 }

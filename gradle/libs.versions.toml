@@ -18,6 +18,7 @@ androidx-test-runner = "1.7.0"
 androidx-test-rules = "1.7.0"
 androidx-test-uiautomator = "2.3.0"
 androidx-test-espresso = "3.7.0"
+playPublisher = "4.0.0"
 
 [libraries]
 junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter",                           version.ref = "junit5" }
@@ -54,4 +55,5 @@ compose-compiler    = { id = "org.jetbrains.kotlin.plugin.compose", version.ref 
 google-services     = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+play-publisher = { id = "com.github.triplet.play", version.ref = "playPublisher" }
 # kotlin-android intentionally absent — AGP 9.0+ has built-in Kotlin support.
