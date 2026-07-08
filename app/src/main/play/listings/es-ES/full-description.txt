@@ -1,0 +1,18 @@
+Tu SanDisk Clip Sport necesita listas de reproducción .m3u — esta app las escribe perfectamente, una por carpeta, en un toque.
+
+Durante una década, los propietarios de Clip Sport confiaron en My Playlist Creator, de Matt Duss. Fue abandonada y retirada. My Playlist Creator 2026 es su renacimiento de código abierto: el mismo formato de lista de reproducción byte a byte, reconstruido desde cero para el Android actual.
+
+CÓMO FUNCIONA
+1. Elige tu carpeta de música o tarjeta SD
+2. Escanea y previsualiza cada lista de reproducción, con renombres y advertencias antes de escribir nada
+3. Genera — una .m3u por carpeta, en el formato exacto del Clip Sport
+
+CARACTERÍSTICAS
+• Limpiar nombres de archivo (opcional): renombra los símbolos y letras acentuadas que el reproductor no admite — Rock & Roll!.mp3 pasa a ser Rock and Roll.mp3. Vista previa completa primero, nunca se elimina nada.
+• Duración real de las pistas, leída de tus archivos; los archivos ilegibles se omiten, nunca se eliminan
+• Carátula folder.jpg opcional
+• Expulsión segura: va directo a la pantalla de Desmontar de la tarjeta SD
+• 10 idiomas
+• Privada por diseño: sin cuentas, sin anuncios, sin rastreo. Solo los informes de errores anónimos salen de tu dispositivo.
+
+Software libre bajo GPLv3 — código fuente en https://github.com/Joeputin100/cliplist. No afiliada ni respaldada por Matt Duss ni por SanDisk.

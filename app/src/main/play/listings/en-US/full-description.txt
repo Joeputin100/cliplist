@@ -1,0 +1,18 @@
+Your SanDisk Clip Sport needs .m3u playlists — this app writes them perfectly, one per folder, in one tap.
+
+For a decade Clip Sport owners relied on My Playlist Creator by Matt Duss. It was abandoned and delisted. My Playlist Creator 2026 is its open-source revival: the same byte-exact playlist format, rebuilt from scratch for modern Android.
+
+HOW IT WORKS
+1. Pick your music folder or SD card
+2. Scan and preview every playlist, rename and warning before anything is written
+3. Generate — one .m3u per folder, in the Clip Sport's exact format
+
+FEATURES
+• Clean file names (optional): renames symbols and accents the player can't handle — Rock & Roll!.mp3 becomes Rock and Roll.mp3. Full preview first, nothing ever deleted.
+• Real track durations read from your files; unreadable files are skipped, never deleted
+• Optional folder.jpg cover art
+• Safe eject: jumps straight to the SD card's Unmount screen
+• 10 languages
+• Private by design: no accounts, no ads, no tracking. Only anonymous crash reports ever leave your device.
+
+Free software under GPLv3 — source code at https://github.com/Joeputin100/cliplist. Not affiliated with or endorsed by Matt Duss or SanDisk.

@@ -1,0 +1,1 @@
+First closed-testing release: scan a folder, preview, and write one byte-perfect .m3u playlist per folder. Clean file names, safe eject, 10 languages.

@@ -1,0 +1,18 @@
+您的 SanDisk Clip Sport 需要 .m3u 播放列表 — 此应用一键为每个文件夹完美生成一个播放列表。
+
+十年来，Clip Sport 用户一直依赖 Matt Duss 开发的 My Playlist Creator。该应用已被放弃并下架。My Playlist Creator 2026 是它的开源复刻版：完全相同、逐字节一致的播放列表格式，为当今的 Android 从零重新打造。
+
+使用方法
+1. 选择您的音乐文件夹或 SD 卡
+2. 扫描并预览每个播放列表，写入前可查看重命名和警告
+3. 生成 — 按 Clip Sport 的精确格式，每个文件夹一个 .m3u
+
+功能特色
+• 规范文件名（可选）：重命名播放器无法处理的符号和重音字母 — Rock & Roll!.mp3 变为 Rock and Roll.mp3。先完整预览，绝不删除任何内容。
+• 从文件中读取真实曲目时长；无法读取的文件会被跳过，绝不删除
+• 可选的 folder.jpg 封面
+• 安全弹出：直接跳转到 SD 卡的卸载界面
+• 支持 10 种语言
+• 设计即隐私：无账户、无广告、无跟踪。只有匿名崩溃报告会离开您的设备。
+
+基于 GPLv3 的自由软件 — 源代码位于 https://github.com/Joeputin100/cliplist。与 Matt Duss 或 SanDisk 无关，也未获得其认可。
