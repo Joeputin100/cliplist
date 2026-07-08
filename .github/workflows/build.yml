@@ -215,6 +215,21 @@ jobs:
           VERSION_CODE: ${{ github.run_number }}
         run: ./gradlew :app:assembleRelease --no-daemon
 
+      - name: Publish AAB to Play closed testing (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          PLAY_SA_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          ANDROID_KEYSTORE_FILE: ${{ runner.temp }}/upload.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          VERSION_CODE: ${{ github.run_number }}
+        run: |
+          printf '%s' "$PLAY_SA_JSON" > "$RUNNER_TEMP/play-sa-key.json"
+          export PLAY_SA_KEY_FILE="$RUNNER_TEMP/play-sa-key.json"
+          export VERSION_NAME="${GITHUB_REF_NAME#v}"
+          ./gradlew :app:publishBundle --no-daemon
+
       # Use Google's first-party auth action + the official Firebase CLI rather than a third-party
       # action — the step handles the service-account key, so supply-chain trust matters here.
       - name: Authenticate to Google Cloud
